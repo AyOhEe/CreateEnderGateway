@@ -1,0 +1,13 @@
+{
+  "itemGroup.createendergateway": "Example Mod Tab",
+  "block.createendergateway.example_block": "Example Block",
+  "item.createendergateway.example_item": "Example Item",
+
+  "createendergateway.configuration.title": "CreateEnderGateway Configs",
+  "createendergateway.configuration.section.createendergateway.common.toml": "CreateEnderGateway Configs",
+  "createendergateway.configuration.section.createendergateway.common.toml.title": "CreateEnderGateway Configs",
+  "createendergateway.configuration.items": "Item List",
+  "createendergateway.configuration.logDirtBlock": "Log Dirt Block",
+  "createendergateway.configuration.magicNumberIntroduction": "Magic Number Text",
+  "createendergateway.configuration.magicNumber": "Magic Number"
+}
