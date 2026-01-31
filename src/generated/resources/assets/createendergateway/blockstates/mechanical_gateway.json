@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "createendergateway:block/mechanical_gateway",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "createendergateway:block/mechanical_gateway"
+    },
+    "facing=south": {
+      "model": "createendergateway:block/mechanical_gateway",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "createendergateway:block/mechanical_gateway",
+      "y": 270
+    }
+  }
+}

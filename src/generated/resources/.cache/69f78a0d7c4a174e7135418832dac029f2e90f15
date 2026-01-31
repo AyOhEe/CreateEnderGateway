@@ -1,0 +1,13 @@
+// 1.21.1	2026-01-31T23:04:15.8335829	Registrate Provider for createendergateway [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
+928163c75261a7d21a37664c9433cc1186e1c8a4 assets/createendergateway/blockstates/abandoned_gateway.json
+6e75112e252c1a70cd0963b5b3cc148bd9b68162 assets/createendergateway/blockstates/mechanical_gateway.json
+de0f6819cb25f1ae0c4ae01278cf1c3a566e80f5 assets/createendergateway/lang/en_ud.json
+fbe7f6b97656f69c82ddb7a465a7119327ea6ed9 assets/createendergateway/lang/en_us.json
+2eb83286450f579ebf055f1d04aac1a7325eba18 assets/createendergateway/models/item/abandoned_gateway.json
+8cef6a7fdf47ac7900ba892eb1fc5272cad64d38 assets/createendergateway/models/item/mechanical_gateway.json
+b784ed84825f84a5f8d761da2378d88a3ee8db55 data/createendergateway/loot_table/blocks/abandoned_gateway.json
+f8223039d0d054d6eeabeb8405f2bbabe23e2c06 data/createendergateway/loot_table/blocks/mechanical_gateway.json
+96c57d45b92787b078b64faa5cac954d8793439f data/minecraft/tags/block/dragon_immune.json
+cf4c036a08cb1b4d59f20213d70ea537af35c72f data/minecraft/tags/block/mineable/pickaxe.json
+cf4c036a08cb1b4d59f20213d70ea537af35c72f data/minecraft/tags/block/needs_iron_tool.json
+96c57d45b92787b078b64faa5cac954d8793439f data/minecraft/tags/block/wither_immune.json
