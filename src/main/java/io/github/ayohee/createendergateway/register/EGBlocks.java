@@ -3,7 +3,6 @@ package io.github.ayohee.createendergateway.register;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import io.github.ayohee.createendergateway.content.blocks.VerticalGatewayBlock;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 import static io.github.ayohee.createendergateway.CreateEnderGateway.REGISTRATE;
@@ -11,7 +10,7 @@ import static io.github.ayohee.createendergateway.CreateEnderGateway.REGISTRATE;
 public class EGBlocks {
     /*-----THESE BLOCKS WILL BE SEEN IN THE CREATIVE TAB-----*/
     static {
-        REGISTRATE.setCreativeTab(EGCreateiveTabs.MAIN_TAB);
+        REGISTRATE.setCreativeTab(EGCreativeTabs.MAIN_TAB);
     }
 
     public static final BlockEntry<VerticalGatewayBlock> MECHANICAL_GATEWAY = REGISTRATE.block("mechanical_gateway", VerticalGatewayBlock::new)

@@ -13,14 +13,14 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 
 import static io.github.ayohee.createendergateway.CreateEnderGateway.REGISTRATE;
 
-public class EGCreateiveTabs {
+public class EGCreativeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN_TAB = EGRegistries.CREATIVE_MODE_TABS.register("main_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.createendergateway"))
             .withTabsBefore(AllCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
             .icon(EGBlocks.MECHANICAL_GATEWAY::asStack)
             .displayItems((parameters, output) -> {
                 for (RegistryEntry<Block, Block> entry : REGISTRATE.getAll(Registries.BLOCK)) {
-                    if (!CreateRegistrate.isInCreativeTab(entry, EGCreateiveTabs.MAIN_TAB))
+                    if (!CreateRegistrate.isInCreativeTab(entry, EGCreativeTabs.MAIN_TAB))
                         continue;
                     if (entry.get() instanceof LiquidBlock)
                         continue;
@@ -28,7 +28,7 @@ public class EGCreateiveTabs {
                     output.accept(entry.get(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 }
                 for (RegistryEntry<Item, Item> entry : REGISTRATE.getAll(Registries.ITEM)) {
-                    if (!CreateRegistrate.isInCreativeTab(entry, EGCreateiveTabs.MAIN_TAB))
+                    if (!CreateRegistrate.isInCreativeTab(entry, EGCreativeTabs.MAIN_TAB))
                         continue;
                     output.accept(entry.get(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                 }
