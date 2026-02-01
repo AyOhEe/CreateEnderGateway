@@ -1,5 +1,8 @@
 {
   "itemGroup.createendergateway": "Create: Ender Gateway",
   "block.createendergateway.mechanical_gateway": "Mechanical End Gateway",
-  "block.createendergateway.abandoned_gateway": "Abandoned End Gateway"
+  "block.createendergateway.abandoned_gateway": "Abandoned End Gateway",
+
+  "item.createendergateway.synthetic_eye": "Synthetic Eye",
+  "item.createendergateway.dimensional_tuner": "Dimensional Tuner"
 }

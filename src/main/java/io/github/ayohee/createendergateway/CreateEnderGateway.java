@@ -6,6 +6,7 @@ import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
 import io.github.ayohee.createendergateway.register.EGBlocks;
 import io.github.ayohee.createendergateway.register.EGCreativeTabs;
+import io.github.ayohee.createendergateway.register.EGItems;
 import io.github.ayohee.createendergateway.register.EGRegistries;
 import net.createmod.catnip.lang.FontHelper;
 import net.minecraft.resources.ResourceKey;
@@ -40,6 +41,7 @@ public class CreateEnderGateway {
 
 
         EGBlocks.register();
+        EGItems.register();
         EGCreativeTabs.register();
         EGRegistries.register(modEventBus);
     }
