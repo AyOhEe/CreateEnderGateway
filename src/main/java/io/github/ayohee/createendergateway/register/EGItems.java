@@ -18,5 +18,11 @@ public class EGItems {
     public static final ItemEntry<DimensionalTunerItem> DIMENSIONAL_TUNER = REGISTRATE.item("dimensional_tuner", DimensionalTunerItem::new)
             .register();
 
+    public static final ItemEntry<Item> AMETHYST_DUST = REGISTRATE.item("amethyst_dust", Item::new)
+            .register();
+
+    public static final ItemEntry<Item> ECHO_DUST = REGISTRATE.item("echo_dust", Item::new)
+            .register();
+
     public static void register() { }
 }

@@ -4,5 +4,7 @@
   "block.createendergateway.abandoned_gateway": "Abandoned End Gateway",
 
   "item.createendergateway.synthetic_eye": "Synthetic Eye",
-  "item.createendergateway.dimensional_tuner": "Dimensional Tuner"
+  "item.createendergateway.dimensional_tuner": "Dimensional Tuner",
+  "item.createendergateway.amethyst_dust": "Amethyst Dust",
+  "item.createendergateway.echo_dust": "Echo Dust"
 }

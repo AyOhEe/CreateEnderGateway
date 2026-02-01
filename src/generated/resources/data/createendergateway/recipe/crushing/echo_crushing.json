@@ -1,0 +1,19 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "minecraft:echo_shard"
+    }
+  ],
+  "results": [
+    {
+      "count": 12,
+      "id": "createendergateway:echo_dust"
+    },
+    {
+      "chance": 0.5,
+      "count": 4,
+      "id": "createendergateway:echo_dust"
+    }
+  ]
+}

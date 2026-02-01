@@ -1,5 +1,6 @@
 package io.github.ayohee.createendergateway;
 
+import io.github.ayohee.createendergateway.datagen.EGRecipeProvider;
 import io.github.ayohee.createendergateway.datagen.recipes.EGMechanicalCraftingRecipeGen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -39,7 +40,7 @@ public class EGDatagen {
         System.out.println("Gathering data for Create: Ender Gateway");
         System.out.println(event.includeServer());
         if (event.includeServer()) {
-            //EIRecipeProvider.registerAllProcessing(generator, output, lookupProvider);
+            EGRecipeProvider.registerAllProcessing(generator, output, lookupProvider);
         }
     }
 

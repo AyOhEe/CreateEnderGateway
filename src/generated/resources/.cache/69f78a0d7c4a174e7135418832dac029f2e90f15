@@ -1,10 +1,12 @@
-// 1.21.1	2026-02-01T23:00:37.4162352	Registrate Provider for createendergateway [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
+// 1.21.1	2026-02-01T23:23:34.5858966	Registrate Provider for createendergateway [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
 22fbaffaf8ead575a7cc9cfd4877c4e0faf70cfc assets/createendergateway/blockstates/abandoned_gateway.json
 519dc67e501238b6112b40a78dca93e036b0e2a2 assets/createendergateway/blockstates/mechanical_gateway.json
-cc673157ff6393b6ac997c581a8bd4904719cbd1 assets/createendergateway/lang/en_ud.json
-cb269281d1a79608dc9a9dc49159d2a2b66c78d0 assets/createendergateway/lang/en_us.json
+0bf1cf89dd70725dc42e81dfcc287ab680337142 assets/createendergateway/lang/en_ud.json
+45a18e841b75b7f037c55cc7390c1365ba6103fd assets/createendergateway/lang/en_us.json
 2eb83286450f579ebf055f1d04aac1a7325eba18 assets/createendergateway/models/item/abandoned_gateway.json
+51aebd56c3b03764f12f901137590563992a1f7e assets/createendergateway/models/item/amethyst_dust.json
 2a0b81bd824240495093d94433f5390ca524c2a4 assets/createendergateway/models/item/dimensional_tuner.json
+1ee7bbda2ec9e033e332be1a7f0af36ae4c09037 assets/createendergateway/models/item/echo_dust.json
 8cef6a7fdf47ac7900ba892eb1fc5272cad64d38 assets/createendergateway/models/item/mechanical_gateway.json
 f2858041c7a280a94eec091a1fc9eb1d6583517f assets/createendergateway/models/item/synthetic_eye.json
 b784ed84825f84a5f8d761da2378d88a3ee8db55 data/createendergateway/loot_table/blocks/abandoned_gateway.json
