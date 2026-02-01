@@ -61,3 +61,6 @@ Generates dilapidated inter-dimensional train stations, allowing Create mod trai
     versionRange="[6.0.9,6.1.0)"
     ordering="NONE"
     side="BOTH"
+
+[[mixin]]
+    config="createendergateway.mixins.json"
