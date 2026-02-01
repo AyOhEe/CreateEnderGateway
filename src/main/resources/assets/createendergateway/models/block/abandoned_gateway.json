@@ -14,11 +14,11 @@
 			"to": [16, 16, 16],
 			"faces": {
 				"north": {"uv": [0, 0, 16, 16], "rotation": 270, "texture": "#top"},
-				"east": {"uv": [0, 3, 16, 16], "rotation": 90, "texture": "#side", "cullface": "north"},
-				"south": {"uv": [0, 0, 16, 16], "rotation": 270, "texture": "#bottom", "cullface": "down"},
-				"west": {"uv": [0, 3, 16, 16], "rotation": 270, "texture": "#side", "cullface": "south"},
-				"up": {"uv": [0, 3, 16, 16], "texture": "#side", "cullface": "east"},
-				"down": {"uv": [0, 3, 16, 16], "rotation": 180, "texture": "#side", "cullface": "west"}
+				"east": {"uv": [0, 3, 16, 16], "rotation": 90, "texture": "#side", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 16], "rotation": 270, "texture": "#bottom", "cullface": "south"},
+				"west": {"uv": [0, 3, 16, 16], "rotation": 270, "texture": "#side", "cullface": "west"},
+				"up": {"uv": [0, 3, 16, 16], "texture": "#side", "cullface": "up"},
+				"down": {"uv": [0, 3, 16, 16], "rotation": 180, "texture": "#side", "cullface": "down"}
 			}
 		}
 	],
@@ -58,16 +58,23 @@
 	},
 	"groups": [
 		{
-			"name": "end_portal_frame",
+			"name": "abandoned_gateway",
 			"origin": [8, 8, 8],
 			"color": 0,
-			"children": []
-		},
-		{
-			"name": "end_portal_frame",
-			"origin": [8, 8, 8],
-			"color": 0,
-			"children": [0]
+			"children": [
+				{
+					"name": "end_portal_frame",
+					"origin": [8, 8, 8],
+					"color": 0,
+					"children": []
+				},
+				{
+					"name": "end_portal_frame",
+					"origin": [8, 8, 8],
+					"color": 0,
+					"children": [0]
+				}
+			]
 		}
 	]
 }
