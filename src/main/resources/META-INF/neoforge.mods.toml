@@ -38,7 +38,7 @@ displayName="${mod_name}" #mandatory
 authors="AyOhEe"
 
 description='''
-Example mod description.
+Generates dilapidated inter-dimensional train stations, allowing Create mod trains to access the End.
 '''
 
 [[dependencies.${mod_id}]]
