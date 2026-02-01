@@ -1,5 +1,6 @@
 package io.github.ayohee.createendergateway;
 
+import io.github.ayohee.createendergateway.datagen.recipes.EGMechanicalCraftingRecipeGen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -31,7 +32,7 @@ public class EGDatagen {
         //generator.addProvider(event.includeServer(), generatedEntriesProvider);
 
 
-        //generator.addProvider(event.includeServer(), new EGMechanicalCraftingRecipeGen(output, lookupProvider));
+        generator.addProvider(event.includeServer(), new EGMechanicalCraftingRecipeGen(output, lookupProvider));
         //generator.addProvider(event.includeServer(), new EGSequencedAssemblyRecipeGen(output, lookupProvider));
 
 
