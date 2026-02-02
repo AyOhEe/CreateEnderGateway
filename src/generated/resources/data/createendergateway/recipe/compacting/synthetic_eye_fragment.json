@@ -1,14 +1,16 @@
 {
   "type": "create:compacting",
-  "heat_requirement": "superheated",
   "ingredients": [
     {
-      "item": "minecraft:ender_pearl"
+      "item": "createendergateway:saturated_eye_fragment"
     }
   ],
   "results": [
     {
-      "amount": 1200,
+      "id": "createendergateway:synthetic_eye_fragment"
+    },
+    {
+      "amount": 50,
       "id": "createendergateway:dormant_ender_solution"
     }
   ]

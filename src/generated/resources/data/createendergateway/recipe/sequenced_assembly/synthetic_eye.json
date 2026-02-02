@@ -1,0 +1,66 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "createendergateway:synthetic_eye_fragment"
+  },
+  "loops": 3,
+  "results": [
+    {
+      "chance": 100.0,
+      "id": "createendergateway:synthetic_eye"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createendergateway:incomplete_synthetic_eye"
+        },
+        {
+          "item": "createendergateway:amethyst_dust"
+        }
+      ],
+      "results": [
+        {
+          "id": "createendergateway:incomplete_synthetic_eye"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createendergateway:incomplete_synthetic_eye"
+        },
+        {
+          "item": "createendergateway:synthetic_eye_fragment"
+        }
+      ],
+      "results": [
+        {
+          "id": "createendergateway:incomplete_synthetic_eye"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createendergateway:incomplete_synthetic_eye"
+        },
+        {
+          "item": "createendergateway:echo_dust"
+        }
+      ],
+      "results": [
+        {
+          "id": "createendergateway:incomplete_synthetic_eye"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "createendergateway:incomplete_synthetic_eye"
+  }
+}

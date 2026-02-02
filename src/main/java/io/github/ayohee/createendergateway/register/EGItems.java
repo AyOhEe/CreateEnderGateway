@@ -1,5 +1,6 @@
 package io.github.ayohee.createendergateway.register;
 
+import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import io.github.ayohee.createendergateway.content.items.DimensionalTunerItem;
 import io.github.ayohee.createendergateway.content.items.SyntheticEyeItem;
@@ -29,6 +30,15 @@ public class EGItems {
 
     public static final ItemEntry<Item> SYNTHETIC_EYE_FRAGMENT = REGISTRATE.item("synthetic_eye_fragment", Item::new)
             .register();
+
+
+    static {
+        REGISTRATE.setCreativeTab(null);
+    }
+
+    public static final ItemEntry<SequencedAssemblyItem> INCOMPLETE_SYNTHETIC_EYE = REGISTRATE.item("incomplete_synthetic_eye", SequencedAssemblyItem::new)
+            .register();
+
 
     public static void register() { }
 }

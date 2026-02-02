@@ -14,17 +14,19 @@ import static io.github.ayohee.createendergateway.CreateEnderGateway.MODID;
 
 public class EGMixingRecipeGen extends MixingRecipeGen {
     public final GeneratedRecipe ACTIVE_ENDER_SOLUTION = create("active_ender_solution", b -> b
-            .require(EGFluids.DORMANT_ENDER_SOLUTION.get(), 1000)
+            .require(EGFluids.DORMANT_ENDER_SOLUTION.get(), 100)
             .require(Items.NETHER_WART)
             .requiresHeat(HeatCondition.HEATED)
-            .output(EGFluids.ACTIVE_ENDER_SOLUTION.get(), 1000)
+            .output(EGFluids.ACTIVE_ENDER_SOLUTION.get(), 100)
+            .output(0.9f, Items.NETHER_WART)
+            .duration(10)
     );
 
     public final GeneratedRecipe SATURATED_EYE_FRAGMENTS = create("saturated_eye_fragments", b -> b
-            .require(EGFluids.ACTIVE_ENDER_SOLUTION.get(), 1000)
+            .require(EGFluids.ACTIVE_ENDER_SOLUTION.get(), 150)
             .require(Items.BLAZE_POWDER)
-            .require(Items.BLAZE_POWDER)
-            .output(EGItems.SATURATED_EYE_FRAGMENT, 12)
+            .output(EGItems.SATURATED_EYE_FRAGMENT, 1)
+            .duration(50)
     );
 
     public EGMixingRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {

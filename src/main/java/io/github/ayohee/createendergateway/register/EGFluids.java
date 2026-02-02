@@ -22,6 +22,10 @@ import java.util.function.Supplier;
 import static io.github.ayohee.createendergateway.CreateEnderGateway.REGISTRATE;
 
 public class EGFluids {
+    static {
+        REGISTRATE.setCreativeTab(EGCreativeTabs.MAIN_TAB);
+    }
+
     public static final FluidEntry<BaseFlowingFluid.Flowing> DORMANT_ENDER_SOLUTION = REGISTRATE
             .standardFluid("dormant_ender_solution", SolidRenderedPlaceableFluidType.create(0x003627, () -> 1f / 8f))
             .tag(EGTags.DORMANT_ENDER_FLUID, AllTags.AllFluidTags.BOTTOMLESS_DENY.tag)
