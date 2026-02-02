@@ -1,8 +1,16 @@
 {
   "block.createendergateway.abandoned_gateway": "ʎɐʍǝʇɐ⅁ pǝuopuɐqⱯ",
+  "block.createendergateway.active_ender_solution": "uoıʇnןoS ɹǝpuƎ ǝʌıʇɔⱯ",
+  "block.createendergateway.dormant_ender_solution": "uoıʇnןoS ɹǝpuƎ ʇuɐɯɹoᗡ",
   "block.createendergateway.mechanical_gateway": "ʎɐʍǝʇɐ⅁ ןɐɔıuɐɥɔǝW",
+  "fluid.createendergateway.active_ender_solution": "uoıʇnןoS ɹǝpuƎ ǝʌıʇɔⱯ",
+  "fluid.createendergateway.dormant_ender_solution": "uoıʇnןoS ɹǝpuƎ ʇuɐɯɹoᗡ",
+  "item.createendergateway.active_ender_solution_bucket": "ʇǝʞɔnᗺ uoıʇnןoS ɹǝpuƎ ǝʌıʇɔⱯ",
   "item.createendergateway.amethyst_dust": "ʇsnᗡ ʇsʎɥʇǝɯⱯ",
   "item.createendergateway.dimensional_tuner": "ɹǝun⟘ ןɐuoısuǝɯıᗡ",
+  "item.createendergateway.dormant_ender_solution_bucket": "ʇǝʞɔnᗺ uoıʇnןoS ɹǝpuƎ ʇuɐɯɹoᗡ",
   "item.createendergateway.echo_dust": "ʇsnᗡ oɥɔƎ",
-  "item.createendergateway.synthetic_eye": "ǝʎƎ ɔıʇǝɥʇuʎS"
+  "item.createendergateway.saturated_eye_fragment": "ʇuǝɯbɐɹℲ ǝʎƎ pǝʇɐɹnʇɐS",
+  "item.createendergateway.synthetic_eye": "ǝʎƎ ɔıʇǝɥʇuʎS",
+  "item.createendergateway.synthetic_eye_fragment": "ʇuǝɯbɐɹℲ ǝʎƎ ɔıʇǝɥʇuʎS"
 }

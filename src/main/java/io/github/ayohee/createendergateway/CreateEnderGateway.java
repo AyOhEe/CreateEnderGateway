@@ -4,10 +4,7 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
-import io.github.ayohee.createendergateway.register.EGBlocks;
-import io.github.ayohee.createendergateway.register.EGCreativeTabs;
-import io.github.ayohee.createendergateway.register.EGItems;
-import io.github.ayohee.createendergateway.register.EGRegistries;
+import io.github.ayohee.createendergateway.register.*;
 import net.createmod.catnip.lang.FontHelper;
 import net.minecraft.resources.ResourceKey;
 import net.neoforged.bus.api.EventPriority;
@@ -42,6 +39,7 @@ public class CreateEnderGateway {
 
         EGBlocks.register();
         EGItems.register();
+        EGFluids.register();
         EGCreativeTabs.register();
         EGRegistries.register(modEventBus);
     }

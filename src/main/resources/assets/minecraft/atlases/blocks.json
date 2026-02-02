@@ -1,0 +1,20 @@
+{
+  "sources": [
+    {
+      "type": "single",
+      "resource": "createendergateway:fluid/dormant_ender_solution_still"
+    },
+    {
+      "type": "single",
+      "resource": "createendergateway:fluid/dormant_ender_solution_flow"
+    },
+    {
+      "type": "single",
+      "resource": "createendergateway:fluid/active_ender_solution_still"
+    },
+    {
+      "type": "single",
+      "resource": "createendergateway:fluid/active_ender_solution_flow"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "createendergateway:block/dormant_ender_solution"
+    }
+  }
+}

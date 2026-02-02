@@ -1,8 +1,16 @@
 {
   "block.createendergateway.abandoned_gateway": "Abandoned Gateway",
+  "block.createendergateway.active_ender_solution": "Active Ender Solution",
+  "block.createendergateway.dormant_ender_solution": "Dormant Ender Solution",
   "block.createendergateway.mechanical_gateway": "Mechanical Gateway",
+  "fluid.createendergateway.active_ender_solution": "Active Ender Solution",
+  "fluid.createendergateway.dormant_ender_solution": "Dormant Ender Solution",
+  "item.createendergateway.active_ender_solution_bucket": "Active Ender Solution Bucket",
   "item.createendergateway.amethyst_dust": "Amethyst Dust",
   "item.createendergateway.dimensional_tuner": "Dimensional Tuner",
+  "item.createendergateway.dormant_ender_solution_bucket": "Dormant Ender Solution Bucket",
   "item.createendergateway.echo_dust": "Echo Dust",
-  "item.createendergateway.synthetic_eye": "Synthetic Eye"
+  "item.createendergateway.saturated_eye_fragment": "Saturated Eye Fragment",
+  "item.createendergateway.synthetic_eye": "Synthetic Eye",
+  "item.createendergateway.synthetic_eye_fragment": "Synthetic Eye Fragment"
 }

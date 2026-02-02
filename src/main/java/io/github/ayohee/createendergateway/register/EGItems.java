@@ -24,5 +24,11 @@ public class EGItems {
     public static final ItemEntry<Item> ECHO_DUST = REGISTRATE.item("echo_dust", Item::new)
             .register();
 
+    public static final ItemEntry<Item> SATURATED_EYE_FRAGMENT = REGISTRATE.item("saturated_eye_fragment", Item::new)
+            .register();
+
+    public static final ItemEntry<Item> SYNTHETIC_EYE_FRAGMENT = REGISTRATE.item("synthetic_eye_fragment", Item::new)
+            .register();
+
     public static void register() { }
 }

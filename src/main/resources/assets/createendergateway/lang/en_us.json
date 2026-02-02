@@ -6,5 +6,16 @@
   "item.createendergateway.synthetic_eye": "Synthetic Eye",
   "item.createendergateway.dimensional_tuner": "Dimensional Tuner",
   "item.createendergateway.amethyst_dust": "Amethyst Dust",
-  "item.createendergateway.echo_dust": "Echo Dust"
+  "item.createendergateway.echo_dust": "Echo Dust",
+
+  "fluid.createendergateway.dormant_ender_solution": "Dormant Ender Solution",
+  "fluid.createendergateway.active_ender_solution": "Active Ender Solution",
+  "block.createendergateway.dormant_ender_solution": "Dormant Ender Solution",
+  "block.createendergateway.active_ender_solution": "Active Ender Solution",
+
+  "item.createendergateway.dormant_ender_solution_bucket": "Dormant Ender Solution Bucket",
+  "item.createendergateway.active_ender_solution_bucket": "Active Ender Solution Bucket",
+
+  "item.createendergateway.saturated_eye_fragment": "Saturated Eye Fragment",
+  "item.createendergateway.synthetic_eye_fragment": "Synthetic Eye Fragment"
 }

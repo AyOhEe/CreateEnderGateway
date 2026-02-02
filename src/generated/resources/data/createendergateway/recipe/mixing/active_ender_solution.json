@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "item": "minecraft:nether_wart"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "createendergateway:dormant_ender_solution"
+    }
+  ],
+  "results": [
+    {
+      "amount": 1000,
+      "id": "createendergateway:active_ender_solution"
+    }
+  ]
+}
