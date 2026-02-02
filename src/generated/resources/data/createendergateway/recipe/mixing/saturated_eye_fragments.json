@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "createendergateway:active_ender_solution"
+    }
+  ],
+  "results": [
+    {
+      "count": 12,
+      "id": "createendergateway:saturated_eye_fragment"
+    }
+  ]
+}

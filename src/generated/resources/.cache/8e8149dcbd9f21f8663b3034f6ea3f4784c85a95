@@ -1,5 +1,6 @@
-// 1.21.1	2026-02-02T09:53:47.9258499	Create: Ender Gateway's Processing Recipes
+// 1.21.1	2026-02-02T09:56:04.7183309	Create: Ender Gateway's Processing Recipes
 73619ce219cb9005d881bc6c6715e03a51ea8227 data/createendergateway/recipe/compacting/dormant_ender_fluid.json
 6b8949eb82f69e006ce089c546a07b2b4be90395 data/createendergateway/recipe/crushing/amethyst_crushing.json
 eb1c499dc7eef29d00d42163b214531109cd5a7d data/createendergateway/recipe/crushing/echo_crushing.json
 14ef2d07c57801f1633364ba45c92d78aba68c14 data/createendergateway/recipe/mixing/active_ender_solution.json
+3bf1f8af8cb1cea14de9740dfe1b0e05cd2a8733 data/createendergateway/recipe/mixing/saturated_eye_fragments.json
