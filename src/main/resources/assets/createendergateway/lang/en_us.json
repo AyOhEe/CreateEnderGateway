@@ -17,5 +17,6 @@
   "item.createendergateway.active_ender_solution_bucket": "Active Ender Solution Bucket",
 
   "item.createendergateway.saturated_eye_fragment": "Saturated Eye Fragment",
-  "item.createendergateway.synthetic_eye_fragment": "Synthetic Eye Fragment"
+  "item.createendergateway.synthetic_eye_fragment": "Synthetic Eye Fragment",
+  "item.createendergateway.incomplete_synthetic_eye": "Incomplete Synthetic Eye"
 }
