@@ -15,7 +15,6 @@ public class EGMixingRecipeGen extends MixingRecipeGen {
     public final GeneratedRecipe ACTIVE_ENDER_SOLUTION = create("active_ender_solution", b -> b
             .require(EGFluids.DORMANT_ENDER_SOLUTION.get(), 1000)
             .require(Items.NETHER_WART)
-            .require(Items.BLAZE_POWDER)
             .requiresHeat(HeatCondition.HEATED)
             .output(EGFluids.ACTIVE_ENDER_SOLUTION.get(), 1000)
     );

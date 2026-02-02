@@ -6,9 +6,6 @@
       "item": "minecraft:nether_wart"
     },
     {
-      "item": "minecraft:blaze_powder"
-    },
-    {
       "type": "neoforge:single",
       "amount": 1000,
       "fluid": "createendergateway:dormant_ender_solution"
