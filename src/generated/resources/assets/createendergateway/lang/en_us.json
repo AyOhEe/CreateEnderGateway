@@ -3,6 +3,7 @@
   "block.createendergateway.active_ender_solution": "Active Ender Solution",
   "block.createendergateway.dormant_ender_solution": "Dormant Ender Solution",
   "block.createendergateway.mechanical_gateway": "Mechanical Gateway",
+  "entity.createendergateway.synthetic_eye": "Synthetic Eye",
   "fluid.createendergateway.active_ender_solution": "Active Ender Solution",
   "fluid.createendergateway.dormant_ender_solution": "Dormant Ender Solution",
   "item.createendergateway.active_ender_solution_bucket": "Active Ender Solution Bucket",

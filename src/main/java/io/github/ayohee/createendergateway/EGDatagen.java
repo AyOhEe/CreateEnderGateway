@@ -1,11 +1,15 @@
 package io.github.ayohee.createendergateway;
 
 import io.github.ayohee.createendergateway.datagen.EGRecipeProvider;
+import io.github.ayohee.createendergateway.datagen.EGStructureTagsProvider;
 import io.github.ayohee.createendergateway.datagen.recipes.EGMechanicalCraftingRecipeGen;
 import io.github.ayohee.createendergateway.datagen.recipes.EGSequencedAssemblyRecipeGen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.StructureTagsProvider;
+import net.minecraft.data.tags.TagsProvider;
+import net.minecraft.world.level.levelgen.structure.Structure;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
@@ -36,6 +40,7 @@ public class EGDatagen {
 
         generator.addProvider(event.includeServer(), new EGMechanicalCraftingRecipeGen(output, lookupProvider));
         generator.addProvider(event.includeServer(), new EGSequencedAssemblyRecipeGen(output, lookupProvider));
+        generator.addProvider(event.includeServer(), new EGStructureTagsProvider(output, lookupProvider, fileHelper));
 
 
         System.out.println("Gathering data for Create: Ender Gateway");

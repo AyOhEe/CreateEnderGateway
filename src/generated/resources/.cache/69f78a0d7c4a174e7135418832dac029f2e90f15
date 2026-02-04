@@ -1,10 +1,10 @@
-// 1.21.1	2026-02-02T11:49:26.6781419	Registrate Provider for createendergateway [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
+// 1.21.1	2026-02-04T17:37:21.3599442	Registrate Provider for createendergateway [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
 22fbaffaf8ead575a7cc9cfd4877c4e0faf70cfc assets/createendergateway/blockstates/abandoned_gateway.json
 c821d268dce555328abfb4267ce76ce79db35bd5 assets/createendergateway/blockstates/active_ender_solution.json
 36a3740d42efef70dff648b4ba92bc8a223e46ce assets/createendergateway/blockstates/dormant_ender_solution.json
 519dc67e501238b6112b40a78dca93e036b0e2a2 assets/createendergateway/blockstates/mechanical_gateway.json
-ccc588fcae295f48eb800385703d979c64c570bc assets/createendergateway/lang/en_ud.json
-7e72dd3b8a3a0375eca0b2a0983163e86cc11e67 assets/createendergateway/lang/en_us.json
+09b904afc889b561067921edcd017a9c1dfe91f5 assets/createendergateway/lang/en_ud.json
+ccf26f868340da7118747db380360333c0bf1812 assets/createendergateway/lang/en_us.json
 aaf53bc8741bd8a4b42804ee37c7de45df78423f assets/createendergateway/models/block/active_ender_solution.json
 62f7d6eb73a56dfbcd632d1c18b3c67e80e68824 assets/createendergateway/models/block/dormant_ender_solution.json
 2eb83286450f579ebf055f1d04aac1a7325eba18 assets/createendergateway/models/item/abandoned_gateway.json
@@ -20,6 +20,7 @@ f2858041c7a280a94eec091a1fc9eb1d6583517f assets/createendergateway/models/item/s
 da1f3f7d40c1c248df1be50eee6da2ac282cd637 assets/createendergateway/models/item/synthetic_eye_fragment.json
 b784ed84825f84a5f8d761da2378d88a3ee8db55 data/createendergateway/loot_table/blocks/abandoned_gateway.json
 f8223039d0d054d6eeabeb8405f2bbabe23e2c06 data/createendergateway/loot_table/blocks/mechanical_gateway.json
+96c57d45b92787b078b64faa5cac954d8793439f data/createendergateway/tags/block/gateway_frame.json
 66d75f07a7c7e40e89ef9e46fceea185d9789724 data/createendergateway/tags/fluid/active_ender_fluid.json
 9cb9c1b75247690ac04f765d03e61078cd24d5af data/createendergateway/tags/fluid/dormant_ender_fluid.json
 c1c555149b48e01982561ec919cb4e56945a7526 data/create/tags/fluid/bottomless/deny.json

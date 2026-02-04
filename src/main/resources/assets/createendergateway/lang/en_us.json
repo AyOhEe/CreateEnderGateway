@@ -3,6 +3,8 @@
   "block.createendergateway.mechanical_gateway": "Mechanical End Gateway",
   "block.createendergateway.abandoned_gateway": "Abandoned End Gateway",
 
+  "entity.createendergateway.synthetic_eye": "Synthetic Eye",
+
   "item.createendergateway.synthetic_eye": "Synthetic Eye",
   "item.createendergateway.dimensional_tuner": "Dimensional Tuner",
   "item.createendergateway.amethyst_dust": "Amethyst Dust",
