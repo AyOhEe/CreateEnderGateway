@@ -16,9 +16,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 public class SyntheticEyeEntity extends EyeOfEnder {
-    private static final EntityDataAccessor<ItemStack> DATA_ITEM_STACK = SynchedEntityData.defineId(SyntheticEyeEntity.class, EntityDataSerializers.ITEM_STACK);
-
-
     public SyntheticEyeEntity(EntityType<? extends SyntheticEyeEntity> entityType, Level level) {
         super(entityType, level);
     }
@@ -29,23 +26,13 @@ public class SyntheticEyeEntity extends EyeOfEnder {
     }
 
 
-    // Need to override these to use our EntityDataAccessor and getDefaultItem
+    // Need to override these to use our getDefaultItem
     public void setItem(ItemStack stack) {
         if (stack.isEmpty()) {
-            this.getEntityData().set(DATA_ITEM_STACK, this.getDefaultItem());
+            super.setItem(this.getDefaultItem());
         } else {
-            this.getEntityData().set(DATA_ITEM_STACK, stack.copyWithCount(1));
+            super.setItem(stack);
         }
-    }
-
-    @Override
-    public ItemStack getItem() {
-        return this.getEntityData().get(DATA_ITEM_STACK);
-    }
-
-    @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        builder.define(DATA_ITEM_STACK, this.getDefaultItem());
     }
 
     @Override
