@@ -41,6 +41,7 @@ public class CreateEnderGateway {
         EGItems.register();
         EGFluids.register();
         EGEntityTypes.register();
+        EGCriteriaTriggers.register();
         EGTags.register();
         EGCreativeTabs.register();
         EGRegistries.register(modEventBus);

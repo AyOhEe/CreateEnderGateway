@@ -20,5 +20,12 @@
 
   "item.createendergateway.saturated_eye_fragment": "Saturated Eye Fragment",
   "item.createendergateway.synthetic_eye_fragment": "Synthetic Eye Fragment",
-  "item.createendergateway.incomplete_synthetic_eye": "Incomplete Synthetic Eye"
+  "item.createendergateway.incomplete_synthetic_eye": "Incomplete Synthetic Eye",
+
+
+  "advancement.createendergateway.root": "Create: Ender Gateway",
+  "advancement.createendergateway.root.desc": "\"End\" of the line",
+
+  "advancement.createendergateway.use_synthetic_eye": "Eye Spy 2: Electric boogaloo",
+  "advancement.createendergateway.use_synthetic_eye.desc": "Getting an odd feeling of déjà vu..."
 }

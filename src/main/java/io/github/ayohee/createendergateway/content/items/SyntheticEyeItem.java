@@ -1,6 +1,7 @@
 package io.github.ayohee.createendergateway.content.items;
 
 import io.github.ayohee.createendergateway.content.entity.SyntheticEyeEntity;
+import io.github.ayohee.createendergateway.register.EGCriteriaTriggers;
 import io.github.ayohee.createendergateway.register.EGTags;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -62,7 +63,7 @@ public class SyntheticEyeItem extends Item {
         level.gameEvent(GameEvent.PROJECTILE_SHOOT, eyeEntity.position(), GameEvent.Context.of(player));
         level.addFreshEntity(eyeEntity);
         if (player instanceof ServerPlayer serverplayer) {
-            CriteriaTriggers.USED_ENDER_EYE.trigger(serverplayer, gatewayPosition);
+            EGCriteriaTriggers.USED_SYNTHETIC_EYE.get().trigger(serverplayer);
         }
 
         float pitch = Mth.lerp(level.random.nextFloat(), 0.33F, 0.5F);
