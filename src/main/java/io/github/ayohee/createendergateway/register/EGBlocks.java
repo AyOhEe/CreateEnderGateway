@@ -1,9 +1,11 @@
 package io.github.ayohee.createendergateway.register;
 
 import com.tterrag.registrate.util.entry.BlockEntry;
+import io.github.ayohee.createendergateway.content.blocks.GatewayCornerBlock;
 import io.github.ayohee.createendergateway.content.blocks.GatewayPortalBlock;
 import io.github.ayohee.createendergateway.content.blocks.VerticalGatewayBlock;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
@@ -36,6 +38,18 @@ public class EGBlocks {
             )
             .tag(EGTags.GATEWAY_FRAME, BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE)
             .blockstate(VerticalGatewayBlock::blockstate)
+            .simpleItem()
+            .register();
+
+    public static final BlockEntry<GatewayCornerBlock> GATEWAY_CORNER = REGISTRATE.block("gateway_corner", GatewayCornerBlock::new)
+            .properties(p -> p
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.COPPER_GRATE)
+                    .mapColor(MapColor.COLOR_GREEN)
+                    .requiresCorrectToolForDrops()
+            )
+            .tag(BlockTags.NEEDS_IRON_TOOL)
+            .blockstate(GatewayCornerBlock::blockstate)
             .simpleItem()
             .register();
 

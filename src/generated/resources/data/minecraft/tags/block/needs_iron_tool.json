@@ -1,5 +1,6 @@
 {
   "values": [
-    "createendergateway:mechanical_gateway"
+    "createendergateway:mechanical_gateway",
+    "createendergateway:gateway_corner"
   ]
 }

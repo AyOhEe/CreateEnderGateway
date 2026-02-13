@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "createendergateway:block/gateway_corner"
+    },
+    "axis=z": {
+      "model": "createendergateway:block/gateway_corner",
+      "y": 90
+    }
+  }
+}

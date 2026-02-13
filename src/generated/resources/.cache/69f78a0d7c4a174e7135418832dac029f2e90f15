@@ -1,25 +1,29 @@
-// 1.21.1	2026-02-13T18:25:45.0432634	Registrate Provider for createendergateway [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
+// 1.21.1	2026-02-13T20:16:32.9523233	Registrate Provider for createendergateway [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
 0b2038d86e92af963cfb5e9020d61f77e03bdf81 assets/createendergateway/blockstates/abandoned_gateway.json
 c821d268dce555328abfb4267ce76ce79db35bd5 assets/createendergateway/blockstates/active_ender_solution.json
 36a3740d42efef70dff648b4ba92bc8a223e46ce assets/createendergateway/blockstates/dormant_ender_solution.json
+02ccba40adb705fe5656fe296911b1902f426eb3 assets/createendergateway/blockstates/gateway_corner.json
 09d8f443729dc22d5c061cea492d054d16a2a836 assets/createendergateway/blockstates/gateway_portal.json
 9f37ca96dbe0054668a88acf46521db6801f1d24 assets/createendergateway/blockstates/mechanical_gateway.json
-8066b7e94d2ff217f660d439ca7b45561ba57091 assets/createendergateway/lang/en_ud.json
-a350d79cb58768a918e16065ef2164df36f9e786 assets/createendergateway/lang/en_us.json
+7b93440208c7b45b095fd0424c8ac0b9b7e85e19 assets/createendergateway/lang/en_ud.json
+14337a69bde00389658d6ea44886e6b33aec8a1f assets/createendergateway/lang/en_us.json
 aaf53bc8741bd8a4b42804ee37c7de45df78423f assets/createendergateway/models/block/active_ender_solution.json
 62f7d6eb73a56dfbcd632d1c18b3c67e80e68824 assets/createendergateway/models/block/dormant_ender_solution.json
+167da1108b71488181348e56bb56898ea6575623 assets/createendergateway/models/block/gateway_corner.json
 2eb83286450f579ebf055f1d04aac1a7325eba18 assets/createendergateway/models/item/abandoned_gateway.json
 c690e11a8610585bbd4cedd99d2c5a0cf85cae6f assets/createendergateway/models/item/active_ender_solution_bucket.json
 51aebd56c3b03764f12f901137590563992a1f7e assets/createendergateway/models/item/amethyst_dust.json
 2a0b81bd824240495093d94433f5390ca524c2a4 assets/createendergateway/models/item/dimensional_tuner.json
 efa6abe15df465ee4cb66541cf143abe86702fea assets/createendergateway/models/item/dormant_ender_solution_bucket.json
 1ee7bbda2ec9e033e332be1a7f0af36ae4c09037 assets/createendergateway/models/item/echo_dust.json
+f89650627b8aedf8888c214fe7ce2a1dba3cbefc assets/createendergateway/models/item/gateway_corner.json
 1bd4b701822c09cac8327b30f017cda9a67a8ee2 assets/createendergateway/models/item/incomplete_synthetic_eye.json
 8cef6a7fdf47ac7900ba892eb1fc5272cad64d38 assets/createendergateway/models/item/mechanical_gateway.json
 71ec51ea7e7374fe3818846bbdc2594264036714 assets/createendergateway/models/item/saturated_eye_fragment.json
 f2858041c7a280a94eec091a1fc9eb1d6583517f assets/createendergateway/models/item/synthetic_eye.json
 da1f3f7d40c1c248df1be50eee6da2ac282cd637 assets/createendergateway/models/item/synthetic_eye_fragment.json
 b784ed84825f84a5f8d761da2378d88a3ee8db55 data/createendergateway/loot_table/blocks/abandoned_gateway.json
+0b3dc1c11aca6f5e29ec9cf57d60793fad9be25e data/createendergateway/loot_table/blocks/gateway_corner.json
 d3f68377805048623426c025463e29bc4e36bbb8 data/createendergateway/loot_table/blocks/gateway_portal.json
 f8223039d0d054d6eeabeb8405f2bbabe23e2c06 data/createendergateway/loot_table/blocks/mechanical_gateway.json
 96c57d45b92787b078b64faa5cac954d8793439f data/createendergateway/tags/block/gateway_frame.json
@@ -31,6 +35,6 @@ c1c555149b48e01982561ec919cb4e56945a7526 data/create/tags/fluid/bottomless/deny.
 46c32d61568fd6283e6f99982daa2cc4399763c9 data/minecraft/tags/block/dragon_immune.json
 b7b037779834b55d5216f78e1c35e41dd7ca602f data/minecraft/tags/block/invalid_spawn_inside.json
 cf4c036a08cb1b4d59f20213d70ea537af35c72f data/minecraft/tags/block/mineable/pickaxe.json
-cf4c036a08cb1b4d59f20213d70ea537af35c72f data/minecraft/tags/block/needs_iron_tool.json
+6ddfccb4a8aea5504e6aec1e8b40966fe4f4d50a data/minecraft/tags/block/needs_iron_tool.json
 b7b037779834b55d5216f78e1c35e41dd7ca602f data/minecraft/tags/block/portals.json
 46c32d61568fd6283e6f99982daa2cc4399763c9 data/minecraft/tags/block/wither_immune.json

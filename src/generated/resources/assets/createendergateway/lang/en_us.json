@@ -2,6 +2,7 @@
   "block.createendergateway.abandoned_gateway": "Abandoned Gateway",
   "block.createendergateway.active_ender_solution": "Active Ender Solution",
   "block.createendergateway.dormant_ender_solution": "Dormant Ender Solution",
+  "block.createendergateway.gateway_corner": "Gateway Corner",
   "block.createendergateway.gateway_portal": "Gateway Portal",
   "block.createendergateway.mechanical_gateway": "Mechanical Gateway",
   "entity.createendergateway.synthetic_eye": "Synthetic Eye",
