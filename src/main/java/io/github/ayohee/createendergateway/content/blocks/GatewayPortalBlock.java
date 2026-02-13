@@ -10,6 +10,7 @@ import net.createmod.catnip.math.VoxelShaper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -56,10 +57,22 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
     }
 
     @Override
-    public @Nullable DimensionTransition getPortalDestination(ServerLevel level, Entity entity, BlockPos pos) {
-        return new DimensionTransition(level, pos.above(10).getBottomCenter(), Vec3.ZERO, 0f, 0f, (Entity e) -> {});
+    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+        if (entity.canUsePortal(false)) {
+            entity.setAsInsidePortal(this, pos);
+        }
     }
 
+    @Override
+    public @Nullable DimensionTransition getPortalDestination(ServerLevel level, Entity entity, BlockPos pos) {
+        ResourceKey<Level> targetDimension = level.dimension() == Level.END ? Level.OVERWORLD : Level.END;
+        ServerLevel dimensionLevel = level.getServer().getLevel(targetDimension);
+        if (dimensionLevel == null) {
+            return null;
+        }
+
+        return new DimensionTransition(dimensionLevel, new Vec3(100, 100, 100), Vec3.ZERO, entity.getYRot(), entity.getXRot(), (Entity e) -> {});
+    }
 
 
 
