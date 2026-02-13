@@ -21,7 +21,7 @@ public class EGStructureSets {
         ctx.register(ABANDONED_STATIONS,
                 new StructureSet(
                         List.of(new StructureSet.StructureSelectionEntry(ctx.lookup(Registries.STRUCTURE).getOrThrow(EGStructures.ABANDONED_STATION), 1)),
-                        new RandomSpreadStructurePlacement(10, 5, RandomSpreadType.LINEAR, 1189370870)
+                        new RandomSpreadStructurePlacement(150, 50, RandomSpreadType.LINEAR, 1189370870)
                 )
         );
     }
