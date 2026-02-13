@@ -39,44 +39,51 @@ import static io.github.ayohee.createendergateway.CreateEnderGateway.MODID;
 public class VerticalGatewayBlock extends Block {
     private static final VoxelShape BASE_SHAPE = Block.box(0, 0, 3, 16, 16, 16);
     private static final VoxelShape EYE_SHAPE = Block.box(4, 4, 0, 12, 12, 3);
-    public static final VoxelShaper VERTICAL_GATEWAY_SHAPE = new AllShapes.Builder(BASE_SHAPE).forHorizontal(Direction.NORTH);
-    public static final VoxelShaper FILLED_GATEWAY_SHAPE = new AllShapes.Builder(Shapes.or(EYE_SHAPE, BASE_SHAPE)).forHorizontal(Direction.NORTH);
+    public static final VoxelShaper VERTICAL_GATEWAY_SHAPE = new AllShapes.Builder(BASE_SHAPE).forDirectional(Direction.NORTH);
+    public static final VoxelShaper FILLED_GATEWAY_SHAPE = new AllShapes.Builder(Shapes.or(EYE_SHAPE, BASE_SHAPE)).forDirectional(Direction.NORTH);
 
+    // UP and DOWN signify that the front of the block (eye socket) is facing up/down. NORTH signifies that it is horizontal.
+    public static final DirectionProperty BACK_ALIGNMENT = DirectionProperty.create("alignment", Direction.UP, Direction.DOWN, Direction.NORTH);
 
     public VerticalGatewayBlock(Properties properties) {
         super(properties);
         registerDefaultState(defaultBlockState()
                 .setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH)
+                .setValue(BACK_ALIGNMENT, Direction.NORTH)
                 .setValue(BlockStateProperties.EYE, false)
         );
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(BlockStateProperties.HORIZONTAL_FACING, BlockStateProperties.EYE);
+        pBuilder.add(BlockStateProperties.HORIZONTAL_FACING, BACK_ALIGNMENT, BlockStateProperties.EYE);
     }
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        if (state.getValue(BlockStateProperties.EYE)) {
-            return FILLED_GATEWAY_SHAPE.get(state.getValue(BlockStateProperties.HORIZONTAL_FACING));
-        } else {
-            return VERTICAL_GATEWAY_SHAPE.get(state.getValue(BlockStateProperties.HORIZONTAL_FACING));
-        }
-    }
+        Direction socket = state.getValue(BACK_ALIGNMENT);
+        Direction facing = socket != Direction.NORTH ? socket : state.getValue(BlockStateProperties.HORIZONTAL_FACING);
 
-    @Override
-    protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         if (state.getValue(BlockStateProperties.EYE)) {
-            return FILLED_GATEWAY_SHAPE.get(state.getValue(BlockStateProperties.HORIZONTAL_FACING));
+            return FILLED_GATEWAY_SHAPE.get(facing);
         } else {
-            return VERTICAL_GATEWAY_SHAPE.get(state.getValue(BlockStateProperties.HORIZONTAL_FACING));
+            return VERTICAL_GATEWAY_SHAPE.get(facing);
         }
     }
 
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
-        return defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, context.getHorizontalDirection().getOpposite());
+        Direction horizontal = context.getHorizontalDirection();
+        Direction looking = context.getNearestLookingDirection();
+
+        if (context.isSecondaryUseActive()) {
+            horizontal = horizontal.getOpposite();
+            looking = looking.getOpposite();
+        }
+
+        return defaultBlockState()
+                .setValue(BlockStateProperties.HORIZONTAL_FACING, horizontal.getOpposite())
+                .setValue(BACK_ALIGNMENT, looking.getAxis() == Direction.Axis.Y ? looking : Direction.NORTH);
     }
 
     @Override
@@ -94,6 +101,7 @@ public class VerticalGatewayBlock extends Block {
         return blockState.getValue(BlockStateProperties.EYE) ? 15 : 0;
     }
 
+    //TODO fix
     @Override
     protected BlockState rotate(BlockState state, Rotation rotation) {
         return state.setValue(BlockStateProperties.HORIZONTAL_FACING, rotation.rotate(state.getValue(BlockStateProperties.HORIZONTAL_FACING)));
@@ -112,9 +120,24 @@ public class VerticalGatewayBlock extends Block {
 
             return ConfiguredModel.builder()
                     .modelFile(prov.models().getExistingFile(model))
-                    .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360)
+                    .rotationY(getModelYRot(state))
+                    .rotationX(getSocketRotation(state.getValue(BACK_ALIGNMENT)))
                     .build();
         });
+    }
+
+    private static int getModelYRot(BlockState state) {
+        int desiredRot = (int)(state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180);
+        desiredRot += state.getValue(BACK_ALIGNMENT) != Direction.NORTH ? 90 : 0;
+        return desiredRot % 360;
+    }
+
+    private static int getSocketRotation(Direction value) {
+        return switch (value) {
+            case UP -> 90;
+            case DOWN -> 270;
+            default -> 0;
+        };
     }
 
     public static int lightLevel(BlockState bs) {
