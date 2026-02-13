@@ -50,6 +50,8 @@ public class CreateEnderGateway {
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
-        // yet empty.
+        event.enqueueWork(() -> {
+            EGPortalTracks.register();
+        });
     }
 }
