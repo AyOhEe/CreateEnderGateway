@@ -2,6 +2,7 @@
   "itemGroup.createendergateway": "Create: Ender Gateway",
   "block.createendergateway.mechanical_gateway": "Mechanical End Gateway",
   "block.createendergateway.abandoned_gateway": "Abandoned End Gateway",
+  "block.createendergateway.gateway_portal": "Ender Gateway Portal",
 
   "entity.createendergateway.synthetic_eye": "Synthetic Eye",
 

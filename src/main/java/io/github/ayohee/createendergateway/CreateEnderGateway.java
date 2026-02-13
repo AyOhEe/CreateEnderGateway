@@ -38,6 +38,7 @@ public class CreateEnderGateway {
 
 
         EGBlocks.register();
+        EGBlockEntityTypes.register();
         EGItems.register();
         EGFluids.register();
         EGEntityTypes.register();

@@ -1,6 +1,7 @@
 {
   "values": [
     "createendergateway:mechanical_gateway",
-    "createendergateway:abandoned_gateway"
+    "createendergateway:abandoned_gateway",
+    "createendergateway:gateway_portal"
   ]
 }
