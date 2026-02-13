@@ -5,6 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.material.Fluid;
@@ -19,6 +20,7 @@ public class EGTags {
 
     public static final TagKey<Block> GATEWAY_FRAME = modBlockTag("gateway_frame");
     public static final TagKey<Structure> SYNTHETIC_EYE_LOCATED = modStructureTag("synthetic_eye_located");
+    public static final TagKey<Biome> HAS_ABANDONED_STATIONS = modBiomeTag("has_abandoned_stations");
 
     public static TagKey<Fluid> modFluidTag(String name) {
         return TagKey.create(BuiltInRegistries.FLUID.key(), ResourceLocation.fromNamespaceAndPath(MODID, name));
@@ -34,6 +36,10 @@ public class EGTags {
 
     public static TagKey<Structure> modStructureTag(String name) {
         return TagKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(MODID, name));
+    }
+
+    public static TagKey<Biome> modBiomeTag(String name) {
+        return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(MODID, name));
     }
 
     public static void register() { }

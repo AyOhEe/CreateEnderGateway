@@ -1,7 +1,15 @@
 {
-  "type": "minecraft:stronghold",
-  "biomes": "#minecraft:has_structure/stronghold",
+  "type": "minecraft:jigsaw",
+  "biomes": "#createendergateway:has_abandoned_stations",
+  "max_distance_from_center": 80,
+  "project_start_to_heightmap": "WORLD_SURFACE",
+  "size": 1,
   "spawn_overrides": {},
+  "start_height": {
+    "absolute": 0
+  },
+  "start_pool": "createendergateway:abandoned_station_pool",
   "step": "surface_structures",
-  "terrain_adaptation": "bury"
+  "terrain_adaptation": "beard_thin",
+  "use_expansion_hack": false
 }

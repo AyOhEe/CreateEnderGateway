@@ -2,6 +2,7 @@ package io.github.ayohee.createendergateway.datagen;
 
 import io.github.ayohee.createendergateway.datagen.bootstrapped.EGStructureSets;
 import io.github.ayohee.createendergateway.datagen.bootstrapped.EGStructures;
+import io.github.ayohee.createendergateway.datagen.bootstrapped.EGTemplatePools;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -16,7 +17,8 @@ import static io.github.ayohee.createendergateway.CreateEnderGateway.MODID;
 public class EGGeneratedEntriesProvider extends DatapackBuiltinEntriesProvider {
     private static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(Registries.STRUCTURE, EGStructures::bootstrap)
-            .add(Registries.STRUCTURE_SET, EGStructureSets::bootstrap);
+            .add(Registries.STRUCTURE_SET, EGStructureSets::bootstrap)
+            .add(Registries.TEMPLATE_POOL, EGTemplatePools::bootstrap);
 
     public EGGeneratedEntriesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Set.of(MODID));

@@ -1,3 +1,4 @@
-// 1.21.1	2026-02-13T13:01:58.9923027	Create: Ender Gateway's Generated Registry Entries
-e7b242858051a07ec3ebb0ae6113a5a1bdba905f data/createendergateway/worldgen/structure/abandoned_station.json
+// 1.21.1	2026-02-13T13:49:11.8529899	Create: Ender Gateway's Generated Registry Entries
+9ec355a4651690c66408eec427b21f8c2e99813f data/createendergateway/worldgen/structure/abandoned_station.json
 ede866b0788bc75ec9fa6161ce53b8cc42510a20 data/createendergateway/worldgen/structure_set/abandoned_stations.json
+cb64201f06e433f94294c56f0d928df4e286d147 data/createendergateway/worldgen/template_pool/abandoned_station_pool.json
