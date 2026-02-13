@@ -52,7 +52,6 @@ public class EGBlocks {
             )
             .tag(BlockTags.PORTALS, BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE, BlockTags.INVALID_SPAWN_INSIDE)
             .blockstate(GatewayPortalBlock::blockstate)
-            .simpleItem()
             .register();
 
     public static void register() { }

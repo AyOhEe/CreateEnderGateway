@@ -3,11 +3,20 @@ package io.github.ayohee.createendergateway.content.blocks;
 import com.simibubi.create.AllShapes;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
-import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
+import io.github.ayohee.createendergateway.register.EGItems;
 import net.createmod.catnip.math.VoxelShaper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -17,6 +26,8 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -108,5 +119,42 @@ public class VerticalGatewayBlock extends Block {
 
     public static int lightLevel(BlockState bs) {
         return bs.getValue(BlockStateProperties.EYE) ? 15 : 0;
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (state.getValue(BlockStateProperties.EYE)) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+
+
+        if (stack.is(Items.ENDER_EYE)) {
+            for (int i = 0; i < 10; i++){
+                double shiftX = (double) pos.getX() + level.random.nextDouble() * 1.2;
+                double shiftY = (double) pos.getY() + level.random.nextDouble() * 0.8;
+                double shiftZ = (double) pos.getZ() + level.random.nextDouble() * 1.2;
+                level.addParticle(ParticleTypes.SMOKE, shiftX, shiftY, shiftZ, 0.0, 0.1, 0.0);
+            }
+
+            level.playSound(player, pos, SoundEvents.BEACON_DEACTIVATE, SoundSource.BLOCKS, 1.2f, 0.5f);
+            return ItemInteractionResult.SUCCESS;
+        }
+
+        if (!stack.is(EGItems.SYNTHETIC_EYE)) {
+            return ItemInteractionResult.FAIL;
+        }
+
+
+        level.playSound(player, pos, SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
+        if (!(level instanceof ServerLevel)) {
+            return ItemInteractionResult.SUCCESS;
+        }
+
+        level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.EYE, true));
+        if (!player.hasInfiniteMaterials()) {
+            stack.shrink(1);
+        }
+
+        return ItemInteractionResult.SUCCESS;
     }
 }
