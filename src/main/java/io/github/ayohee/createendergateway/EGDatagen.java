@@ -16,9 +16,7 @@ import static io.github.ayohee.createendergateway.CreateEnderGateway.MODID;
 
 public class EGDatagen {
     public static void gatherDataHighPriority(GatherDataEvent event) {
-        if (event.getMods().contains(MODID)) {
-            addExtraRegistrateData();
-        }
+        // Yet empty.
     }
 
     public static void gatherData(GatherDataEvent event) {
@@ -40,9 +38,5 @@ public class EGDatagen {
         if (event.includeServer()) {
             EGRecipeProvider.registerAllProcessing(generator, output, lookupProvider);
         }
-    }
-
-    private static void addExtraRegistrateData() {
-        EGRegistrateTags.addGenerators();
     }
 }
