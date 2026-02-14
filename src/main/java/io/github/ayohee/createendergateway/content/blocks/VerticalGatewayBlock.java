@@ -3,7 +3,10 @@ package io.github.ayohee.createendergateway.content.blocks;
 import com.simibubi.create.AllShapes;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
+import io.github.ayohee.createendergateway.register.EGBlocks;
 import io.github.ayohee.createendergateway.register.EGItems;
+import io.github.ayohee.createendergateway.register.EGTags;
+import net.createmod.catnip.data.Pair;
 import net.createmod.catnip.math.VoxelShaper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,7 +23,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
@@ -178,6 +183,44 @@ public class VerticalGatewayBlock extends Block {
             stack.shrink(1);
         }
 
+        checkForPortalFormation(level, pos);
+
         return ItemInteractionResult.SUCCESS;
+    }
+
+    private boolean isFrame(LevelAccessor level, BlockPos pos) {
+        return level.getBlockState(pos).is(EGTags.GATEWAY_FRAME);
+    }
+
+    private boolean isFilled(LevelAccessor level, BlockPos pos) {
+        return isFrame(level, pos) && level.getBlockState(pos).getValue(BlockStateProperties.EYE);
+    }
+
+    private void checkForPortalFormation(LevelAccessor level, BlockPos pos) {
+        BlockState state = level.getBlockState(pos);
+
+        switch (state.getValue(BACK_ALIGNMENT)) {
+            case UP -> fromBottom(level, pos, state);
+            case DOWN -> fromTop(level, pos, state);
+            default -> fromSide(level, pos, state);
+        }
+    }
+
+    private void fromSide(LevelAccessor level, BlockPos pos, BlockState state) {
+        Direction backFacing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+        // Axis in which portal side lies
+        Direction.Axis portalAxis = Direction.Axis.Y;
+    }
+
+    private void fromTop(LevelAccessor level, BlockPos pos, BlockState state) {
+        Direction backFacing = Direction.DOWN;
+        // Axis in which portal side lies
+        Direction.Axis portalAxis = state.getValue(BlockStateProperties.HORIZONTAL_FACING).getClockWise().getAxis();
+    }
+
+    private void fromBottom(LevelAccessor level, BlockPos pos, BlockState state) {
+        Direction backFacing = Direction.UP;
+        // Axis in which portal side lies
+        Direction.Axis portalAxis = state.getValue(BlockStateProperties.HORIZONTAL_FACING).getClockWise().getAxis();
     }
 }
