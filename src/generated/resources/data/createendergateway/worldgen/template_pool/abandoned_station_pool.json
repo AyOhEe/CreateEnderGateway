@@ -3,7 +3,7 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "createendergateway:example",
+        "location": "createendergateway:abandoned_station_1",
         "processors": {
           "processors": []
         },

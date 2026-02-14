@@ -15,7 +15,7 @@ import static io.github.ayohee.createendergateway.CreateEnderGateway.MODID;
 
 public class EGTemplatePools {
     public static final List<Pair<String, Integer>> STRUCTURE_NAMES = List.of(
-            Pair.of("example", 1)
+            Pair.of("abandoned_station_1", 1)
     );
 
     public static final ResourceKey<StructureTemplatePool> ABANDONED_STATION_POOL = ResourceKey.create(
