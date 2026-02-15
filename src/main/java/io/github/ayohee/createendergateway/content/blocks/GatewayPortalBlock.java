@@ -6,6 +6,7 @@ import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import io.github.ayohee.createendergateway.content.blockentity.GatewayBlockEntity;
 import io.github.ayohee.createendergateway.register.EGBlockEntityTypes;
+import io.github.ayohee.createendergateway.register.EGBlocks;
 import net.createmod.catnip.math.VoxelShaper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Portal;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -71,6 +73,23 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
 
     private void teleportAway(Level level, LivingEntity le) {
         //TODO
+    }
+
+    @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        super.onRemove(state, level, pos, newState, movedByPiston);
+        for (Direction d : Direction.values()) {
+            if (d.getAxis() != Direction.Axis.Y && d.getAxis() != state.getValue(BlockStateProperties.HORIZONTAL_AXIS)) {
+                continue;
+            }
+
+            BlockPos neighbourPos = pos.relative(d);
+            BlockState neighbourState = level.getBlockState(neighbourPos);
+
+            if (neighbourState.is(EGBlocks.GATEWAY_PORTAL.get())) {
+                level.setBlock(neighbourPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
+            }
+        }
     }
 
     @Override

@@ -97,6 +97,10 @@ public class VerticalGatewayBlock extends Block {
             looking = looking.getOpposite();
         }
 
+        if (looking.getAxis() == Direction.Axis.Y) {
+            horizontal = horizontal.getClockWise();
+        }
+
         return defaultBlockState()
                 .setValue(BlockStateProperties.HORIZONTAL_FACING, horizontal.getOpposite())
                 .setValue(BACK_ALIGNMENT, looking.getAxis() == Direction.Axis.Y ? looking : Direction.NORTH);
@@ -161,6 +165,23 @@ public class VerticalGatewayBlock extends Block {
     }
 
     @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        super.onRemove(state, level, pos, newState, movedByPiston);
+
+        Direction neighbourDir = state.getValue(BACK_ALIGNMENT);
+        if (neighbourDir == Direction.NORTH) {
+            neighbourDir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+        }
+
+        BlockPos neighbourPos = pos.relative(neighbourDir);
+        BlockState neighbourState = level.getBlockState(neighbourPos);
+
+        if (neighbourState.is(EGBlocks.GATEWAY_PORTAL.get())) {
+            level.setBlock(neighbourPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
+        }
+    }
+
+    @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (state.getValue(BlockStateProperties.EYE)) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -205,10 +226,6 @@ public class VerticalGatewayBlock extends Block {
 
     private static boolean isFrame(BlockState state) {
         return state.is(EGTags.GATEWAY_FRAME);
-    }
-
-    private static boolean isFilled(LevelAccessor level, BlockPos pos) {
-        return isFrame(level, pos) && level.getBlockState(pos).getValue(BlockStateProperties.EYE);
     }
 
     private void checkForPortalFormation(LevelAccessor level, BlockPos pos) {
