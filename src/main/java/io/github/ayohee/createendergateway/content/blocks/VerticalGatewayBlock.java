@@ -8,8 +8,12 @@ import io.github.ayohee.createendergateway.register.EGItems;
 import io.github.ayohee.createendergateway.register.EGTags;
 import net.createmod.catnip.data.Pair;
 import net.createmod.catnip.math.VoxelShaper;
+import net.createmod.catnip.placement.IPlacementHelper;
+import net.createmod.catnip.placement.PlacementHelpers;
+import net.createmod.catnip.placement.PlacementOffset;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -18,6 +22,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -30,10 +35,10 @@ import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -44,7 +49,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import static io.github.ayohee.createendergateway.CreateEnderGateway.MODID;
@@ -60,6 +64,8 @@ public class VerticalGatewayBlock extends Block {
 
     // UP and DOWN signify that the front of the block (eye socket) is facing up/down. NORTH signifies that it is horizontal.
     public static final DirectionProperty BACK_ALIGNMENT = DirectionProperty.create("alignment", Direction.UP, Direction.DOWN, Direction.NORTH);
+
+    private static final int placementHelperId = PlacementHelpers.register(new PlacementHelper());
 
     public VerticalGatewayBlock(Properties properties) {
         super(properties);
@@ -183,6 +189,17 @@ public class VerticalGatewayBlock extends Block {
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        ItemStack heldByPlayer = stack.copy();
+
+        IPlacementHelper placementHelper = PlacementHelpers.get(placementHelperId);
+        if (!player.isShiftKeyDown() && player.mayBuild()) {
+            if (placementHelper.matchesItem(heldByPlayer) && placementHelper.getOffset(player, level, state, pos, hitResult)
+                    .placeInWorld(level, (BlockItem) heldByPlayer.getItem(), player, hand, hitResult)
+                    .consumesAction())
+                return ItemInteractionResult.SUCCESS;
+        }
+
+
         if (state.getValue(BlockStateProperties.EYE)) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
@@ -388,5 +405,48 @@ public class VerticalGatewayBlock extends Block {
         }
 
         return checkPos;
+    }
+
+    private static class PlacementHelper implements IPlacementHelper {
+
+        @Override
+        public Predicate<ItemStack> getItemPredicate() {
+            return (s) -> s.is(EGBlocks.ABANDONED_GATEWAY.asItem()) || s.is(EGBlocks.MECHANICAL_GATEWAY.asItem());
+        }
+
+        @Override
+        public Predicate<BlockState> getStatePredicate() {
+            return (s) -> s.is(EGBlocks.ABANDONED_GATEWAY) || s.is(EGBlocks.MECHANICAL_GATEWAY);
+        }
+
+        @Override
+        public PlacementOffset getOffset(Player player, Level world, BlockState state, BlockPos pos, BlockHitResult ray) {
+            BlockPos posA;
+            BlockPos posB;
+            switch (state.getValue(BACK_ALIGNMENT)) {
+                case UP, DOWN -> {
+                    Direction horizontal = state.getValue(BlockStateProperties.HORIZONTAL_FACING).getClockWise();
+                    posA = pos.relative(horizontal);
+                    posB = pos.relative(horizontal, -1);
+                }
+                default -> {
+                    posA = pos.above();
+                    posB = pos.below();
+                }
+            }
+
+            Vec3 raySpot = ray.getLocation();
+            if (raySpot.distanceTo(posA.getCenter()) < raySpot.distanceTo(posB.getCenter())) {
+                return world.getBlockState(posA).canBeReplaced() ? PlacementOffset.success(posA, b -> clone(state, b)) : PlacementOffset.fail();
+            } else {
+                return world.getBlockState(posB).canBeReplaced() ? PlacementOffset.success(posB, b -> clone(state, b)) : PlacementOffset.fail();
+            }
+        }
+
+        private BlockState clone(BlockState from, BlockState to) {
+            return to.setValue(BlockStateProperties.EYE, false)
+                    .setValue(BlockStateProperties.HORIZONTAL_FACING, from.getValue(BlockStateProperties.HORIZONTAL_FACING))
+                    .setValue(BACK_ALIGNMENT, from.getValue(BACK_ALIGNMENT));
+        }
     }
 }
