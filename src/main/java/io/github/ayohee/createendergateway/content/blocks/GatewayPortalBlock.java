@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -58,13 +59,26 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
 
     @Override
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+        if (!((GatewayBlockEntity)level.getBlockEntity(pos)).isLinked() && entity instanceof LivingEntity le) {
+            teleportAway(level, le);
+            return;
+        }
+
         if (entity.canUsePortal(false)) {
             entity.setAsInsidePortal(this, pos);
         }
     }
 
+    private void teleportAway(Level level, LivingEntity le) {
+        //TODO
+    }
+
     @Override
     public @Nullable DimensionTransition getPortalDestination(ServerLevel level, Entity entity, BlockPos pos) {
+        if (!((GatewayBlockEntity)level.getBlockEntity(pos)).isLinked()) {
+            return null;
+        }
+
         ResourceKey<Level> targetDimension = level.dimension() == Level.END ? Level.OVERWORLD : Level.END;
         ServerLevel dimensionLevel = level.getServer().getLevel(targetDimension);
         if (dimensionLevel == null) {
