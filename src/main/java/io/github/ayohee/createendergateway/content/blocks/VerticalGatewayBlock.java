@@ -30,6 +30,7 @@ import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
@@ -39,6 +40,13 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+
 import static io.github.ayohee.createendergateway.CreateEnderGateway.MODID;
 
 public class VerticalGatewayBlock extends Block {
@@ -46,6 +54,9 @@ public class VerticalGatewayBlock extends Block {
     private static final VoxelShape EYE_SHAPE = Block.box(4, 4, 0, 12, 12, 3);
     public static final VoxelShaper VERTICAL_GATEWAY_SHAPE = new AllShapes.Builder(BASE_SHAPE).forDirectional(Direction.NORTH);
     public static final VoxelShaper FILLED_GATEWAY_SHAPE = new AllShapes.Builder(Shapes.or(EYE_SHAPE, BASE_SHAPE)).forDirectional(Direction.NORTH);
+
+    public static final int MAX_FRAME_SIZE = 16;
+    public static final int MIN_FRAME_SIZE = 5;
 
     // UP and DOWN signify that the front of the block (eye socket) is facing up/down. NORTH signifies that it is horizontal.
     public static final DirectionProperty BACK_ALIGNMENT = DirectionProperty.create("alignment", Direction.UP, Direction.DOWN, Direction.NORTH);
@@ -188,39 +199,177 @@ public class VerticalGatewayBlock extends Block {
         return ItemInteractionResult.SUCCESS;
     }
 
-    private boolean isFrame(LevelAccessor level, BlockPos pos) {
+    private static boolean isFrame(LevelAccessor level, BlockPos pos) {
         return level.getBlockState(pos).is(EGTags.GATEWAY_FRAME);
     }
 
-    private boolean isFilled(LevelAccessor level, BlockPos pos) {
+    private static boolean isFrame(BlockState state) {
+        return state.is(EGTags.GATEWAY_FRAME);
+    }
+
+    private static boolean isFilled(LevelAccessor level, BlockPos pos) {
         return isFrame(level, pos) && level.getBlockState(pos).getValue(BlockStateProperties.EYE);
     }
 
     private void checkForPortalFormation(LevelAccessor level, BlockPos pos) {
-        BlockState state = level.getBlockState(pos);
+        // Find the corners
+        Pair<Direction, Direction.Axis> alignmentPair = getPortalAlignment(level, pos);
+        Pair<BlockPos, BlockPos> corners = findPortalCorners(level, pos, alignmentPair.getFirst(), alignmentPair.getSecond());
+        if (corners == null) {
+            return;
+        }
+        BlockPos minCorner = corners.getFirst();
+        BlockPos maxCorner = corners.getSecond();
 
-        switch (state.getValue(BACK_ALIGNMENT)) {
-            case UP -> fromBottom(level, pos, state);
-            case DOWN -> fromTop(level, pos, state);
-            default -> fromSide(level, pos, state);
+
+        Direction.Axis portalAxis = (minCorner.getX() == maxCorner.getX()) ? Direction.Axis.Z : Direction.Axis.X;
+        int width = maxCorner.get(portalAxis) - minCorner.get(portalAxis) + 1;
+        int height = maxCorner.getY() - minCorner.getY() + 1;
+
+        if (width < MIN_FRAME_SIZE || width > MAX_FRAME_SIZE || height < MIN_FRAME_SIZE || height > MAX_FRAME_SIZE) {
+            return;
+        }
+
+
+        // Check that the inside is only air
+        Direction posHorizontal = Direction.get(Direction.AxisDirection.POSITIVE, portalAxis);
+        Direction negHorizontal = Direction.get(Direction.AxisDirection.NEGATIVE, portalAxis);
+        BlockPos insideCorner = minCorner.above().relative(posHorizontal);
+        for (BlockPos alongHorizontal : forBlockAlongDirection(insideCorner, posHorizontal, width - 2)) {
+            for (BlockPos checkPos : forBlockAlongDirection(alongHorizontal, Direction.UP, height - 2)) {
+                BlockState bs = level.getBlockState(checkPos);
+                if (!bs.is(Blocks.AIR)) {
+                    return;
+                }
+            }
+        }
+
+
+        // Check each side
+        Direction forward = posHorizontal.getClockWise();
+        Direction backward = negHorizontal.getClockWise();
+        Predicate<BlockState> topFrameCheck = (s) -> checkFrameBlockState(s, Direction.DOWN, List.of(backward, forward));
+        Predicate<BlockState> bottomFrameCheck = (s) -> checkFrameBlockState(s, Direction.UP, List.of(backward, forward));
+        Predicate<BlockState> minSideFrameCheck = (s) -> checkFrameBlockState(s, Direction.NORTH, List.of(negHorizontal));
+        Predicate<BlockState> maxSideFrameCheck = (s) -> checkFrameBlockState(s, Direction.NORTH, List.of(posHorizontal));
+
+        // The only reason I use atomic here is so i can modify it within a lambda
+        AtomicBoolean sawWrongState = new AtomicBoolean(false);
+        AtomicBoolean hasSeenAbandoned = new AtomicBoolean(false);
+        BiConsumer<BlockPos, Predicate<BlockState>> frameTest = (p, t) -> {
+            BlockState checkState = level.getBlockState(p);
+            if (!t.test(checkState)) {
+                sawWrongState.set(true);
+            }
+
+            if (checkState.is(EGBlocks.ABANDONED_GATEWAY.get())) {
+                hasSeenAbandoned.set(true);
+            }
+        };
+
+        forBlockAlongDirection(minCorner.above(), Direction.UP, height - 2)
+                .forEach((p) -> frameTest.accept(p, minSideFrameCheck));
+        forBlockAlongDirection(maxCorner.below(), Direction.DOWN, height - 2)
+                .forEach((p) -> frameTest.accept(p, maxSideFrameCheck));
+        forBlockAlongDirection(minCorner.relative(posHorizontal), posHorizontal, width - 2)
+                .forEach((p) -> frameTest.accept(p, bottomFrameCheck));
+        forBlockAlongDirection(maxCorner.relative(negHorizontal), negHorizontal, width - 2)
+                .forEach((p) -> frameTest.accept(p, topFrameCheck));
+
+        // Need at least one abandoned frame for assembly - need to make sure they're only built at structure locations
+        if (!hasSeenAbandoned.get() || sawWrongState.get()) {
+            return;
+        }
+
+
+        // Place the portals
+        BlockState portalBS = EGBlocks.GATEWAY_PORTAL.getDefaultState();
+        portalBS = portalBS.setValue(BlockStateProperties.HORIZONTAL_AXIS, portalAxis);
+
+        for (BlockPos alongHorizontal : forBlockAlongDirection(insideCorner, posHorizontal, width - 2)) {
+            for (BlockPos placePos : forBlockAlongDirection(alongHorizontal, Direction.UP, height - 2)) {
+                level.setBlock(placePos, portalBS, Block.UPDATE_CLIENTS);
+            }
         }
     }
 
-    private void fromSide(LevelAccessor level, BlockPos pos, BlockState state) {
-        Direction backFacing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
-        // Axis in which portal side lies
-        Direction.Axis portalAxis = Direction.Axis.Y;
+    private List<BlockPos> forBlockAlongDirection(BlockPos start, Direction direction, int length) {
+        BlockPos current = start;
+        List<BlockPos> positions = new ArrayList<>();
+        for (int i = 0; i < length; i++) {
+            positions.add(current);
+            current = current.relative(direction);
+        }
+
+        return positions;
     }
 
-    private void fromTop(LevelAccessor level, BlockPos pos, BlockState state) {
-        Direction backFacing = Direction.DOWN;
-        // Axis in which portal side lies
-        Direction.Axis portalAxis = state.getValue(BlockStateProperties.HORIZONTAL_FACING).getClockWise().getAxis();
+    private Pair<BlockPos, BlockPos> findPortalCorners(LevelAccessor level, BlockPos pos, Direction backFacing, Direction.Axis portalAxis) {
+        BlockPos oppositeSide = exploreFrameWhile(level, pos, backFacing, s -> s.is(Blocks.AIR));
+        if (oppositeSide == null || !isFrame(level, oppositeSide)) {
+            return null;
+        }
+
+        BlockPos positiveExtent = exploreFrameWhile(level, pos, Direction.get(Direction.AxisDirection.POSITIVE, portalAxis), VerticalGatewayBlock::isFrame);
+        BlockPos negativeExtent = exploreFrameWhile(level, pos, Direction.get(Direction.AxisDirection.NEGATIVE, portalAxis), VerticalGatewayBlock::isFrame);
+
+        if (positiveExtent == null || negativeExtent == null) {
+            return null;
+        }
+
+        // Find the corners, check the width
+        BlockPos minCorner = BlockPos.min(BlockPos.min(positiveExtent, negativeExtent), oppositeSide);
+        BlockPos maxCorner = BlockPos.max(BlockPos.max(positiveExtent, negativeExtent), oppositeSide);
+
+        return Pair.of(minCorner, maxCorner);
     }
 
-    private void fromBottom(LevelAccessor level, BlockPos pos, BlockState state) {
-        Direction backFacing = Direction.UP;
-        // Axis in which portal side lies
-        Direction.Axis portalAxis = state.getValue(BlockStateProperties.HORIZONTAL_FACING).getClockWise().getAxis();
+    private Pair<Direction, Direction.Axis> getPortalAlignment(LevelAccessor level, BlockPos pos) {
+        BlockState state = level.getBlockState(pos);
+
+        Direction facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+        return switch (state.getValue(BACK_ALIGNMENT)) {
+            case UP   -> Pair.of(Direction.UP,         facing.getClockWise().getAxis());
+            case DOWN -> Pair.of(Direction.DOWN,       facing.getClockWise().getAxis());
+            default   -> Pair.of(facing.getOpposite(), Direction.Axis.Y);
+        };
+    }
+
+    private boolean checkFrameBlockState(BlockState s, Direction backAlignment, List<Direction> allowedFacing) {
+        if (!s.is(EGTags.GATEWAY_FRAME)) {
+            return false;
+        }
+
+        if (!s.getValue(BlockStateProperties.EYE)) {
+            return false;
+        }
+
+        if (s.getValue(BACK_ALIGNMENT) != backAlignment) {
+            return false;
+        }
+
+        if (!allowedFacing.contains(s.getValue(BlockStateProperties.HORIZONTAL_FACING))) {
+            return false;
+        }
+
+        return true;
+    }
+
+    // Returns the BlockPos that it failed on.
+    private BlockPos exploreFrameWhile(LevelAccessor level, BlockPos pos, Direction exploreDir, Predicate<BlockState> check) {
+        BlockPos checkPos = pos.relative(exploreDir);
+        BlockState checkState = level.getBlockState(checkPos);
+        int checked = 0;
+        while (check.test(checkState)) {
+            if (checked >= MAX_FRAME_SIZE) {
+                return null;
+            }
+
+            checkPos = checkPos.relative(exploreDir);
+            checkState = level.getBlockState(checkPos);
+            checked++;
+        }
+
+        return checkPos;
     }
 }
