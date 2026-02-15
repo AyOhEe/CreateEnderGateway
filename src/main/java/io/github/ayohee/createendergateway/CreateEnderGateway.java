@@ -51,6 +51,7 @@ public class CreateEnderGateway {
 
     private void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
+            EGContraptionMovementSettings.registerDefaults();
             EGPortalTracks.register();
         });
     }
