@@ -13,7 +13,6 @@ import net.createmod.catnip.placement.PlacementHelpers;
 import net.createmod.catnip.placement.PlacementOffset;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -223,16 +222,16 @@ public class VerticalGatewayBlock extends Block {
 
 
         level.playSound(player, pos, SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
-        if (!(level instanceof ServerLevel)) {
-            return ItemInteractionResult.SUCCESS;
-        }
-
         level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.EYE, true));
-        if (!player.hasInfiniteMaterials()) {
-            stack.shrink(1);
+        if (level instanceof ServerLevel) {
+            if (!player.hasInfiniteMaterials()) {
+                stack.shrink(1);
+            }
         }
 
-        checkForPortalFormation(level, pos);
+        if (checkForPortalFormation(level, pos)) {
+            level.playSound(player, pos, SoundEvents.END_PORTAL_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
+        }
 
         return ItemInteractionResult.SUCCESS;
     }
@@ -245,12 +244,12 @@ public class VerticalGatewayBlock extends Block {
         return state.is(EGTags.GATEWAY_FRAME);
     }
 
-    private void checkForPortalFormation(LevelAccessor level, BlockPos pos) {
+    private boolean checkForPortalFormation(Level level, BlockPos pos) {
         // Find the corners
         Pair<Direction, Direction.Axis> alignmentPair = getPortalAlignment(level, pos);
         Pair<BlockPos, BlockPos> corners = findPortalCorners(level, pos, alignmentPair.getFirst(), alignmentPair.getSecond());
         if (corners == null) {
-            return;
+            return false;
         }
         BlockPos minCorner = corners.getFirst();
         BlockPos maxCorner = corners.getSecond();
@@ -261,7 +260,7 @@ public class VerticalGatewayBlock extends Block {
         int height = maxCorner.getY() - minCorner.getY() + 1;
 
         if (width < MIN_FRAME_SIZE || width > MAX_FRAME_SIZE || height < MIN_FRAME_SIZE || height > MAX_FRAME_SIZE) {
-            return;
+            return false;
         }
 
 
@@ -273,7 +272,7 @@ public class VerticalGatewayBlock extends Block {
             for (BlockPos checkPos : forBlockAlongDirection(alongHorizontal, Direction.UP, height - 2)) {
                 BlockState bs = level.getBlockState(checkPos);
                 if (!bs.is(Blocks.AIR)) {
-                    return;
+                    return false;
                 }
             }
         }
@@ -312,19 +311,22 @@ public class VerticalGatewayBlock extends Block {
 
         // Need at least one abandoned frame for assembly - need to make sure they're only built at structure locations
         if (!hasSeenAbandoned.get() || sawWrongState.get()) {
-            return;
+            return false;
         }
-
 
         // Place the portals
-        BlockState portalBS = EGBlocks.GATEWAY_PORTAL.getDefaultState();
-        portalBS = portalBS.setValue(BlockStateProperties.HORIZONTAL_AXIS, portalAxis);
+        if (level instanceof ServerLevel) {
+            BlockState portalBS = EGBlocks.GATEWAY_PORTAL.getDefaultState();
+            portalBS = portalBS.setValue(BlockStateProperties.HORIZONTAL_AXIS, portalAxis);
 
-        for (BlockPos alongHorizontal : forBlockAlongDirection(insideCorner, posHorizontal, width - 2)) {
-            for (BlockPos placePos : forBlockAlongDirection(alongHorizontal, Direction.UP, height - 2)) {
-                level.setBlock(placePos, portalBS, Block.UPDATE_CLIENTS);
+            for (BlockPos alongHorizontal : forBlockAlongDirection(insideCorner, posHorizontal, width - 2)) {
+                for (BlockPos placePos : forBlockAlongDirection(alongHorizontal, Direction.UP, height - 2)) {
+                    level.setBlock(placePos, portalBS, Block.UPDATE_CLIENTS);
+                }
             }
         }
+
+        return true;
     }
 
     private List<BlockPos> forBlockAlongDirection(BlockPos start, Direction direction, int length) {
