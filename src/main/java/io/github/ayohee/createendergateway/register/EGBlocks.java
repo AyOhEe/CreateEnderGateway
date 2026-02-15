@@ -23,6 +23,7 @@ public class EGBlocks {
             .initialProperties(() -> Blocks.END_PORTAL_FRAME)
             .properties((p) -> p
                     .lightLevel(VerticalGatewayBlock::lightLevel)
+                    .pushReaction(PushReaction.BLOCK)
                     .strength(5, 6)
             )
             .tag(EGTags.GATEWAY_FRAME, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE)
@@ -62,7 +63,8 @@ public class EGBlocks {
     public static final BlockEntry<GatewayPortalBlock> GATEWAY_PORTAL = REGISTRATE.block("gateway_portal", GatewayPortalBlock::new)
             .initialProperties(() -> Blocks.NETHER_PORTAL)
             .properties((p) -> p
-
+                    .pushReaction(PushReaction.BLOCK)
+                    .strength(-1)
             )
             .tag(BlockTags.PORTALS, BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE, BlockTags.INVALID_SPAWN_INSIDE)
             .blockstate(GatewayPortalBlock::blockstate)
