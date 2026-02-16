@@ -1,8 +1,10 @@
 package io.github.ayohee.createendergateway;
 
 import io.github.ayohee.createendergateway.content.blockentityrenderer.GatewayBlockEntityRenderer;
+import io.github.ayohee.createendergateway.content.ponder.EGPonderPlugin;
 import io.github.ayohee.createendergateway.register.EGBlockEntityTypes;
 import io.github.ayohee.createendergateway.register.EGEntityTypes;
+import net.createmod.ponder.foundation.PonderIndex;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.api.distmarker.Dist;
@@ -26,5 +28,8 @@ public class CreateEnderGatewayClient {
     static void onClientSetup(FMLClientSetupEvent event) {
         //FIXME this shouldn't be done this way. No clue why it wasn't working through registrate.
         BlockEntityRenderers.register(EGBlockEntityTypes.GATEWAY_PORTAL.get(), GatewayBlockEntityRenderer::new);
+
+
+        PonderIndex.addPlugin(new EGPonderPlugin());
     }
 }
