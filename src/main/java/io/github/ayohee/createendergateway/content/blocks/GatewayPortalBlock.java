@@ -20,6 +20,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -35,6 +36,9 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static io.github.ayohee.createendergateway.CreateEnderGateway.MODID;
 
@@ -78,6 +82,20 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         super.onRemove(state, level, pos, newState, movedByPiston);
+
+        for (BlockPos neighbourPos : getNeighbours(level, pos)) {
+            level.setBlock(neighbourPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
+        }
+    }
+
+    public static List<BlockPos> getNeighbours(LevelAccessor level, BlockPos pos) {
+        BlockState state = level.getBlockState(pos);
+        List<BlockPos> neighbours = new ArrayList<>();
+
+        if (!state.is(EGBlocks.GATEWAY_PORTAL)) {
+            return neighbours;
+        }
+
         for (Direction d : Direction.values()) {
             if (d.getAxis() != Direction.Axis.Y && d.getAxis() != state.getValue(BlockStateProperties.HORIZONTAL_AXIS)) {
                 continue;
@@ -87,9 +105,11 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
             BlockState neighbourState = level.getBlockState(neighbourPos);
 
             if (neighbourState.is(EGBlocks.GATEWAY_PORTAL.get())) {
-                level.setBlock(neighbourPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
+                neighbours.add(neighbourPos);
             }
         }
+
+        return neighbours;
     }
 
     @Override

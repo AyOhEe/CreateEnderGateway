@@ -22,7 +22,7 @@ public class DimensionalTunerRenderer extends CustomRenderedItemModelRenderer {
                           PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
         renderer.render(model.getOriginalModel(), light);
 
-        ms.mulPose(Axis.YP.rotationDegrees(DimensionalTunerItem.getCogRotation()));
+        ms.mulPose(Axis.YP.rotationDegrees(0));//DimensionalTunerItem.getCogRotation()));
 
         ms.translate(-1/16f, -1/32f, 0);
         renderer.render(GEAR.get(), light);

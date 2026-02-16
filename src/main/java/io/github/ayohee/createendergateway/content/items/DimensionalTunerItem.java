@@ -3,6 +3,7 @@ package io.github.ayohee.createendergateway.content.items;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
+import io.github.ayohee.createendergateway.content.blocks.GatewayPortalBlock;
 import io.github.ayohee.createendergateway.content.itemrenderer.DimensionalTunerRenderer;
 import io.github.ayohee.createendergateway.register.EGBlocks;
 import io.github.ayohee.createendergateway.register.EGDataComponents;
@@ -15,10 +16,15 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Set;
 import java.util.function.Consumer;
 
 public class DimensionalTunerItem extends Item {
@@ -47,13 +53,55 @@ public class DimensionalTunerItem extends Item {
             return InteractionResult.FAIL;
         }
 
+        if (heldInHand.has(EGDataComponents.PORTAL_TUNING)) {
+            heldInHand.remove(EGDataComponents.PORTAL_TUNING);
+            return InteractionResult.SUCCESS;
+        }
+
         heldInHand.set(EGDataComponents.PORTAL_TUNING, new PortalTuning(where));
         return InteractionResult.SUCCESS;
     }
 
-    //TODO actually implement
     private boolean isAlreadyTunedTo(ItemStack heldInHand, BlockPos where, Level level) {
-        return heldInHand.has(EGDataComponents.PORTAL_TUNING);
+        // If it isn't tuned, it can't already be linked
+        if (!heldInHand.has(EGDataComponents.PORTAL_TUNING)) {
+            return false;
+        }
+
+        // Start searching at the current block
+        Queue<BlockPos> checkQueue = new LinkedList<>();
+        checkQueue.add(where);
+
+        // Where are we looking for?
+        BlockPos linkedPos = heldInHand.get(EGDataComponents.PORTAL_TUNING).linkingFrom();
+
+        // Keep track of the blocks we've already checked - we can skip those when we see them again.
+        Set<BlockPos> alreadySeen = new HashSet<>();
+        while (!checkQueue.isEmpty()) {
+            // Make sure we haven't already seen this one
+            BlockPos checkPos = checkQueue.poll();
+            if (alreadySeen.contains(checkPos)) {
+                continue;
+            }
+            alreadySeen.add(checkPos); // And mark it as seen
+
+            // Make sure it's actually a portal
+            BlockState checkState = level.getBlockState(checkPos);
+            if (!checkState.is(EGBlocks.GATEWAY_PORTAL)) {
+                continue;
+            }
+
+            // Is it the portal we were looking for?
+            if (checkPos.equals(linkedPos)) {
+                return true;
+            }
+
+            // Nope - look at all of the neighbours
+            checkQueue.addAll(GatewayPortalBlock.getNeighbours(level, checkPos));
+        }
+
+        // Didn't find it.
+        return false;
     }
 
     @Override
