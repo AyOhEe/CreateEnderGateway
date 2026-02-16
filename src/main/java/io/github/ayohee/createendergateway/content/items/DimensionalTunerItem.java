@@ -8,6 +8,7 @@ import io.github.ayohee.createendergateway.register.EGBlocks;
 import io.github.ayohee.createendergateway.register.EGDataComponents;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
@@ -40,8 +41,19 @@ public class DimensionalTunerItem extends Item {
             return InteractionResult.PASS;
         }
 
-        context.getItemInHand().set(EGDataComponents.PORTAL_TUNING, new PortalTuning(where));
+        ItemStack heldInHand = context.getItemInHand();
+        if (isAlreadyTunedTo(heldInHand, where, level)) {
+            context.getPlayer().displayClientMessage(Component.translatable("tooltip.createendergateway.already_tuned_to_portal").withColor(0xFF4040), true);
+            return InteractionResult.FAIL;
+        }
+
+        heldInHand.set(EGDataComponents.PORTAL_TUNING, new PortalTuning(where));
         return InteractionResult.SUCCESS;
+    }
+
+    //TODO actually implement
+    private boolean isAlreadyTunedTo(ItemStack heldInHand, BlockPos where, Level level) {
+        return heldInHand.has(EGDataComponents.PORTAL_TUNING);
     }
 
     @Override
