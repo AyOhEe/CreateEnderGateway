@@ -45,6 +45,7 @@ public class CreateEnderGateway {
         EGCriteriaTriggers.register();
         EGTags.register();
         EGCreativeTabs.register();
+        EGDataComponents.register();
 
         EGRegistries.register(modEventBus);
     }

@@ -14,9 +14,11 @@ public class EGItems {
     }
 
     public static final ItemEntry<SyntheticEyeItem> SYNTHETIC_EYE = REGISTRATE.item("synthetic_eye", SyntheticEyeItem::new)
+            .properties(p -> p.stacksTo(16))
             .register();
 
     public static final ItemEntry<DimensionalTunerItem> DIMENSIONAL_TUNER = REGISTRATE.item("dimensional_tuner", DimensionalTunerItem::new)
+            .properties(p -> p.stacksTo(1))
             .register();
 
     public static final ItemEntry<Item> AMETHYST_DUST = REGISTRATE.item("amethyst_dust", Item::new)
