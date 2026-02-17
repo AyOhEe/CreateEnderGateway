@@ -17,7 +17,7 @@ public class EGPonderScenes {
         HELPER.forComponents(EGBlocks.MECHANICAL_GATEWAY)
                 .addStoryBoard("mechanical_gateway", EGPonderScenes::mechanicalGateway);
         HELPER.forComponents(EGBlocks.ABANDONED_GATEWAY)
-                .addStoryBoard("abandoned_gateway", EGPonderScenes::mechanicalGateway);
+                .addStoryBoard("abandoned_gateway", EGPonderScenes::abandonedGateway);
         
         HELPER.forComponents(EGItems.SYNTHETIC_EYE)
                 .addStoryBoard("synthetic_eye", EGPonderScenes::syntheticEye);
@@ -26,10 +26,18 @@ public class EGPonderScenes {
                 .addStoryBoard("dimensional_tuner", EGPonderScenes::dimensionalTuner);
     }
 
-    private static void dimensionalTuner(SceneBuilder builder, SceneBuildingUtil util) {
+    private static void mechanicalGateway(SceneBuilder builder, SceneBuildingUtil util) {
         builder.title("mechanical_gateway", "Repairing Portals");
-        builder.configureBasePlate(0, 0, 5);
         builder.world().showSection(util.select().layer(0), Direction.UP);
+        builder.configureBasePlate(0, 0, 5);
+
+        builder.markAsFinished();
+    }
+
+    private static void abandonedGateway(SceneBuilder builder, SceneBuildingUtil util) {
+        builder.title("abandoned_gateway", "Abandoned Portals");
+        builder.world().showSection(util.select().layer(0), Direction.UP);
+        builder.configureBasePlate(0, 0, 5);
 
         builder.markAsFinished();
     }
@@ -42,10 +50,10 @@ public class EGPonderScenes {
         builder.markAsFinished();
     }
 
-    private static void mechanicalGateway(SceneBuilder builder, SceneBuildingUtil util) {
+    private static void dimensionalTuner(SceneBuilder builder, SceneBuildingUtil util) {
         builder.title("dimensional_tuner", "Linking Portals");
-        builder.world().showSection(util.select().layer(0), Direction.UP);
         builder.configureBasePlate(0, 0, 5);
+        builder.world().showSection(util.select().layer(0), Direction.UP);
 
         builder.markAsFinished();
     }
