@@ -17,7 +17,7 @@ public class EGPonderScenes {
         HELPER.forComponents(EGBlocks.MECHANICAL_GATEWAY)
                 .addStoryBoard("mechanical_gateway", EGPonderScenes::mechanicalGateway);
         HELPER.forComponents(EGBlocks.ABANDONED_GATEWAY)
-                .addStoryBoard("mechanical_gateway", EGPonderScenes::mechanicalGateway);
+                .addStoryBoard("abandoned_gateway", EGPonderScenes::mechanicalGateway);
         
         HELPER.forComponents(EGItems.SYNTHETIC_EYE)
                 .addStoryBoard("synthetic_eye", EGPonderScenes::syntheticEye);

@@ -13,6 +13,8 @@
   "createendergateway.ponder.mechanical_gateway.header": "Repairing Portals",
   "createendergateway.ponder.mod_name": "Create: Ender Gateway",
   "createendergateway.ponder.synthetic_eye.header": "Finding Abandoned Stations",
+  "createendergateway.ponder.tag.ender_gateway": "Create: Ender Gateway",
+  "createendergateway.ponder.tag.ender_gateway.description": "Train transport between the End and the Overworld",
   "entity.createendergateway.synthetic_eye": "Synthetic Eye",
   "fluid.createendergateway.active_ender_solution": "Active Ender Solution",
   "fluid.createendergateway.dormant_ender_solution": "Dormant Ender Solution",
