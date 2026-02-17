@@ -1,4 +1,8 @@
 {
+  "advancement.createendergateway.root": "ʎɐʍǝʇɐ⅁ ɹǝpuƎ :ǝʇɐǝɹƆ",
+  "advancement.createendergateway.root.desc": "ǝuıן ǝɥʇ ɟo \"puƎ\"",
+  "advancement.createendergateway.use_synthetic_eye": "ooןɐbooq ɔıɹʇɔǝןƎ :ᄅ ʎdS ǝʎƎ",
+  "advancement.createendergateway.use_synthetic_eye.desc": "˙˙˙nʌ àظép ɟo buıןǝǝɟ ppo uɐ buıʇʇǝ⅁",
   "block.createendergateway.abandoned_gateway": "ʎɐʍǝʇɐ⅁ pǝuopuɐqⱯ",
   "block.createendergateway.active_ender_solution": "uoıʇnןoS ɹǝpuƎ ǝʌıʇɔⱯ",
   "block.createendergateway.dormant_ender_solution": "uoıʇnןoS ɹǝpuƎ ʇuɐɯɹoᗡ",
@@ -7,6 +11,7 @@
   "block.createendergateway.mechanical_gateway": "ʎɐʍǝʇɐ⅁ ןɐɔıuɐɥɔǝW",
   "createendergateway.ponder.dimensional_tuner.header": "sןɐʇɹoԀ buıʞuıꞀ",
   "createendergateway.ponder.mechanical_gateway.header": "sןɐʇɹoԀ buıɹıɐdǝᴚ",
+  "createendergateway.ponder.mod_name": "ʎɐʍǝʇɐ⅁ ɹǝpuƎ :ǝʇɐǝɹƆ",
   "createendergateway.ponder.synthetic_eye.header": "suoıʇɐʇS pǝuopuɐqⱯ buıpuıℲ",
   "entity.createendergateway.synthetic_eye": "ǝʎƎ ɔıʇǝɥʇuʎS",
   "fluid.createendergateway.active_ender_solution": "uoıʇnןoS ɹǝpuƎ ǝʌıʇɔⱯ",
@@ -19,5 +24,8 @@
   "item.createendergateway.incomplete_synthetic_eye": "ǝʎƎ ɔıʇǝɥʇuʎS ǝʇǝןdɯoɔuI",
   "item.createendergateway.saturated_eye_fragment": "ʇuǝɯbɐɹℲ ǝʎƎ pǝʇɐɹnʇɐS",
   "item.createendergateway.synthetic_eye": "ǝʎƎ ɔıʇǝɥʇuʎS",
-  "item.createendergateway.synthetic_eye_fragment": "ʇuǝɯbɐɹℲ ǝʎƎ ɔıʇǝɥʇuʎS"
+  "item.createendergateway.synthetic_eye_fragment": "ʇuǝɯbɐɹℲ ǝʎƎ ɔıʇǝɥʇuʎS",
+  "itemGroup.createendergateway": "ʎɐʍǝʇɐ⅁ ɹǝpuƎ :ǝʇɐǝɹƆ",
+  "tooltip.createendergateway.already_tuned_to_portal": "ןɐʇɹod sıɥʇ oʇ pǝʞuıן ʎpɐǝɹןɐ sı ɹǝunʇ sıɥ⟘",
+  "tooltip.createendergateway.gateway_not_linked": "˙˙˙pǝunʇ uǝǝq ʇ,usɐɥ ʎɐʍǝʇɐ⅁ sıɥ⟘"
 }

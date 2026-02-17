@@ -1,5 +1,8 @@
 package io.github.ayohee.createendergateway;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.simibubi.create.foundation.utility.FilesHelper;
 import com.tterrag.registrate.providers.ProviderType;
 import io.github.ayohee.createendergateway.content.ponder.EGPonderPlugin;
 import io.github.ayohee.createendergateway.datagen.EGGeneratedEntriesProvider;
@@ -13,6 +16,7 @@ import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
@@ -48,8 +52,23 @@ public class EGDatagen {
 
     private static void addExtraRegistrateData() {
         REGISTRATE.addDataGenerator(ProviderType.LANG, provider -> {
+            provideDefaultLang("default", provider::add);
             providePonderLang(provider::add);
         });
+    }
+
+    private static void provideDefaultLang(String fileName, BiConsumer<String, String> consumer) {
+        String path = "assets/createendergateway/lang/default/" + fileName + ".json";
+        JsonElement jsonElement = FilesHelper.loadJsonResource(path);
+        if (jsonElement == null) {
+            throw new IllegalStateException(String.format("Could not find default lang file: %s", path));
+        }
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
+        for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue().getAsString();
+            consumer.accept(key, value);
+        }
     }
 
     private static void providePonderLang(BiConsumer<String, String> consumer) {

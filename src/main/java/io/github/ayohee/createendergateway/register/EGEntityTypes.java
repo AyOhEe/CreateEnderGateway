@@ -22,6 +22,7 @@ public class EGEntityTypes {
                     .clientTrackingRange(4)
                     .updateInterval(4)
             ).renderer(() -> (ctx -> new ThrownItemRenderer<>(ctx, 1.0f, true)))
+            .lang("Synthetic Eye")
             .register();
 
     public static void register() { }

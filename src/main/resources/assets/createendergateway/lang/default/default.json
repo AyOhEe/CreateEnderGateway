@@ -1,0 +1,14 @@
+{
+  "itemGroup.createendergateway": "Create: Ender Gateway",
+
+  "advancement.createendergateway.root": "Create: Ender Gateway",
+  "advancement.createendergateway.root.desc": "\"End\" of the line",
+
+  "advancement.createendergateway.use_synthetic_eye": "Eye Spy 2: Electric boogaloo",
+  "advancement.createendergateway.use_synthetic_eye.desc": "Getting an odd feeling of déjà vu...",
+
+  "tooltip.createendergateway.gateway_not_linked": "This Gateway hasn't been tuned...",
+  "tooltip.createendergateway.already_tuned_to_portal": "This tuner is already linked to this portal",
+
+  "createendergateway.ponder.mod_name": "Create: Ender Gateway"
+}

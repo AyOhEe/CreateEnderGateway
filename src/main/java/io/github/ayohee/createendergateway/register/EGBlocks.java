@@ -28,6 +28,7 @@ public class EGBlocks {
             )
             .tag(EGTags.GATEWAY_FRAME, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE)
             .blockstate(VerticalGatewayBlock::blockstate)
+            .lang("Mechanical Gateway")
             .simpleItem()
             .register();
 
@@ -39,6 +40,7 @@ public class EGBlocks {
             )
             .tag(EGTags.GATEWAY_FRAME, BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE)
             .blockstate(VerticalGatewayBlock::blockstate)
+            .lang("Abandoned Gateway")
             .simpleItem()
             .register();
 
@@ -51,6 +53,7 @@ public class EGBlocks {
             )
             .tag(BlockTags.NEEDS_IRON_TOOL)
             .blockstate(GatewayCornerBlock::blockstate)
+            .lang("Gateway Corner")
             .simpleItem()
             .register();
 
@@ -68,6 +71,7 @@ public class EGBlocks {
             )
             .tag(BlockTags.PORTALS, BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE, BlockTags.INVALID_SPAWN_INSIDE)
             .blockstate(GatewayPortalBlock::blockstate)
+            .lang("Gateway Portal")
             .register();
 
     public static void register() { }

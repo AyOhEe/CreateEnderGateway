@@ -1,4 +1,8 @@
 {
+  "advancement.createendergateway.root": "Create: Ender Gateway",
+  "advancement.createendergateway.root.desc": "\"End\" of the line",
+  "advancement.createendergateway.use_synthetic_eye": "Eye Spy 2: Electric boogaloo",
+  "advancement.createendergateway.use_synthetic_eye.desc": "Getting an odd feeling of déjà vu...",
   "block.createendergateway.abandoned_gateway": "Abandoned Gateway",
   "block.createendergateway.active_ender_solution": "Active Ender Solution",
   "block.createendergateway.dormant_ender_solution": "Dormant Ender Solution",
@@ -7,6 +11,7 @@
   "block.createendergateway.mechanical_gateway": "Mechanical Gateway",
   "createendergateway.ponder.dimensional_tuner.header": "Linking Portals",
   "createendergateway.ponder.mechanical_gateway.header": "Repairing Portals",
+  "createendergateway.ponder.mod_name": "Create: Ender Gateway",
   "createendergateway.ponder.synthetic_eye.header": "Finding Abandoned Stations",
   "entity.createendergateway.synthetic_eye": "Synthetic Eye",
   "fluid.createendergateway.active_ender_solution": "Active Ender Solution",
@@ -19,5 +24,8 @@
   "item.createendergateway.incomplete_synthetic_eye": "Incomplete Synthetic Eye",
   "item.createendergateway.saturated_eye_fragment": "Saturated Eye Fragment",
   "item.createendergateway.synthetic_eye": "Synthetic Eye",
-  "item.createendergateway.synthetic_eye_fragment": "Synthetic Eye Fragment"
+  "item.createendergateway.synthetic_eye_fragment": "Synthetic Eye Fragment",
+  "itemGroup.createendergateway": "Create: Ender Gateway",
+  "tooltip.createendergateway.already_tuned_to_portal": "This tuner is already linked to this portal",
+  "tooltip.createendergateway.gateway_not_linked": "This Gateway hasn't been tuned..."
 }
