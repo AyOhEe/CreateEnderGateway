@@ -13,7 +13,9 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
@@ -61,12 +63,27 @@ public class DimensionalTunerItem extends Item {
         }
 
         if (heldInHand.has(EGDataComponents.PORTAL_TUNING)) {
+            PortalTuning tuning = heldInHand.get(EGDataComponents.PORTAL_TUNING);
+            Player who = context.getPlayer();
+
+            linkPortals(level, where, who, tuning);
+
             heldInHand.remove(EGDataComponents.PORTAL_TUNING);
             return InteractionResult.SUCCESS;
         }
 
         heldInHand.set(EGDataComponents.PORTAL_TUNING, new PortalTuning(where, level.dimension()));
         return InteractionResult.SUCCESS;
+    }
+
+    private void linkPortals(Level level, BlockPos where, Player who, PortalTuning tuning) {
+        if (!(level instanceof ServerLevel sLevel)) {
+            return;
+        }
+
+        //TODO
+
+        who.sendSystemMessage(Component.literal("Linking from [" + tuning.linkingFrom.toShortString() + " in " + tuning.sourceDimension.location() + "] to [" + where.toShortString() + " in " + level.dimension().location() + "]").withColor(0x40FF40));
     }
 
     private boolean isAlreadyTunedToDimension(ItemStack heldInHand, Level level) {

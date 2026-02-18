@@ -39,6 +39,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static io.github.ayohee.createendergateway.CreateEnderGateway.MODID;
 
@@ -65,17 +66,21 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
 
     @Override
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        if (!((GatewayBlockEntity)level.getBlockEntity(pos)).isLinked() && entity instanceof LivingEntity le) {
-            teleportAway(level, le);
-            return;
-        }
-
         if (entity.canUsePortal(false)) {
             entity.setAsInsidePortal(this, pos);
         }
+
+        if (!(level instanceof ServerLevel sLevel)) {
+            return;
+        }
+
+        if (askBlockEntityForPortal(sLevel, pos) == null && entity instanceof LivingEntity le) {
+            teleportAway(sLevel, le);
+            return;
+        }
     }
 
-    private void teleportAway(Level level, LivingEntity le) {
+    private void teleportAway(ServerLevel level, LivingEntity le) {
         //TODO
     }
 
@@ -118,7 +123,29 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
 
     @Override
     public @Nullable DimensionTransition getPortalDestination(ServerLevel level, Entity entity, BlockPos pos) {
-        if (!((GatewayBlockEntity)level.getBlockEntity(pos)).isLinked()) {
+        ResourceKey<Level> targetDimension = level.dimension() == Level.END ? Level.OVERWORLD : Level.END;
+        ServerLevel dimensionLevel = level.getServer().getLevel(targetDimension);
+        if (dimensionLevel == null) {
+            return null;
+        }
+
+        BlockPos where = askBlockEntityForPortal(level, pos);
+        if (where == null) {
+            return null;
+        }
+
+        return new DimensionTransition(dimensionLevel, where.getCenter(), Vec3.ZERO, entity.getYRot(), entity.getXRot(), (Entity e) -> {});
+    }
+
+    private BlockPos askBlockEntityForPortal(ServerLevel level, BlockPos pos) {
+        Optional<GatewayBlockEntity> optionalBE = level.getBlockEntity(pos, EGBlockEntityTypes.GATEWAY_PORTAL.get());
+        if (optionalBE.isEmpty()) {
+            return null;
+        }
+
+        GatewayBlockEntity be = optionalBE.get();
+        BlockPos linkedPos = be.getLinkedPos();
+        if (linkedPos == null) {
             return null;
         }
 
@@ -128,9 +155,13 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
             return null;
         }
 
-        return new DimensionTransition(dimensionLevel, new Vec3(100, 100, 100), Vec3.ZERO, entity.getYRot(), entity.getXRot(), (Entity e) -> {});
-    }
+        Optional<GatewayBlockEntity> linkedBE = dimensionLevel.getBlockEntity(linkedPos, EGBlockEntityTypes.GATEWAY_PORTAL.get());
+        if (linkedBE.isEmpty()) {
+            return null;
+        }
 
+        return linkedPos;
+    }
 
 
     @Override
