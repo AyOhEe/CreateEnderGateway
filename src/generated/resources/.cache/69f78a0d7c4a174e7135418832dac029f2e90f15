@@ -1,12 +1,12 @@
-// 1.21.1	2026-02-18T14:33:11.8133057	Registrate Provider for createendergateway [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
+// 1.21.1	2026-02-18T19:19:17.3499799	Registrate Provider for createendergateway [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
 0b2038d86e92af963cfb5e9020d61f77e03bdf81 assets/createendergateway/blockstates/abandoned_gateway.json
 c821d268dce555328abfb4267ce76ce79db35bd5 assets/createendergateway/blockstates/active_ender_solution.json
 36a3740d42efef70dff648b4ba92bc8a223e46ce assets/createendergateway/blockstates/dormant_ender_solution.json
 02ccba40adb705fe5656fe296911b1902f426eb3 assets/createendergateway/blockstates/gateway_corner.json
 09d8f443729dc22d5c061cea492d054d16a2a836 assets/createendergateway/blockstates/gateway_portal.json
 9f37ca96dbe0054668a88acf46521db6801f1d24 assets/createendergateway/blockstates/mechanical_gateway.json
-e05cc3dfe0a7557aa8eafbc8183e252d311bb2ec assets/createendergateway/lang/en_ud.json
-4ad8a814d28c8651731a4e0098f9c120a54cf872 assets/createendergateway/lang/en_us.json
+c748f4740a20bf23dc4daa62066254a7e80f96d0 assets/createendergateway/lang/en_ud.json
+f0dd37db6195df1c8e990e87d88554b36c271751 assets/createendergateway/lang/en_us.json
 aaf53bc8741bd8a4b42804ee37c7de45df78423f assets/createendergateway/models/block/active_ender_solution.json
 62f7d6eb73a56dfbcd632d1c18b3c67e80e68824 assets/createendergateway/models/block/dormant_ender_solution.json
 167da1108b71488181348e56bb56898ea6575623 assets/createendergateway/models/block/gateway_corner.json

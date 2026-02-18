@@ -29,6 +29,7 @@
   "item.createendergateway.synthetic_eye": "Synthetic Eye",
   "item.createendergateway.synthetic_eye_fragment": "Synthetic Eye Fragment",
   "itemGroup.createendergateway": "Create: Ender Gateway",
+  "tooltip.createendergateway.already_tuned_to_dimension": "This tuner is already linked to a portal in this dimension",
   "tooltip.createendergateway.already_tuned_to_portal": "This tuner is already linked to this portal",
   "tooltip.createendergateway.gateway_not_linked": "This Gateway hasn't been tuned..."
 }

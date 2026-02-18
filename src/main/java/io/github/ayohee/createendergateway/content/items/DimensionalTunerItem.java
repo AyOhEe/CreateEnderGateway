@@ -9,8 +9,10 @@ import io.github.ayohee.createendergateway.register.EGBlocks;
 import io.github.ayohee.createendergateway.register.EGDataComponents;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -53,13 +55,27 @@ public class DimensionalTunerItem extends Item {
             return InteractionResult.FAIL;
         }
 
+        if (isAlreadyTunedToDimension(heldInHand, level)) {
+            context.getPlayer().displayClientMessage(Component.translatable("tooltip.createendergateway.already_tuned_to_dimension").withColor(0xFF4040), true);
+            return InteractionResult.FAIL;
+        }
+
         if (heldInHand.has(EGDataComponents.PORTAL_TUNING)) {
             heldInHand.remove(EGDataComponents.PORTAL_TUNING);
             return InteractionResult.SUCCESS;
         }
 
-        heldInHand.set(EGDataComponents.PORTAL_TUNING, new PortalTuning(where));
+        heldInHand.set(EGDataComponents.PORTAL_TUNING, new PortalTuning(where, level.dimension()));
         return InteractionResult.SUCCESS;
+    }
+
+    private boolean isAlreadyTunedToDimension(ItemStack heldInHand, Level level) {
+        // If it isn't tuned, it can't already be linked
+        if (!heldInHand.has(EGDataComponents.PORTAL_TUNING)) {
+            return false;
+        }
+
+        return heldInHand.get(EGDataComponents.PORTAL_TUNING).sourceDimension.equals(level.dimension());
     }
 
     private boolean isAlreadyTunedTo(ItemStack heldInHand, BlockPos where, Level level) {
@@ -109,13 +125,18 @@ public class DimensionalTunerItem extends Item {
         return stack.has(EGDataComponents.PORTAL_TUNING);
     }
 
-    public record PortalTuning(BlockPos linkingFrom) {
+    public record PortalTuning(BlockPos linkingFrom, ResourceKey<Level> sourceDimension) {
+        static Codec<ResourceKey<Level>> CODEC_DIMENSION = ResourceKey.codec(Registries.DIMENSION);
+        static StreamCodec<ByteBuf, ResourceKey<Level>> STREAM_CODEC_DIMENSION = ResourceKey.streamCodec(Registries.DIMENSION);
+
         public static final Codec<PortalTuning> CODEC = RecordCodecBuilder.create(i -> i.group(
-                BlockPos.CODEC.fieldOf("pos_from").forGetter(PortalTuning::linkingFrom))
+                BlockPos.CODEC.fieldOf("pos_from").forGetter(PortalTuning::linkingFrom),
+                CODEC_DIMENSION.fieldOf("sourceDimension").forGetter(PortalTuning::sourceDimension))
         .apply(i, PortalTuning::new));
 
         public static final StreamCodec<ByteBuf, PortalTuning> STREAM_CODEC = StreamCodec.composite(
                 BlockPos.STREAM_CODEC, PortalTuning::linkingFrom,
+                STREAM_CODEC_DIMENSION, PortalTuning::sourceDimension,
                 PortalTuning::new
         );
     }
