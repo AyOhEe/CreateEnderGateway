@@ -83,13 +83,17 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         super.onRemove(state, level, pos, newState, movedByPiston);
 
-        for (BlockPos neighbourPos : getNeighbours(level, pos)) {
+        for (BlockPos neighbourPos : getNeighbours(level, pos, state)) {
             level.setBlock(neighbourPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
         }
     }
 
     public static List<BlockPos> getNeighbours(LevelAccessor level, BlockPos pos) {
         BlockState state = level.getBlockState(pos);
+        return getNeighbours(level, pos, state);
+    }
+
+    private static List<BlockPos> getNeighbours(LevelAccessor level, BlockPos pos, BlockState state) {
         List<BlockPos> neighbours = new ArrayList<>();
 
         if (!state.is(EGBlocks.GATEWAY_PORTAL)) {
