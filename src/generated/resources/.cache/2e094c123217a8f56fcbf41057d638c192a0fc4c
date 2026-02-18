@@ -1,4 +1,7 @@
-// 1.21.1	2026-02-18T15:53:28.9749022	Create: Ender Gateway's Generated Registry Entries
-91cedb295d5720a76fffb0f4e7159d895abd6cbd data/createendergateway/worldgen/structure/abandoned_station.json
-d32f1d8c5b83498919997ee764443b907758e8af data/createendergateway/worldgen/structure_set/abandoned_stations.json
-2ee78fa37c456fcecdf01665c303ec6134461457 data/createendergateway/worldgen/template_pool/abandoned_station_pool.json
+// 1.21.1	2026-02-18T17:27:42.2918598	Create: Ender Gateway's Generated Registry Entries
+c6036fe6080852de62a9bd6fa993f936e3264796 data/createendergateway/worldgen/structure/abandoned_station_end.json
+ef5d6958c31aa25379594121d71051026ea61d1e data/createendergateway/worldgen/structure/abandoned_station_overworld.json
+80ce8fade01842a7fa371e052466454300044040 data/createendergateway/worldgen/structure_set/abandoned_stations_end.json
+defa6fae89e0f12473c09ddd7a9025f27ae0b883 data/createendergateway/worldgen/structure_set/abandoned_stations_overworld.json
+51dec8cff42b4df87ed3907ede1eff73d3d55c52 data/createendergateway/worldgen/template_pool/end_abandoned_station_pool.json
+57e5c3522214d734544c52c6b299904095ed2489 data/createendergateway/worldgen/template_pool/overworld_abandoned_station_pool.json

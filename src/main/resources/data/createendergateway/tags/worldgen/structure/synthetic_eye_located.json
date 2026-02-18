@@ -1,5 +1,6 @@
 {
   "values": [
-    "createendergateway:abandoned_station"
+    "createendergateway:abandoned_station_end",
+    "createendergateway:abandoned_station_overworld"
   ]
 }

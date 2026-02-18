@@ -1,16 +1,21 @@
 {
   "type": "createendergateway:fixed_orientation_jigsaw",
-  "biomes": "#createendergateway:has_abandoned_stations",
+  "biomes": "#createendergateway:has_abandoned_stations_end",
   "max_distance_from_center": 80,
   "project_start_to_heightmap": "WORLD_SURFACE",
   "rotation": "none",
   "size": 1,
   "spawn_overrides": {},
   "start_height": {
-    "absolute": 0
+    "type": "minecraft:uniform",
+    "max_inclusive": {
+      "absolute": 80
+    },
+    "min_inclusive": {
+      "absolute": 55
+    }
   },
-  "start_pool": "createendergateway:abandoned_station_pool",
+  "start_pool": "createendergateway:end_abandoned_station_pool",
   "step": "surface_structures",
-  "terrain_adaptation": "beard_thin",
   "use_expansion_hack": false
 }

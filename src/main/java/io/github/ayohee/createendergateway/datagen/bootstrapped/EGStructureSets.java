@@ -13,15 +13,26 @@ import java.util.List;
 import static io.github.ayohee.createendergateway.CreateEnderGateway.MODID;
 
 public class EGStructureSets {
-    public static final ResourceKey<StructureSet> ABANDONED_STATIONS = ResourceKey.create(
+    public static final ResourceKey<StructureSet> ABANDONED_STATIONS_OVERWORLD = ResourceKey.create(
             Registries.STRUCTURE_SET,
-            ResourceLocation.fromNamespaceAndPath(MODID, "abandoned_stations")
+            ResourceLocation.fromNamespaceAndPath(MODID, "abandoned_stations_overworld")
     );
+    public static final ResourceKey<StructureSet> ABANDONED_STATIONS_END = ResourceKey.create(
+            Registries.STRUCTURE_SET,
+            ResourceLocation.fromNamespaceAndPath(MODID, "abandoned_stations_end")
+    );
+
     public static void bootstrap(BootstrapContext<StructureSet> ctx) {
-        ctx.register(ABANDONED_STATIONS,
+        ctx.register(ABANDONED_STATIONS_OVERWORLD,
                 new StructureSet(
-                        List.of(new StructureSet.StructureSelectionEntry(ctx.lookup(Registries.STRUCTURE).getOrThrow(EGStructures.ABANDONED_STATION), 1)),
-                        new RandomSpreadStructurePlacement(150, 50, RandomSpreadType.LINEAR, 1189370870)
+                        List.of(new StructureSet.StructureSelectionEntry(ctx.lookup(Registries.STRUCTURE).getOrThrow(EGStructures.ABANDONED_STATION_OVERWORLD), 1)),
+                        new RandomSpreadStructurePlacement(75, 30, RandomSpreadType.LINEAR, 1189370870)
+                )
+        );
+        ctx.register(ABANDONED_STATIONS_END,
+                new StructureSet(
+                        List.of(new StructureSet.StructureSelectionEntry(ctx.lookup(Registries.STRUCTURE).getOrThrow(EGStructures.ABANDONED_STATION_END), 1)),
+                        new RandomSpreadStructurePlacement(50, 30, RandomSpreadType.LINEAR, 1189370870)
                 )
         );
     }

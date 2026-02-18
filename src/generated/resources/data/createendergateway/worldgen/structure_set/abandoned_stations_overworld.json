@@ -2,12 +2,12 @@
   "placement": {
     "type": "minecraft:random_spread",
     "salt": 1189370870,
-    "separation": 50,
-    "spacing": 150
+    "separation": 30,
+    "spacing": 75
   },
   "structures": [
     {
-      "structure": "createendergateway:abandoned_station",
+      "structure": "createendergateway:abandoned_station_overworld",
       "weight": 1
     }
   ]

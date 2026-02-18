@@ -20,7 +20,9 @@ public class EGTags {
 
     public static final TagKey<Block> GATEWAY_FRAME = modBlockTag("gateway_frame");
     public static final TagKey<Structure> SYNTHETIC_EYE_LOCATED = modStructureTag("synthetic_eye_located");
-    public static final TagKey<Biome> HAS_ABANDONED_STATIONS = modBiomeTag("has_abandoned_stations");
+
+    public static final TagKey<Biome> HAS_ABANDONED_STATIONS_OVERWORLD = modBiomeTag("has_abandoned_stations_overworld");
+    public static final TagKey<Biome> HAS_ABANDONED_STATIONS_END = modBiomeTag("has_abandoned_stations_end");
 
     public static TagKey<Fluid> modFluidTag(String name) {
         return TagKey.create(BuiltInRegistries.FLUID.key(), ResourceLocation.fromNamespaceAndPath(MODID, name));

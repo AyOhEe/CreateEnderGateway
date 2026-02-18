@@ -14,19 +14,33 @@ import java.util.List;
 import static io.github.ayohee.createendergateway.CreateEnderGateway.MODID;
 
 public class EGTemplatePools {
-    public static final List<Pair<String, Integer>> STRUCTURE_NAMES = List.of(
-            Pair.of("abandoned_station_1", 1)
+    public static final List<Pair<String, Integer>> OVERWORLD_STATIONS = List.of(
+            Pair.of("overworld/abandoned_station_1", 1)
     );
 
-    public static final ResourceKey<StructureTemplatePool> ABANDONED_STATION_POOL = ResourceKey.create(
+    public static final List<Pair<String, Integer>> END_STATIONS = List.of(
+            Pair.of("end/end_abandoned_station_1", 1)
+    );
+
+    public static final ResourceKey<StructureTemplatePool> OVERWORLD_ABANDONED_STATION_POOL = ResourceKey.create(
             Registries.TEMPLATE_POOL,
-            ResourceLocation.fromNamespaceAndPath(MODID, "abandoned_station_pool")
+            ResourceLocation.fromNamespaceAndPath(MODID, "overworld_abandoned_station_pool")
+    );
+
+    public static final ResourceKey<StructureTemplatePool> END_ABANDONED_STATION_POOL = ResourceKey.create(
+            Registries.TEMPLATE_POOL,
+            ResourceLocation.fromNamespaceAndPath(MODID, "end_abandoned_station_pool")
     );
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> ctx) {
-        ctx.register(ABANDONED_STATION_POOL,
+        ctx.register(OVERWORLD_ABANDONED_STATION_POOL,
                 new StructureTemplatePool(ctx.lookup(Registries.TEMPLATE_POOL).getOrThrow(Pools.EMPTY),
-                        STRUCTURE_NAMES.stream().map(EGTemplatePools::toPoolPair).toList()
+                        OVERWORLD_STATIONS.stream().map(EGTemplatePools::toPoolPair).toList()
+                )
+        );
+        ctx.register(END_ABANDONED_STATION_POOL,
+                new StructureTemplatePool(ctx.lookup(Registries.TEMPLATE_POOL).getOrThrow(Pools.EMPTY),
+                        END_STATIONS.stream().map(EGTemplatePools::toPoolPair).toList()
                 )
         );
     }
