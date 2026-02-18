@@ -64,3 +64,6 @@ Generates dilapidated inter-dimensional train stations, allowing Create mod trai
 
 [[mixin]]
     config="createendergateway.mixins.json"
+
+[[accessTransformers]]
+    file="META-INF/accesstransformer.cfg"

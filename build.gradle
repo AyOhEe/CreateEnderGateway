@@ -74,6 +74,12 @@ configurations {
     runtimeClasspath.extendsFrom localRuntime
 }
 
+minecraft {
+    accessTransformers {
+        file('src/main/resources/META-INF/accesstransformer.cfg')
+    }
+}
+
 
 repositories {
     maven { url = "https://maven.createmod.net" } // Create, Ponder, Flywheel

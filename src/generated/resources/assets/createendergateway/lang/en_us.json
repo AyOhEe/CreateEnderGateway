@@ -9,6 +9,7 @@
   "block.createendergateway.gateway_corner": "Gateway Corner",
   "block.createendergateway.gateway_portal": "Gateway Portal",
   "block.createendergateway.mechanical_gateway": "Mechanical Gateway",
+  "createendergateway.ponder.abandoned_gateway.header": "Abandoned Portals",
   "createendergateway.ponder.dimensional_tuner.header": "Linking Portals",
   "createendergateway.ponder.mechanical_gateway.header": "Repairing Portals",
   "createendergateway.ponder.mod_name": "Create: Ender Gateway",
