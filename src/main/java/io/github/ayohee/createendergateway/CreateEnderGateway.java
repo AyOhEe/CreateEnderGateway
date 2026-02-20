@@ -47,6 +47,7 @@ public class CreateEnderGateway {
         EGCreativeTabs.register();
         EGDataComponents.register();
         EGStructureTypes.register();
+        EGPointsOfInterest.register();
 
         EGRegistries.register(modEventBus);
     }

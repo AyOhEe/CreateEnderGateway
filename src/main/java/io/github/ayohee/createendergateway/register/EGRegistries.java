@@ -4,6 +4,7 @@ import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.neoforged.bus.api.IEventBus;
@@ -18,6 +19,7 @@ public class EGRegistries {
     public static final DeferredRegister<CriterionTrigger<?>> TRIGGER_TYPES = DeferredRegister.create(TRIGGER_TYPE, MODID);
     public static final DeferredRegister.DataComponents DATA_COMPONENTS = DeferredRegister.createDataComponents(DATA_COMPONENT_TYPE, MODID);
     public static final DeferredRegister<StructureType<?>> STRUCTURE_TYPES = DeferredRegister.create(STRUCTURE_TYPE, MODID);
+    public static final DeferredRegister<PoiType> POINT_OF_INTEREST_TYPES = DeferredRegister.create(POINT_OF_INTEREST_TYPE, MODID);
 
     public static void register(IEventBus modEventBus) {
         CREATIVE_MODE_TABS.register(modEventBus);
@@ -25,5 +27,6 @@ public class EGRegistries {
         TRIGGER_TYPES.register(modEventBus);
         DATA_COMPONENTS.register(modEventBus);
         STRUCTURE_TYPES.register(modEventBus);
+        POINT_OF_INTEREST_TYPES.register(modEventBus);
     }
 }
