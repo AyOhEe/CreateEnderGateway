@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
@@ -57,11 +58,7 @@ public class GatewayBlockEntity extends BlockEntity implements IHaveHoveringInfo
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
         if (linkedPos != null) {
-            CompoundTag asNBT = new CompoundTag();
-            asNBT.putInt("X", linkedPos.getX());
-            asNBT.putInt("Y", linkedPos.getY());
-            asNBT.putInt("Z", linkedPos.getZ());
-            tag.put("linked_pos", asNBT);
+            tag.put("linked_pos", NbtUtils.writeBlockPos(linkedPos));
         }
     }
 
@@ -69,7 +66,7 @@ public class GatewayBlockEntity extends BlockEntity implements IHaveHoveringInfo
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
         if (tag.contains("linked_pos")) {
-            linkedPos = NBTHelper.readBlockPos(tag, "linked_pos");
+            linkedPos = NbtUtils.readBlockPos(tag, "linked_pos").get();
         }
     }
 }
