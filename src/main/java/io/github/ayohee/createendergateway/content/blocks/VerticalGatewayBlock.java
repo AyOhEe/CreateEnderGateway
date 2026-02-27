@@ -126,7 +126,6 @@ public class VerticalGatewayBlock extends Block {
         return blockState.getValue(BlockStateProperties.EYE) ? 15 : 0;
     }
 
-    //TODO fix
     @Override
     protected BlockState rotate(BlockState state, Rotation rotation) {
         return state.setValue(BlockStateProperties.HORIZONTAL_FACING, rotation.rotate(state.getValue(BlockStateProperties.HORIZONTAL_FACING)));

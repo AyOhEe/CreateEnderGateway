@@ -25,6 +25,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Portal;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -209,5 +210,14 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
     @Override
     public BlockEntityType<? extends GatewayBlockEntity> getBlockEntityType() {
         return EGBlockEntityTypes.GATEWAY_PORTAL.get();
+    }
+
+    @Override
+    protected BlockState rotate(BlockState state, Rotation rotation) {
+        Direction.Axis alignment = state.getValue(BlockStateProperties.HORIZONTAL_AXIS);
+        return switch (rotation) {
+            case NONE, CLOCKWISE_180 -> state;
+            case CLOCKWISE_90, COUNTERCLOCKWISE_90 -> state.setValue(BlockStateProperties.HORIZONTAL_AXIS, alignment == Direction.Axis.X ? Direction.Axis.Z : Direction.Axis.X);
+        };
     }
 }

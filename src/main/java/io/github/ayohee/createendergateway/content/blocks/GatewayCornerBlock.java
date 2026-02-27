@@ -6,6 +6,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -40,5 +42,14 @@ public class GatewayCornerBlock extends Block {
                     .rotationY(state.getValue(BlockStateProperties.HORIZONTAL_AXIS) == Direction.Axis.X ? 0 : 90)
                     .build();
         });
+    }
+
+    @Override
+    protected BlockState rotate(BlockState state, Rotation rotation) {
+        Direction.Axis alignment = state.getValue(BlockStateProperties.HORIZONTAL_AXIS);
+        return switch (rotation) {
+            case NONE, CLOCKWISE_180 -> state;
+            case CLOCKWISE_90, COUNTERCLOCKWISE_90 -> state.setValue(BlockStateProperties.HORIZONTAL_AXIS, alignment == Direction.Axis.X ? Direction.Axis.Z : Direction.Axis.X);
+        };
     }
 }
