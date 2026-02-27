@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:cut_copper"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 100,
+      "fluid": "createendergateway:dormant_ender_solution"
+    }
+  ],
+  "results": [
+    {
+      "id": "createendergateway:gateway_corner"
+    }
+  ]
+}

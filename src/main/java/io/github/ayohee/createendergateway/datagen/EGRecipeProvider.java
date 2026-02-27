@@ -1,10 +1,7 @@
 package io.github.ayohee.createendergateway.datagen;
 
 import com.simibubi.create.api.data.recipe.ProcessingRecipeGen;
-import io.github.ayohee.createendergateway.datagen.recipes.EGCompactingRecipeGen;
-import io.github.ayohee.createendergateway.datagen.recipes.EGCrushingRecipeGen;
-import io.github.ayohee.createendergateway.datagen.recipes.EGMixingRecipeGen;
-import io.github.ayohee.createendergateway.datagen.recipes.EGPressingRecipeGen;
+import io.github.ayohee.createendergateway.datagen.recipes.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
@@ -29,6 +26,7 @@ public class EGRecipeProvider extends RecipeProvider {
         GENERATORS.add(new EGMixingRecipeGen(output, registries));
         GENERATORS.add(new EGPressingRecipeGen(output, registries));
         GENERATORS.add(new EGCompactingRecipeGen(output, registries));
+        GENERATORS.add(new EGFillingRecipeGen(output, registries));
 
         gen.addProvider(true, new DataProvider() {
             @Override
