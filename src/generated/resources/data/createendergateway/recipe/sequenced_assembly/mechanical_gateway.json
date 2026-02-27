@@ -1,0 +1,118 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:end_stone_bricks"
+  },
+  "loops": 3,
+  "results": [
+    {
+      "chance": 80.0,
+      "id": "createendergateway:mechanical_gateway"
+    },
+    {
+      "chance": 10.0,
+      "id": "minecraft:end_stone"
+    },
+    {
+      "chance": 10.0,
+      "id": "create:precision_mechanism"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "createendergateway:incomplete_mechanical_gateway"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 250,
+          "fluid": "createendergateway:active_ender_solution"
+        }
+      ],
+      "results": [
+        {
+          "id": "createendergateway:incomplete_mechanical_gateway"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createendergateway:incomplete_mechanical_gateway"
+        },
+        {
+          "item": "create:precision_mechanism"
+        }
+      ],
+      "results": [
+        {
+          "id": "createendergateway:incomplete_mechanical_gateway"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createendergateway:incomplete_mechanical_gateway"
+        },
+        {
+          "item": "create:cogwheel"
+        }
+      ],
+      "results": [
+        {
+          "id": "createendergateway:incomplete_mechanical_gateway"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createendergateway:incomplete_mechanical_gateway"
+        },
+        {
+          "item": "minecraft:end_stone"
+        }
+      ],
+      "results": [
+        {
+          "id": "createendergateway:incomplete_mechanical_gateway"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "createendergateway:incomplete_mechanical_gateway"
+        }
+      ],
+      "results": [
+        {
+          "id": "createendergateway:incomplete_mechanical_gateway"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "createendergateway:incomplete_mechanical_gateway"
+        }
+      ],
+      "results": [
+        {
+          "id": "createendergateway:incomplete_mechanical_gateway"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "createendergateway:incomplete_mechanical_gateway"
+  }
+}

@@ -48,6 +48,11 @@ public class EGItems {
             .lang("Incomplete Synthetic Eye")
             .register();
 
+    public static final ItemEntry<SequencedAssemblyItem> INCOMPLETE_MECHANICAL_GATEWAY = REGISTRATE.item("incomplete_mechanical_gateway", SequencedAssemblyItem::new)
+            .lang("Incomplete Mechanical Gateway")
+            .model((ctx, prov) -> prov.withExistingParent(ctx.getName(), "minecraft:item/end_stone"))
+            .register();
+
 
     public static void register() { }
 }

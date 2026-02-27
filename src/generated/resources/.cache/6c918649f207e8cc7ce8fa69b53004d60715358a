@@ -1,2 +1,3 @@
-// 1.21.1	2026-02-02T11:49:26.6801425	createendergateway's sequenced assembly recipes
+// 1.21.1	2026-02-27T21:06:06.1695023	createendergateway's sequenced assembly recipes
+368581cd988418e68b45404956fb7f6acb4af336 data/createendergateway/recipe/sequenced_assembly/mechanical_gateway.json
 99d657b85d7cadaa3023d37b1eb9d2756ea94782 data/createendergateway/recipe/sequenced_assembly/synthetic_eye.json

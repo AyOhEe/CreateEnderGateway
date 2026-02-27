@@ -24,6 +24,7 @@ public class EGBlocks {
             .properties((p) -> p
                     .lightLevel(VerticalGatewayBlock::lightLevel)
                     .pushReaction(PushReaction.BLOCK)
+                    .requiresCorrectToolForDrops()
                     .strength(5, 6)
             )
             .tag(EGTags.GATEWAY_FRAME, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE)
