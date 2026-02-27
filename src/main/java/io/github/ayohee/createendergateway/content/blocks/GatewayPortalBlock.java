@@ -108,8 +108,9 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
                 entity.stopRiding();
             }
 
+            Vec3 posBeforeTP = entity.position();
             if (entity.randomTeleport(targetX, targetY, targetZ, true)) {
-                level.gameEvent(GameEvent.TELEPORT, entity.position(), GameEvent.Context.of(entity));
+                level.gameEvent(GameEvent.TELEPORT, posBeforeTP, GameEvent.Context.of(entity));
 
                 level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS);
                 entity.resetFallDistance();
@@ -200,7 +201,7 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
         }
 
         Vec3 blockCenter = pos.getCenter();
-        Vec3 entityOffset = blockCenter.subtract(entity.getPosition(0));
+        Vec3 entityOffset = blockCenter.subtract(entity.position());
 
         return new DimensionTransition(dimensionLevel, where.getCenter().subtract(entityOffset), Vec3.ZERO, entity.getYRot(), entity.getXRot(), (Entity e) -> {});
     }
