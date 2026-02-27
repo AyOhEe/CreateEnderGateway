@@ -70,20 +70,28 @@ public class DimensionalTunerItem extends Item {
 
         if (heldInHand.has(EGDataComponents.PORTAL_TUNING)) {
             PortalTuning tuning = heldInHand.get(EGDataComponents.PORTAL_TUNING);
+            heldInHand.remove(EGDataComponents.PORTAL_TUNING);
             Player who = context.getPlayer();
 
-            if (level.getServer().getLevel(tuning.sourceDimension()).getBlockState(tuning.linkingFrom()).is(EGBlocks.GATEWAY_PORTAL)) {
-                linkPortals(level, getPortalRect(where, level).getFirst().minCorner, who, tuning);
-            } else {
-                context.getPlayer().displayClientMessage(Component.translatable("tooltip.createendergateway.source_portal_broken").withColor(0xFF4040), true);
-            }
+            tryLinkPortals(level, who, where, tuning);
 
-            heldInHand.remove(EGDataComponents.PORTAL_TUNING);
             return InteractionResult.SUCCESS;
         }
 
         heldInHand.set(EGDataComponents.PORTAL_TUNING, new PortalTuning(getPortalRect(where, level).getFirst().minCorner, level.dimension()));
         return InteractionResult.SUCCESS;
+    }
+
+    private void tryLinkPortals(Level level, Player who, BlockPos where, PortalTuning tuning) {
+        if (level.isClientSide()) {
+            return;
+        }
+
+        if (level.getServer().getLevel(tuning.sourceDimension()).getBlockState(tuning.linkingFrom()).is(EGBlocks.GATEWAY_PORTAL)) {
+            linkPortals(level, getPortalRect(where, level).getFirst().minCorner, who, tuning);
+        } else {
+            who.displayClientMessage(Component.translatable("tooltip.createendergateway.source_portal_broken").withColor(0xFF4040), true);
+        }
     }
 
     private void linkPortals(Level level, BlockPos where, Player who, PortalTuning tuning) {
