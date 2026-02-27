@@ -3,6 +3,7 @@ package io.github.ayohee.createendergateway.content.items;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
+import io.github.ayohee.createendergateway.content.blockentity.GatewayBlockEntity;
 import io.github.ayohee.createendergateway.content.blocks.GatewayPortalBlock;
 import io.github.ayohee.createendergateway.content.blocks.VerticalGatewayBlock;
 import io.github.ayohee.createendergateway.content.itemrenderer.DimensionalTunerRenderer;
@@ -55,28 +56,37 @@ public class DimensionalTunerItem extends Item {
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
+        Player who = context.getPlayer();
         BlockPos where = context.getClickedPos();
         Level level = context.getLevel();
+
+        if (who == null) {
+            return InteractionResult.FAIL;
+        }
 
         if (!level.getBlockState(where).is(EGBlocks.GATEWAY_PORTAL)) {
             return InteractionResult.PASS;
         }
 
+        if (((GatewayBlockEntity) level.getBlockEntity(where)).isLinked()) {
+            who.displayClientMessage(Component.translatable("tooltip.createendergateway.portal_already_tuned").withColor(0xFF4040), true);
+            return InteractionResult.FAIL;
+        }
+
         ItemStack heldInHand = context.getItemInHand();
         if (isAlreadyTunedTo(heldInHand, where, level)) {
-            context.getPlayer().displayClientMessage(Component.translatable("tooltip.createendergateway.already_tuned_to_portal").withColor(0xFF4040), true);
+            who.displayClientMessage(Component.translatable("tooltip.createendergateway.already_tuned_to_portal").withColor(0xFF4040), true);
             return InteractionResult.FAIL;
         }
 
         if (isAlreadyTunedToDimension(heldInHand, level)) {
-            context.getPlayer().displayClientMessage(Component.translatable("tooltip.createendergateway.already_tuned_to_dimension").withColor(0xFF4040), true);
+            who.displayClientMessage(Component.translatable("tooltip.createendergateway.already_tuned_to_dimension").withColor(0xFF4040), true);
             return InteractionResult.FAIL;
         }
 
         if (heldInHand.has(EGDataComponents.PORTAL_TUNING)) {
             PortalTuning tuning = heldInHand.get(EGDataComponents.PORTAL_TUNING);
             heldInHand.remove(EGDataComponents.PORTAL_TUNING);
-            Player who = context.getPlayer();
 
             tryLinkPortals(level, who, where, tuning);
 

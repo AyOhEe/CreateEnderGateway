@@ -11,6 +11,7 @@
   "tooltip.createendergateway.already_tuned_to_portal": "This tuner is already linked to this portal",
   "tooltip.createendergateway.already_tuned_to_dimension": "This tuner is already linked to a portal in this dimension",
   "tooltip.createendergateway.source_portal_broken": "The linked portal no longer exists",
+  "tooltip.createendergateway.portal_already_tuned": "This portal is already tuned",
 
   "createendergateway.ponder.mod_name": "Create: Ender Gateway"
 }
