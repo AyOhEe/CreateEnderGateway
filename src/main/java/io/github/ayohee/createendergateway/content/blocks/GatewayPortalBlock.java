@@ -7,7 +7,9 @@ import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import io.github.ayohee.createendergateway.content.blockentity.GatewayBlockEntity;
 import io.github.ayohee.createendergateway.register.EGBlockEntityTypes;
 import io.github.ayohee.createendergateway.register.EGBlocks;
+import net.createmod.catnip.data.Pair;
 import net.createmod.catnip.math.VoxelShaper;
+import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -219,5 +221,18 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
             case NONE, CLOCKWISE_180 -> state;
             case CLOCKWISE_90, COUNTERCLOCKWISE_90 -> state.setValue(BlockStateProperties.HORIZONTAL_AXIS, alignment == Direction.Axis.X ? Direction.Axis.Z : Direction.Axis.X);
         };
+    }
+
+
+    public static Pair<BlockUtil.FoundRectangle, Direction.Axis> getPortalRect(BlockPos where, Level level) {
+        Direction.Axis portalAxis = level.getBlockState(where).getValue(BlockStateProperties.HORIZONTAL_AXIS);
+        return Pair.of(BlockUtil.getLargestRectangleAround(where,
+                Direction.Axis.Y, VerticalGatewayBlock.MAX_FRAME_SIZE,
+                portalAxis, VerticalGatewayBlock.MAX_FRAME_SIZE,
+                (p) -> {
+                    BlockState bs = level.getBlockState(p);
+                    return bs.is(EGBlocks.GATEWAY_PORTAL) && bs.getValue(BlockStateProperties.HORIZONTAL_AXIS) == portalAxis;
+                }
+        ), portalAxis);
     }
 }

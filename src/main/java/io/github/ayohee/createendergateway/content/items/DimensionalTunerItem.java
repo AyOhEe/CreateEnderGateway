@@ -35,6 +35,8 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.function.Consumer;
 
+import static io.github.ayohee.createendergateway.content.blocks.GatewayPortalBlock.getPortalRect;
+
 public class DimensionalTunerItem extends Item {
     public DimensionalTunerItem(Properties properties) {
         super(properties);
@@ -71,7 +73,7 @@ public class DimensionalTunerItem extends Item {
             Player who = context.getPlayer();
 
             if (level.getServer().getLevel(tuning.sourceDimension()).getBlockState(tuning.linkingFrom()).is(EGBlocks.GATEWAY_PORTAL)) {
-                linkPortals(level, getPortalRect(where, level).minCorner, who, tuning);
+                linkPortals(level, getPortalRect(where, level).getFirst().minCorner, who, tuning);
             } else {
                 context.getPlayer().displayClientMessage(Component.translatable("tooltip.createendergateway.source_portal_broken").withColor(0xFF4040), true);
             }
@@ -80,20 +82,8 @@ public class DimensionalTunerItem extends Item {
             return InteractionResult.SUCCESS;
         }
 
-        heldInHand.set(EGDataComponents.PORTAL_TUNING, new PortalTuning(getPortalRect(where, level).minCorner, level.dimension()));
+        heldInHand.set(EGDataComponents.PORTAL_TUNING, new PortalTuning(getPortalRect(where, level).getFirst().minCorner, level.dimension()));
         return InteractionResult.SUCCESS;
-    }
-
-    private BlockUtil.FoundRectangle getPortalRect(BlockPos where, Level level) {
-        Direction.Axis portalAxis = level.getBlockState(where).getValue(BlockStateProperties.HORIZONTAL_AXIS);
-        return BlockUtil.getLargestRectangleAround(where,
-                Direction.Axis.Y, VerticalGatewayBlock.MAX_FRAME_SIZE,
-                portalAxis, VerticalGatewayBlock.MAX_FRAME_SIZE,
-                (p) -> {
-                    BlockState bs = level.getBlockState(p);
-                    return bs.is(EGBlocks.GATEWAY_PORTAL) && bs.getValue(BlockStateProperties.HORIZONTAL_AXIS) == portalAxis;
-                }
-        );
     }
 
     private void linkPortals(Level level, BlockPos where, Player who, PortalTuning tuning) {
@@ -103,8 +93,8 @@ public class DimensionalTunerItem extends Item {
 
         Level linkingLevel = level.getServer().getLevel(tuning.sourceDimension());
         BlockPos offset = tuning.linkingFrom().subtract(where);
-        BlockUtil.FoundRectangle portalRect = getPortalRect(where, level);
-        BlockUtil.FoundRectangle linkingRect = getPortalRect(tuning.linkingFrom(), linkingLevel);
+        BlockUtil.FoundRectangle portalRect = getPortalRect(where, level).getFirst();
+        BlockUtil.FoundRectangle linkingRect = getPortalRect(tuning.linkingFrom(), linkingLevel).getFirst();
 
         //TODO Iterate through both portals and link from one dimension to another based on closest POI
         //     Each portal block will end up with a corresponding block in the other dimension

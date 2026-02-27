@@ -1,7 +1,11 @@
 package io.github.ayohee.createendergateway.content.blockentity;
 
 import com.simibubi.create.api.equipment.goggles.IHaveHoveringInformation;
+import io.github.ayohee.createendergateway.content.blocks.GatewayPortalBlock;
+import io.github.ayohee.createendergateway.register.EGBlockEntityTypes;
+import net.createmod.catnip.data.Pair;
 import net.createmod.catnip.nbt.NBTHelper;
+import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
