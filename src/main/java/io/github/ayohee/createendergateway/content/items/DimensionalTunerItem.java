@@ -22,6 +22,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.ai.village.poi.PoiManager;
 import net.minecraft.world.entity.player.Player;
@@ -59,9 +61,16 @@ public class DimensionalTunerItem extends Item {
         Player who = context.getPlayer();
         BlockPos where = context.getClickedPos();
         Level level = context.getLevel();
-
         if (who == null) {
             return InteractionResult.FAIL;
+        }
+
+
+        ItemStack heldInHand = context.getItemInHand();
+        if (context.isSecondaryUseActive() && heldInHand.has(EGDataComponents.PORTAL_TUNING)) {
+            heldInHand.remove(EGDataComponents.PORTAL_TUNING);
+            level.playSound(who, who.blockPosition(), SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 0.75f, 1.0f);
+            return InteractionResult.SUCCESS;
         }
 
         if (!level.getBlockState(where).is(EGBlocks.GATEWAY_PORTAL)) {
@@ -73,7 +82,6 @@ public class DimensionalTunerItem extends Item {
             return InteractionResult.FAIL;
         }
 
-        ItemStack heldInHand = context.getItemInHand();
         if (isAlreadyTunedTo(heldInHand, where, level)) {
             who.displayClientMessage(Component.translatable("tooltip.createendergateway.already_tuned_to_portal").withColor(0xFF4040), true);
             return InteractionResult.FAIL;
