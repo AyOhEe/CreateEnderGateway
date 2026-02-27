@@ -16,9 +16,14 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -33,6 +38,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.Vec3;
@@ -70,9 +76,10 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
 
     @Override
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        if (entity.canUsePortal(false)) {
-            entity.setAsInsidePortal(this, pos);
+        if (!entity.canUsePortal(false)) {
+            return;
         }
+        entity.setAsInsidePortal(this, pos);
 
         if (!(level instanceof ServerLevel sLevel)) {
             return;
@@ -84,8 +91,34 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
         }
     }
 
-    private void teleportAway(ServerLevel level, LivingEntity le) {
-        //TODO
+    private void teleportAway(ServerLevel level, LivingEntity entity) {
+        if (entity.isOnPortalCooldown()) {
+            return;
+        }
+
+        for (int i = 0; i < 16; i++) {
+            double targetX = entity.getX() + (entity.getRandom().nextDouble() - 0.5) * 16.0;
+            double targetY = Mth.clamp(
+                    entity.getY() + (entity.getRandom().nextInt(16) - 8),
+                    level.getMinBuildHeight(),
+                    level.getMaxBuildHeight()
+            );
+            double targetZ = entity.getZ() + (entity.getRandom().nextDouble() - 0.5) * 16.0;
+            if (entity.isPassenger()) {
+                entity.stopRiding();
+            }
+
+            if (entity.randomTeleport(targetX, targetY, targetZ, true)) {
+                level.gameEvent(GameEvent.TELEPORT, entity.position(), GameEvent.Context.of(entity));
+
+                level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS);
+                entity.resetFallDistance();
+
+                // Small cooldown to prevent other portal blocks from making particles where there shouldn't be
+                entity.setPortalCooldown(20);
+                break;
+            }
+        }
     }
 
     @Override
