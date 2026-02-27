@@ -40,8 +40,26 @@ public class GatewayBlockEntity extends BlockEntity implements IHaveHoveringInfo
         return linkedPos;
     }
 
-    protected void link(BlockPos where) {
-        linkedPos = where;
+    public void link(BlockPos where) {
+        if (linkedPos == null) {
+            linkedPos = where;
+        }
+    }
+
+    public void unlink() {
+        linkedPos = null;
+    }
+
+    public void propagateUnlink() {
+        Pair<BlockUtil.FoundRectangle, Direction.Axis> portalPair = GatewayPortalBlock.getPortalRect(getBlockPos(), getLevel());
+        BlockUtil.FoundRectangle portalRect = portalPair.getFirst();
+        Direction.Axis portalAxis = portalPair.getSecond();
+        for (int i = 0; i < portalRect.axis1Size; i++) {
+            for (int j = 0; j < portalRect.axis2Size; j++) {
+                BlockPos currentPos = portalRect.minCorner.relative(Direction.Axis.Y, i).relative(portalAxis, j);
+                getLevel().getBlockEntity(currentPos, EGBlockEntityTypes.GATEWAY_PORTAL.get()).ifPresent(GatewayBlockEntity::unlink);
+            }
+        }
     }
 
     @Override

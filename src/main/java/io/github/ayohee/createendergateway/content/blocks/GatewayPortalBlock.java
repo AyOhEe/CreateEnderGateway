@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Portal;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -91,11 +92,33 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         super.onRemove(state, level, pos, newState, movedByPiston);
 
-        //TODO handle unlinking
+        if (level instanceof ServerLevel sLevel) {
+            unlinkPortal(sLevel, pos);
+        }
 
         for (BlockPos neighbourPos : getNeighbours(level, pos, state)) {
             level.setBlock(neighbourPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
         }
+    }
+
+    private void unlinkPortal(ServerLevel sLevel, BlockPos pos) {
+        BlockPos linkedPos = askBlockEntityForPortal(sLevel, pos);
+        if (linkedPos == null) {
+            return;
+        }
+
+        ResourceKey<Level> targetDimension = sLevel.dimension() == Level.END ? Level.OVERWORLD : Level.END;
+        BlockEntity linkedBE = sLevel.getServer().getLevel(targetDimension).getBlockEntity(linkedPos);
+
+        if (!(linkedBE instanceof GatewayBlockEntity gateway)) {
+            return;
+        }
+
+        if (!gateway.isLinked()) {
+            return;
+        }
+
+        gateway.propagateUnlink();
     }
 
     public static List<BlockPos> getNeighbours(LevelAccessor level, BlockPos pos) {
