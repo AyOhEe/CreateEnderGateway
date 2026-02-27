@@ -4,11 +4,14 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import io.github.ayohee.createendergateway.content.blocks.GatewayPortalBlock;
+import io.github.ayohee.createendergateway.content.blocks.VerticalGatewayBlock;
 import io.github.ayohee.createendergateway.content.itemrenderer.DimensionalTunerRenderer;
 import io.github.ayohee.createendergateway.register.EGBlocks;
 import io.github.ayohee.createendergateway.register.EGDataComponents;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
@@ -21,6 +24,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
@@ -66,14 +70,30 @@ public class DimensionalTunerItem extends Item {
             PortalTuning tuning = heldInHand.get(EGDataComponents.PORTAL_TUNING);
             Player who = context.getPlayer();
 
-            linkPortals(level, where, who, tuning);
+            if (level.getServer().getLevel(tuning.sourceDimension()).getBlockState(tuning.linkingFrom()).is(EGBlocks.GATEWAY_PORTAL)) {
+                linkPortals(level, getPortalRect(where, level).minCorner, who, tuning);
+            } else {
+                context.getPlayer().displayClientMessage(Component.translatable("tooltip.createendergateway.source_portal_broken").withColor(0xFF4040), true);
+            }
 
             heldInHand.remove(EGDataComponents.PORTAL_TUNING);
             return InteractionResult.SUCCESS;
         }
 
-        heldInHand.set(EGDataComponents.PORTAL_TUNING, new PortalTuning(where, level.dimension()));
+        heldInHand.set(EGDataComponents.PORTAL_TUNING, new PortalTuning(getPortalRect(where, level).minCorner, level.dimension()));
         return InteractionResult.SUCCESS;
+    }
+
+    private BlockUtil.FoundRectangle getPortalRect(BlockPos where, Level level) {
+        Direction.Axis portalAxis = level.getBlockState(where).getValue(BlockStateProperties.HORIZONTAL_AXIS);
+        return BlockUtil.getLargestRectangleAround(where,
+                Direction.Axis.Y, VerticalGatewayBlock.MAX_FRAME_SIZE,
+                portalAxis, VerticalGatewayBlock.MAX_FRAME_SIZE,
+                (p) -> {
+                    BlockState bs = level.getBlockState(p);
+                    return bs.is(EGBlocks.GATEWAY_PORTAL) && bs.getValue(BlockStateProperties.HORIZONTAL_AXIS) == portalAxis;
+                }
+        );
     }
 
     private void linkPortals(Level level, BlockPos where, Player who, PortalTuning tuning) {
@@ -81,9 +101,16 @@ public class DimensionalTunerItem extends Item {
             return;
         }
 
-        //TODO
+        Level linkingLevel = level.getServer().getLevel(tuning.sourceDimension());
+        BlockPos offset = tuning.linkingFrom().subtract(where);
+        BlockUtil.FoundRectangle portalRect = getPortalRect(where, level);
+        BlockUtil.FoundRectangle linkingRect = getPortalRect(tuning.linkingFrom(), linkingLevel);
 
-        who.sendSystemMessage(Component.literal("Linking from [" + tuning.linkingFrom.toShortString() + " in " + tuning.sourceDimension.location() + "] to [" + where.toShortString() + " in " + level.dimension().location() + "]").withColor(0x40FF40));
+        //TODO Iterate through both portals and link from one dimension to another based on closest POI
+        //     Each portal block will end up with a corresponding block in the other dimension
+
+
+        who.sendSystemMessage(Component.literal("Linking from [" + tuning.linkingFrom().toShortString() + " in " + tuning.sourceDimension().location() + "] to [" + where.toShortString() + " in " + level.dimension().location() + "]").withColor(0x40FF40));
     }
 
     private boolean isAlreadyTunedToDimension(ItemStack heldInHand, Level level) {

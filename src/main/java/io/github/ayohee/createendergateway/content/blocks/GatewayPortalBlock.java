@@ -88,6 +88,8 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         super.onRemove(state, level, pos, newState, movedByPiston);
 
+        //TODO handle unlinking
+
         for (BlockPos neighbourPos : getNeighbours(level, pos, state)) {
             level.setBlock(neighbourPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
         }
@@ -134,7 +136,14 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
             return null;
         }
 
-        return new DimensionTransition(dimensionLevel, where.getCenter(), Vec3.ZERO, entity.getYRot(), entity.getXRot(), (Entity e) -> {});
+        if (!dimensionLevel.getBlockState(where).is(EGBlocks.GATEWAY_PORTAL)) {
+            return null;
+        }
+
+        Vec3 blockCenter = pos.getCenter();
+        Vec3 entityOffset = blockCenter.subtract(entity.getPosition(0));
+
+        return new DimensionTransition(dimensionLevel, where.getCenter().subtract(entityOffset), Vec3.ZERO, entity.getYRot(), entity.getXRot(), (Entity e) -> {});
     }
 
     private BlockPos askBlockEntityForPortal(ServerLevel level, BlockPos pos) {
