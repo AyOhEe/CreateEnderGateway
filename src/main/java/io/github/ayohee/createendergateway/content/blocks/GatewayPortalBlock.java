@@ -16,14 +16,12 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -235,10 +233,10 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        double d0 = (double)pos.getX() + random.nextDouble();
-        double d1 = (double)pos.getY() + 0.8;
-        double d2 = (double)pos.getZ() + random.nextDouble();
-        level.addParticle(ParticleTypes.SMOKE, d0, d1, d2, 0.0, 0.0, 0.0);
+        double x = pos.getX() + random.nextDouble();
+        double y = pos.getY() + 0.8;
+        double z = pos.getZ() + random.nextDouble();
+        level.addParticle(ParticleTypes.SMOKE, x, y, z, 0.0, 0.0, 0.0);
     }
 
     @Override
