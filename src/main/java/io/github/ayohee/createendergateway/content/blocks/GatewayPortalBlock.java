@@ -122,8 +122,6 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
 
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        super.onRemove(state, level, pos, newState, movedByPiston);
-
         if (level instanceof ServerLevel sLevel) {
             unlinkPortal(sLevel, pos);
         }
@@ -131,6 +129,9 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
         for (BlockPos neighbourPos : getNeighbours(level, pos, state)) {
             level.setBlock(neighbourPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
         }
+
+        // Do this last so we have a BlockEntity to consult
+        super.onRemove(state, level, pos, newState, movedByPiston);
     }
 
     private void unlinkPortal(ServerLevel sLevel, BlockPos pos) {
