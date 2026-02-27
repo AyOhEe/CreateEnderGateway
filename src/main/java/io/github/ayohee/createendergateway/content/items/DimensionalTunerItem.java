@@ -6,18 +6,23 @@ import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import io.github.ayohee.createendergateway.content.blocks.GatewayPortalBlock;
 import io.github.ayohee.createendergateway.content.blocks.VerticalGatewayBlock;
 import io.github.ayohee.createendergateway.content.itemrenderer.DimensionalTunerRenderer;
+import io.github.ayohee.createendergateway.register.EGBlockEntityTypes;
 import io.github.ayohee.createendergateway.register.EGBlocks;
 import io.github.ayohee.createendergateway.register.EGDataComponents;
+import io.github.ayohee.createendergateway.register.EGPointsOfInterest;
 import io.netty.buffer.ByteBuf;
+import net.createmod.catnip.data.Pair;
 import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.ai.village.poi.PoiManager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -83,32 +88,61 @@ public class DimensionalTunerItem extends Item {
     }
 
     private void tryLinkPortals(Level level, Player who, BlockPos where, PortalTuning tuning) {
-        if (level.isClientSide()) {
+        if (!(level instanceof ServerLevel sLevel)) {
             return;
         }
 
-        if (level.getServer().getLevel(tuning.sourceDimension()).getBlockState(tuning.linkingFrom()).is(EGBlocks.GATEWAY_PORTAL)) {
-            linkPortals(level, getPortalRect(where, level).getFirst().minCorner, who, tuning);
+        if (sLevel.getServer().getLevel(tuning.sourceDimension()).getBlockState(tuning.linkingFrom()).is(EGBlocks.GATEWAY_PORTAL)) {
+            linkPortals(sLevel, getPortalRect(where, level).getFirst().minCorner, who, tuning);
         } else {
             who.displayClientMessage(Component.translatable("tooltip.createendergateway.source_portal_broken").withColor(0xFF4040), true);
         }
     }
 
-    private void linkPortals(Level level, BlockPos where, Player who, PortalTuning tuning) {
-        if (!(level instanceof ServerLevel sLevel)) {
-            return;
+    private void linkPortals(ServerLevel level, BlockPos where, Player who, PortalTuning tuning) {
+
+        ServerLevel foreignLevel = level.getServer().getLevel(tuning.sourceDimension());
+        BlockPos offset = tuning.linkingFrom().subtract(where);
+
+        Pair<BlockUtil.FoundRectangle, Direction.Axis> localPair = getPortalRect(where, level);
+        BlockUtil.FoundRectangle localRect = localPair.getFirst();
+        Direction.Axis localAxis = localPair.getSecond();
+
+        Pair<BlockUtil.FoundRectangle, Direction.Axis> foreignPair = getPortalRect(tuning.linkingFrom(), foreignLevel);
+        BlockUtil.FoundRectangle foreignRect = foreignPair.getFirst();
+        Direction.Axis foreignAxis = foreignPair.getSecond();
+
+        // Local portal -> Foreign portal
+        for (int i = 0; i < localRect.axis1Size; i++) {
+           for (int j = 0; j < localRect.axis2Size; j++) {
+               BlockPos localPos = localRect.minCorner.relative(Direction.Axis.Y, i).relative(localAxis, j);
+               //Link Local -> Foreign
+               linkPortalBlock(level, localPos, foreignLevel, offset);
+           }
         }
 
-        Level linkingLevel = level.getServer().getLevel(tuning.sourceDimension());
-        BlockPos offset = tuning.linkingFrom().subtract(where);
-        BlockUtil.FoundRectangle portalRect = getPortalRect(where, level).getFirst();
-        BlockUtil.FoundRectangle linkingRect = getPortalRect(tuning.linkingFrom(), linkingLevel).getFirst();
-
-        //TODO Iterate through both portals and link from one dimension to another based on closest POI
-        //     Each portal block will end up with a corresponding block in the other dimension
+        // Foreign portal -> Local portal
+        for (int i = 0; i < foreignRect.axis1Size; i++) {
+            for (int j = 0; j < foreignRect.axis2Size; j++) {
+                BlockPos foreignPos = foreignRect.minCorner.relative(Direction.Axis.Y, i).relative(foreignAxis, j);
+                //Link Foreign -> Local
+                linkPortalBlock(foreignLevel, foreignPos, level, offset.multiply(-1));
+            }
+        }
 
 
         who.sendSystemMessage(Component.literal("Linking from [" + tuning.linkingFrom().toShortString() + " in " + tuning.sourceDimension().location() + "] to [" + where.toShortString() + " in " + level.dimension().location() + "]").withColor(0x40FF40));
+    }
+
+    private void linkPortalBlock(ServerLevel localLevel, BlockPos localPos, ServerLevel foreignLevel, Vec3i offset) {
+        PoiManager poiManager = foreignLevel.getPoiManager();
+        BlockPos checkOrigin = localPos.offset(offset);
+        localLevel.getBlockEntity(localPos, EGBlockEntityTypes.GATEWAY_PORTAL.get()).ifPresent((be) -> {
+            poiManager.ensureLoadedAndValid(foreignLevel, checkOrigin, VerticalGatewayBlock.MAX_FRAME_SIZE * 2);
+            poiManager.findClosestWithType(EGPointsOfInterest.GATEWAY_PORTAL::equals, checkOrigin, VerticalGatewayBlock.MAX_FRAME_SIZE * 2, PoiManager.Occupancy.ANY).ifPresent(
+                    p -> be.link(p.getSecond())
+            );
+        });
     }
 
     private boolean isAlreadyTunedToDimension(ItemStack heldInHand, Level level) {
