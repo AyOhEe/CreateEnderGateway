@@ -21,6 +21,7 @@ public class EGItems {
     public static final ItemEntry<DimensionalTunerItem> DIMENSIONAL_TUNER = REGISTRATE.item("dimensional_tuner", DimensionalTunerItem::new)
             .properties(p -> p.stacksTo(1))
             .lang("Dimensional Tuner")
+            .model((ctx, prov) -> prov.withExistingParent(ctx.getName(), "minecraft:block/air"))
             .register();
 
     public static final ItemEntry<Item> AMETHYST_DUST = REGISTRATE.item("amethyst_dust", Item::new)
