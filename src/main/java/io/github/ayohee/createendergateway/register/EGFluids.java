@@ -35,7 +35,7 @@ public class EGFluids {
                     .tickRate(8)
                     .slopeFindDistance(3)
                     .explosionResistance(100f))
-            .renderType(() -> RenderType::solid)
+            .renderType(() -> RenderType::translucent)
             .lang("Dormant Ender Solution")
             .source(BaseFlowingFluid.Source::new)
             .block()
@@ -55,7 +55,7 @@ public class EGFluids {
                     .tickRate(8)
                     .slopeFindDistance(3)
                     .explosionResistance(100f))
-            .renderType(() -> RenderType::solid)
+            .renderType(() -> RenderType::translucent)
             .lang("Active Ender Solution")
             .source(BaseFlowingFluid.Source::new)
             .block()
@@ -74,12 +74,19 @@ public class EGFluids {
 
         private Vector3f fogColor;
         private Supplier<Float> fogDistance;
+        private int tint;
+
 
         public static FluidBuilder.FluidTypeFactory create(int fogColor, Supplier<Float> fogDistance) {
+            return create(fogColor, NO_TINT, fogDistance);
+        }
+
+        public static FluidBuilder.FluidTypeFactory create(int fogColor, int tint, Supplier<Float> fogDistance) {
             return (p, s, f) -> {
                 SolidRenderedPlaceableFluidType fluidType = new SolidRenderedPlaceableFluidType(p, s, f);
                 fluidType.fogColor = new Color(fogColor, false).asVectorF();
                 fluidType.fogDistance = fogDistance;
+                fluidType.tint = tint;
                 return fluidType;
             };
         }
@@ -91,7 +98,7 @@ public class EGFluids {
 
         @Override
         protected int getTintColor(FluidStack stack) {
-            return NO_TINT;
+            return tint;
         }
 
         /*
@@ -101,7 +108,7 @@ public class EGFluids {
          */
         @Override
         public int getTintColor(FluidState state, BlockAndTintGetter world, BlockPos pos) {
-            return 0x00ffffff;
+            return tint | 0xff000000;// & 0x00ffffff;
         }
 
         @Override
