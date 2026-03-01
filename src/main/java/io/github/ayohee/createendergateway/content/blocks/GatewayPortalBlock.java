@@ -195,14 +195,17 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
             return null;
         }
 
-        if (!dimensionLevel.getBlockState(where).is(EGBlocks.GATEWAY_PORTAL)) {
+        BlockState foreignBS = dimensionLevel.getBlockState(where);
+        BlockState localBS = level.getBlockState(pos);
+        if (!(foreignBS.is(EGBlocks.GATEWAY_PORTAL) && localBS.is(EGBlocks.GATEWAY_PORTAL))) {
             return null;
         }
+        float yOffset = foreignBS.getValue(BlockStateProperties.HORIZONTAL_AXIS) == localBS.getValue(BlockStateProperties.HORIZONTAL_AXIS) ? 0 : 90;
 
         Vec3 blockCenter = pos.getCenter();
         Vec3 entityOffset = blockCenter.subtract(entity.position());
 
-        return new DimensionTransition(dimensionLevel, where.getCenter().subtract(entityOffset), Vec3.ZERO, entity.getYRot(), entity.getXRot(), (Entity e) -> {});
+        return new DimensionTransition(dimensionLevel, where.getCenter().subtract(entityOffset), Vec3.ZERO, (entity.getYRot() + yOffset) % 360, entity.getXRot(), (Entity e) -> {});
     }
 
     private BlockPos askBlockEntityForPortal(ServerLevel level, BlockPos pos) {
