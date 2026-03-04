@@ -34,5 +34,6 @@
   "tooltip.createendergateway.already_tuned_to_portal": "This tuner is already linked to this portal",
   "tooltip.createendergateway.gateway_not_linked": "This Gateway hasn't been tuned...",
   "tooltip.createendergateway.portal_already_tuned": "This portal is already tuned",
-  "tooltip.createendergateway.source_portal_broken": "The linked portal no longer exists"
+  "tooltip.createendergateway.source_portal_broken": "The linked portal no longer exists",
+  "tooltip.createendergateway.tuner_shift_click": "Tuner Unlinked"
 }

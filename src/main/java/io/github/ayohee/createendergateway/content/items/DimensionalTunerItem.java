@@ -70,6 +70,7 @@ public class DimensionalTunerItem extends Item {
         if (context.isSecondaryUseActive() && heldInHand.has(EGDataComponents.PORTAL_TUNING)) {
             heldInHand.remove(EGDataComponents.PORTAL_TUNING);
             level.playSound(who, who.blockPosition(), SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 0.75f, 1.0f);
+            who.displayClientMessage(Component.translatable("tooltip.createendergateway.tuner_shift_click"), true);
             return InteractionResult.SUCCESS;
         }
 
