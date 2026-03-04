@@ -1,0 +1,24 @@
+{
+  "parent": "createendergateway:find_station",
+  "criteria": {
+    "0": {
+      "trigger": "createendergateway:repair_gateway"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.createendergateway.repair_gateway.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "createendergateway:mechanical_gateway"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.createendergateway.repair_gateway"
+    }
+  },
+  "sends_telemetry_event": false
+}

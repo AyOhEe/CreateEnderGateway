@@ -1,10 +1,17 @@
 package io.github.ayohee.createendergateway;
 
+import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import io.github.ayohee.createendergateway.content.blockentityrenderer.GatewayBlockEntityRenderer;
+import io.github.ayohee.createendergateway.content.itemrenderer.CustomRendererItemExtension;
+import io.github.ayohee.createendergateway.content.itemrenderer.DimensionalTunerRenderer;
+import io.github.ayohee.createendergateway.content.itemrenderer.GatewayPortalRenderer;
 import io.github.ayohee.createendergateway.content.ponder.EGPonderPlugin;
 import io.github.ayohee.createendergateway.register.EGBlockEntityTypes;
+import io.github.ayohee.createendergateway.register.EGBlocks;
 import io.github.ayohee.createendergateway.register.EGEntityTypes;
+import io.github.ayohee.createendergateway.register.EGItems;
 import net.createmod.ponder.foundation.PonderIndex;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.api.distmarker.Dist;
@@ -14,6 +21,8 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
@@ -31,5 +40,17 @@ public class CreateEnderGatewayClient {
 
 
         PonderIndex.addPlugin(new EGPonderPlugin());
+    }
+
+    @SubscribeEvent
+    static void onRegisterClientExtensions(RegisterClientExtensionsEvent event) {
+        event.registerItem(
+                SimpleCustomRenderer.create(EGItems.DIMENSIONAL_TUNER.asItem(), new DimensionalTunerRenderer()),
+                EGItems.DIMENSIONAL_TUNER
+        );
+        event.registerItem(
+                new CustomRendererItemExtension(new GatewayPortalRenderer()),
+                EGBlocks.GATEWAY_PORTAL.asItem()
+        );
     }
 }

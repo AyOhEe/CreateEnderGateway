@@ -1,0 +1,26 @@
+{
+  "parent": "createendergateway:use_synthetic_eye",
+  "criteria": {
+    "0": {
+      "trigger": "createendergateway:use_wrong_eye"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.createendergateway.use_wrong_eye.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:ender_eye"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.createendergateway.use_wrong_eye"
+    },
+    "frame": "challenge",
+    "hidden": true
+  },
+  "sends_telemetry_event": false
+}

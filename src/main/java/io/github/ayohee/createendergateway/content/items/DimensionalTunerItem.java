@@ -51,12 +51,6 @@ public class DimensionalTunerItem extends Item {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(SimpleCustomRenderer.create(this, new DimensionalTunerRenderer()));
-    }
-
-    @Override
     public InteractionResult useOn(UseOnContext context) {
         Player who = context.getPlayer();
         BlockPos where = context.getClickedPos();

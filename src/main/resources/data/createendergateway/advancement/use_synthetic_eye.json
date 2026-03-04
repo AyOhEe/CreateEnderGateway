@@ -2,12 +2,11 @@
   "parent": "createendergateway:root",
   "criteria": {
     "0": {
-      "trigger": "createendergateway:used_synthetic_eye"
+      "trigger": "createendergateway:use_synthetic_eye"
     }
   },
   "display": {
     "announce_to_chat": true,
-    "background": "create:textures/gui/advancements.png",
     "description": {
       "color": "#DBA213",
       "translate": "advancement.createendergateway.use_synthetic_eye.desc"
@@ -16,7 +15,7 @@
       "count": 1,
       "id": "createendergateway:synthetic_eye"
     },
-    "show_toast": false,
+    "show_toast": true,
     "title": {
       "translate": "advancement.createendergateway.use_synthetic_eye"
     }

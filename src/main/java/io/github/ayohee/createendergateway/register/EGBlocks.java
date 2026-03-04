@@ -1,11 +1,11 @@
 package io.github.ayohee.createendergateway.register;
 
+import com.simibubi.create.foundation.data.AssetLookup;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import io.github.ayohee.createendergateway.content.blocks.GatewayCornerBlock;
 import io.github.ayohee.createendergateway.content.blocks.GatewayPortalBlock;
 import io.github.ayohee.createendergateway.content.blocks.VerticalGatewayBlock;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
@@ -75,6 +75,8 @@ public class EGBlocks {
             .tag(BlockTags.PORTALS, BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE, BlockTags.INVALID_SPAWN_INSIDE)
             .blockstate(GatewayPortalBlock::blockstate)
             .lang("Gateway Portal")
+            .loot((c, b) -> c.dropOther(b, Blocks.AIR))
+            .simpleItem()
             .register();
 
     public static void register() { }

@@ -17,7 +17,7 @@ public class EGCreativeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN_TAB = EGRegistries.CREATIVE_MODE_TABS.register("main_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.createendergateway"))
             .withTabsBefore(AllCreativeModeTabs.PALETTES_CREATIVE_TAB.getKey())
-            .icon(EGBlocks.MECHANICAL_GATEWAY::asStack)
+            .icon(EGItems.SYNTHETIC_EYE::asStack)
             .displayItems((parameters, output) -> {
                 for (RegistryEntry<Block, Block> entry : REGISTRATE.getAll(Registries.BLOCK)) {
                     if (!CreateRegistrate.isInCreativeTab(entry, EGCreativeTabs.MAIN_TAB))

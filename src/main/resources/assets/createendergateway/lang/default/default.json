@@ -7,6 +7,27 @@
   "advancement.createendergateway.use_synthetic_eye": "Eye Spy 2: Electric boogaloo",
   "advancement.createendergateway.use_synthetic_eye.desc": "Getting an odd feeling of déjà vu...",
 
+  "advancement.createendergateway.use_wrong_eye": "[TODO] use wrong eye",
+  "advancement.createendergateway.use_wrong_eye.desc": "[TODO] use wrong eye desc",
+
+  "advancement.createendergateway.find_station": "[TODO] find station",
+  "advancement.createendergateway.find_station.desc": "[TODO] find station desc",
+
+  "advancement.createendergateway.repair_gateway": "[TODO] repair gateway",
+  "advancement.createendergateway.repair_gateway.desc": "[TODO] repair gateway desc",
+
+  "advancement.createendergateway.link_gateways": "[TODO] link gateways",
+  "advancement.createendergateway.link_gateways.desc": "[TODO] link gateways desc",
+
+  "advancement.createendergateway.travel_with_train": "[TODO] travel with train",
+  "advancement.createendergateway.travel_with_train.desc": "[TODO] travel with train desc",
+
+  "advancement.createendergateway.travel_10k": "[TODO] travel 10k",
+  "advancement.createendergateway.travel_10k.desc": "[TODO] travel 10k desc",
+
+  "advancement.createendergateway.travel_100k": "[TODO] travel 100k",
+  "advancement.createendergateway.travel_100k.desc": "[TODO] travel 100k desc",
+
   "tooltip.createendergateway.gateway_not_linked": "This Gateway hasn't been tuned...",
   "tooltip.createendergateway.already_tuned_to_portal": "This tuner is already linked to this portal",
   "tooltip.createendergateway.already_tuned_to_dimension": "This tuner is already linked to a portal in this dimension",

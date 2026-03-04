@@ -1,12 +1,12 @@
-// 1.21.1	2026-03-04T19:32:08.399203	Registrate Provider for createendergateway [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
+// 1.21.1	2026-03-04T22:34:39.7200935	Registrate Provider for createendergateway [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider]
 0b2038d86e92af963cfb5e9020d61f77e03bdf81 assets/createendergateway/blockstates/abandoned_gateway.json
 c821d268dce555328abfb4267ce76ce79db35bd5 assets/createendergateway/blockstates/active_ender_solution.json
 36a3740d42efef70dff648b4ba92bc8a223e46ce assets/createendergateway/blockstates/dormant_ender_solution.json
 02ccba40adb705fe5656fe296911b1902f426eb3 assets/createendergateway/blockstates/gateway_corner.json
 09d8f443729dc22d5c061cea492d054d16a2a836 assets/createendergateway/blockstates/gateway_portal.json
 9f37ca96dbe0054668a88acf46521db6801f1d24 assets/createendergateway/blockstates/mechanical_gateway.json
-3678b3dad1c08af2519b40024b078f37d707e5cc assets/createendergateway/lang/en_ud.json
-3f54a3d11c5dff916681e599c2e5cea5c39fcf0c assets/createendergateway/lang/en_us.json
+aba680e644a067e97f6ac21f9cdf0d99a08718f9 assets/createendergateway/lang/en_ud.json
+2569359a564682c4b642fd3e59461fc70c4367a2 assets/createendergateway/lang/en_us.json
 aaf53bc8741bd8a4b42804ee37c7de45df78423f assets/createendergateway/models/block/active_ender_solution.json
 62f7d6eb73a56dfbcd632d1c18b3c67e80e68824 assets/createendergateway/models/block/dormant_ender_solution.json
 167da1108b71488181348e56bb56898ea6575623 assets/createendergateway/models/block/gateway_corner.json
@@ -17,6 +17,7 @@ c690e11a8610585bbd4cedd99d2c5a0cf85cae6f assets/createendergateway/models/item/a
 efa6abe15df465ee4cb66541cf143abe86702fea assets/createendergateway/models/item/dormant_ender_solution_bucket.json
 1ee7bbda2ec9e033e332be1a7f0af36ae4c09037 assets/createendergateway/models/item/echo_dust.json
 f89650627b8aedf8888c214fe7ce2a1dba3cbefc assets/createendergateway/models/item/gateway_corner.json
+813ac3f37d9a5b746259b8297ce0db78b63d0eb3 assets/createendergateway/models/item/gateway_portal.json
 e22c8a151951087ff1dd2b4588bb5dff2cfe1690 assets/createendergateway/models/item/incomplete_mechanical_gateway.json
 1bd4b701822c09cac8327b30f017cda9a67a8ee2 assets/createendergateway/models/item/incomplete_synthetic_eye.json
 8cef6a7fdf47ac7900ba892eb1fc5272cad64d38 assets/createendergateway/models/item/mechanical_gateway.json
