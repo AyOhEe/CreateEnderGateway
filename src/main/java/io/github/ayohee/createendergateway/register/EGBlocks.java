@@ -23,6 +23,7 @@ public class EGBlocks {
             .initialProperties(() -> Blocks.END_PORTAL_FRAME)
             .properties((p) -> p
                     .lightLevel(VerticalGatewayBlock::lightLevel)
+                    .noOcclusion()
                     .pushReaction(PushReaction.BLOCK)
                     .requiresCorrectToolForDrops()
                     .strength(5, 6)
@@ -37,6 +38,7 @@ public class EGBlocks {
             .initialProperties(() -> Blocks.END_PORTAL_FRAME)
             .properties((p) -> p
                     .lightLevel(VerticalGatewayBlock::lightLevel)
+                    .noOcclusion()
                     .strength(-1)
             )
             .tag(EGTags.GATEWAY_FRAME, BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE)

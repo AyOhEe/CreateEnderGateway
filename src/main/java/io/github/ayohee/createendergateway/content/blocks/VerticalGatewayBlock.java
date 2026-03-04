@@ -123,7 +123,7 @@ public class VerticalGatewayBlock extends Block {
 
     @Override
     protected int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
-        return blockState.getValue(BlockStateProperties.EYE) ? 15 : 0;
+        return blockState.getValue(BlockStateProperties.EYE) ? 15 : 1;
     }
 
     @Override
