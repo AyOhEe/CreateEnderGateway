@@ -176,7 +176,7 @@ public class VerticalGatewayBlock extends Block {
 
         Direction neighbourDir = state.getValue(BACK_ALIGNMENT);
         if (neighbourDir == Direction.NORTH) {
-            neighbourDir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            neighbourDir = state.getValue(BlockStateProperties.HORIZONTAL_FACING).getOpposite();
         }
 
         BlockPos neighbourPos = pos.relative(neighbourDir);
