@@ -1,8 +1,21 @@
 {
   "parent": "createendergateway:use_synthetic_eye",
   "criteria": {
-    "0": {
-      "trigger": "createendergateway:find_station"
+    "station": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structures": "#createendergateway:synthetic_eye_located"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
     }
   },
   "display": {

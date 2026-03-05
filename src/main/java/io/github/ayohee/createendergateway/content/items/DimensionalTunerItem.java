@@ -7,10 +7,7 @@ import io.github.ayohee.createendergateway.content.blockentity.GatewayBlockEntit
 import io.github.ayohee.createendergateway.content.blocks.GatewayPortalBlock;
 import io.github.ayohee.createendergateway.content.blocks.VerticalGatewayBlock;
 import io.github.ayohee.createendergateway.content.itemrenderer.DimensionalTunerRenderer;
-import io.github.ayohee.createendergateway.register.EGBlockEntityTypes;
-import io.github.ayohee.createendergateway.register.EGBlocks;
-import io.github.ayohee.createendergateway.register.EGDataComponents;
-import io.github.ayohee.createendergateway.register.EGPointsOfInterest;
+import io.github.ayohee.createendergateway.register.*;
 import io.netty.buffer.ByteBuf;
 import net.createmod.catnip.data.Pair;
 import net.minecraft.BlockUtil;
@@ -22,6 +19,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
@@ -144,7 +142,9 @@ public class DimensionalTunerItem extends Item {
         }
 
 
-        who.sendSystemMessage(Component.literal("Linking from [" + tuning.linkingFrom().toShortString() + " in " + tuning.sourceDimension().location() + "] to [" + where.toShortString() + " in " + level.dimension().location() + "]").withColor(0x40FF40));
+        if (who instanceof ServerPlayer serverplayer) {
+            EGCriteriaTriggers.LINK_GATEWAYS.get().trigger(serverplayer);
+        }
     }
 
     private void linkPortalBlock(ServerLevel localLevel, BlockPos localPos, ServerLevel foreignLevel, Vec3i offset) {

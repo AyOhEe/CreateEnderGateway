@@ -2,7 +2,22 @@
   "parent": "createendergateway:link_gateways",
   "criteria": {
     "0": {
-      "trigger": "createendergateway:travel_with_train"
+      "in_end": {
+        "conditions": {
+          "player": [
+            {
+              "condition": "minecraft:entity_properties",
+              "entity": "this",
+              "predicate": {
+                "location": {
+                  "dimension": "minecraft:the_end"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "trigger": "create:train_portal_builtin"
     }
   },
   "display": {

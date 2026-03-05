@@ -4,6 +4,7 @@ import com.simibubi.create.AllShapes;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import io.github.ayohee.createendergateway.register.EGBlocks;
+import io.github.ayohee.createendergateway.register.EGCriteriaTriggers;
 import io.github.ayohee.createendergateway.register.EGItems;
 import io.github.ayohee.createendergateway.register.EGTags;
 import net.createmod.catnip.data.Pair;
@@ -16,6 +17,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -199,7 +201,11 @@ public class VerticalGatewayBlock extends Block {
 
 
         if (state.getValue(BlockStateProperties.EYE)) {
-            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            if (stack.is(Items.ENDER_EYE) || stack.is(EGItems.SYNTHETIC_EYE)) {
+                return ItemInteractionResult.FAIL;
+            } else {
+                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            }
         }
 
 
@@ -212,7 +218,10 @@ public class VerticalGatewayBlock extends Block {
             }
 
             level.playSound(player, pos, SoundEvents.BEACON_DEACTIVATE, SoundSource.BLOCKS, 1.2f, 0.5f);
-            return ItemInteractionResult.SUCCESS;
+            if (player instanceof ServerPlayer serverplayer) {
+                EGCriteriaTriggers.USED_WRONG_EYE.get().trigger(serverplayer);
+            }
+            return level.isClientSide() ? ItemInteractionResult.SUCCESS : ItemInteractionResult.FAIL;
         }
 
         if (!stack.is(EGItems.SYNTHETIC_EYE)) {
@@ -228,7 +237,7 @@ public class VerticalGatewayBlock extends Block {
             }
         }
 
-        if (checkForPortalFormation(level, pos)) {
+        if (checkForPortalFormation(level, pos, player)) {
             level.playSound(player, pos, SoundEvents.END_PORTAL_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
         }
 
@@ -243,7 +252,7 @@ public class VerticalGatewayBlock extends Block {
         return state.is(EGTags.GATEWAY_FRAME);
     }
 
-    private boolean checkForPortalFormation(Level level, BlockPos pos) {
+    private boolean checkForPortalFormation(Level level, BlockPos pos, Player player) {
         // Find the corners
         Pair<Direction, Direction.Axis> alignmentPair = getPortalAlignment(level, pos);
         Pair<BlockPos, BlockPos> corners = findPortalCorners(level, pos, alignmentPair.getFirst(), alignmentPair.getSecond());
@@ -323,6 +332,9 @@ public class VerticalGatewayBlock extends Block {
                     level.setBlock(placePos, portalBS, Block.UPDATE_CLIENTS);
                 }
             }
+        }
+        if (player instanceof ServerPlayer serverplayer) {
+            EGCriteriaTriggers.REPAIR_GATEWAY.get().trigger(serverplayer);
         }
 
         return true;

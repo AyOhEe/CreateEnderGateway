@@ -5,28 +5,28 @@
   "advancement.createendergateway.root.desc": "\"End\" of the line",
 
   "advancement.createendergateway.use_synthetic_eye": "Eye Spy 2: Electric boogaloo",
-  "advancement.createendergateway.use_synthetic_eye.desc": "Getting an odd feeling of déjà vu...",
+  "advancement.createendergateway.use_synthetic_eye.desc": "Craft and throw a Synthetic Eye",
 
-  "advancement.createendergateway.use_wrong_eye": "[TODO] use wrong eye",
-  "advancement.createendergateway.use_wrong_eye.desc": "[TODO] use wrong eye desc",
+  "advancement.createendergateway.use_wrong_eye": "Hardware Incompatibility",
+  "advancement.createendergateway.use_wrong_eye.desc": "Use an Eye of Ender on a Gateway Frame",
 
-  "advancement.createendergateway.find_station": "[TODO] find station",
-  "advancement.createendergateway.find_station.desc": "[TODO] find station desc",
+  "advancement.createendergateway.find_station": "Those Were the Ways",
+  "advancement.createendergateway.find_station.desc": "Find an abandoned train station",
 
-  "advancement.createendergateway.repair_gateway": "[TODO] repair gateway",
-  "advancement.createendergateway.repair_gateway.desc": "[TODO] repair gateway desc",
+  "advancement.createendergateway.repair_gateway": "We Need to Go Further",
+  "advancement.createendergateway.repair_gateway.desc": "Repair an abandoned End gateway",
 
-  "advancement.createendergateway.link_gateways": "[TODO] link gateways",
-  "advancement.createendergateway.link_gateways.desc": "[TODO] link gateways desc",
+  "advancement.createendergateway.link_gateways": "Same Wavelength",
+  "advancement.createendergateway.link_gateways.desc": "Link an End gateway in the Overworld with one in the End",
 
-  "advancement.createendergateway.travel_with_train": "[TODO] travel with train",
-  "advancement.createendergateway.travel_with_train.desc": "[TODO] travel with train desc",
+  "advancement.createendergateway.travel_with_train": "Interdimensional Logistics",
+  "advancement.createendergateway.travel_with_train.desc": "Travel to the End using a train",
 
-  "advancement.createendergateway.travel_10k": "[TODO] travel 10k",
-  "advancement.createendergateway.travel_10k.desc": "[TODO] travel 10k desc",
+  "advancement.createendergateway.travel_10k": "Trans-factory Express",
+  "advancement.createendergateway.travel_10k.desc": "Exit the End 10,000 blocks from where you entered",
 
-  "advancement.createendergateway.travel_100k": "[TODO] travel 100k",
-  "advancement.createendergateway.travel_100k.desc": "[TODO] travel 100k desc",
+  "advancement.createendergateway.travel_100k": "Second Star to the Right, and Straight on 'til Morning",
+  "advancement.createendergateway.travel_100k.desc": "Exit the End 100,000 blocks from where you entered",
 
   "tooltip.createendergateway.gateway_not_linked": "This Gateway hasn't been tuned...",
   "tooltip.createendergateway.already_tuned_to_portal": "This tuner is already linked to this portal",
