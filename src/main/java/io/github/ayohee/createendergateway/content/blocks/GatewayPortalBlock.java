@@ -205,7 +205,7 @@ public class GatewayPortalBlock extends Block implements Portal, IBE<GatewayBloc
         Vec3 blockCenter = pos.getCenter();
         Vec3 entityOffset = blockCenter.subtract(entity.position());
 
-        return new DimensionTransition(dimensionLevel, where.getCenter().subtract(entityOffset), Vec3.ZERO, (entity.getYRot() + yOffset) % 360, entity.getXRot(), (Entity e) -> {});
+        return new DimensionTransition(dimensionLevel, where.getCenter().subtract(0, entityOffset.y(), 0), Vec3.ZERO, (entity.getYRot() + yOffset) % 360, entity.getXRot(), (Entity e) -> {});
     }
 
     private BlockPos askBlockEntityForPortal(ServerLevel level, BlockPos pos) {
