@@ -1,25 +1,23 @@
+# Create: Ender Gateway
+Create: Ender Gateway adds broken-down train stations throughout the Overworld and End. These stations can be repaired, making a portal big enough for Create's trains to fit through, allowing trains to access the End.
 
-Installation information
-=======
+## Content
+Blocks:
+- Mechanical Gateway Frame
+- Abandoned Gateway Frame
+- Gateway Corner (purely decorative)
+- 
+Items:
+- Synthetic Eye
+- Dimensional Tuner
+- Amethyst Dust
+- Echo Dust
 
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions provided by [GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+Fluids:
+- Dormant Ender Solution
+- Active Ender
 
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
+Structures:
+- Abandoned Stations (Overworld and End variants)
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
-
-Mapping Names:
-============
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
-
-Additional Resources: 
-==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/
+Features a handful of ponders to showcase portal repair and train travel.
