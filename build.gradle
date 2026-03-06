@@ -84,6 +84,7 @@ minecraft {
 repositories {
     maven { url = "https://maven.createmod.net" } // Create, Ponder, Flywheel
     maven { url = "https://maven.ithundxr.dev/snapshots" } // Registrate
+    maven { url = "https://api.modrinth.com/maven" } // Iris
 }
 
 
@@ -95,6 +96,13 @@ dependencies {
     compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${minecraft_version}:${flywheel_version}")
     runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_version}")
     implementation("com.tterrag.registrate:Registrate:${registrate_version}")
+
+    compileOnly("maven.modrinth:sodium:${sodium_version}-neoforge")
+    compileOnly("maven.modrinth:iris:${iris_version}-neoforge")
+    if (iris_enable.toBoolean()) {
+        implementation("maven.modrinth:sodium:${sodium_version}-neoforge")
+        implementation("maven.modrinth:iris:${iris_version}-neoforge")
+    }
 }
 
 
