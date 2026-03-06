@@ -30,7 +30,7 @@ public class EGBlocks {
             )
             .tag(EGTags.GATEWAY_FRAME, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL, BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE)
             .blockstate(VerticalGatewayBlock::blockstate)
-            .lang("Mechanical Gateway")
+            .lang("Mechanical Gateway Frame")
             .simpleItem()
             .register();
 
@@ -43,7 +43,7 @@ public class EGBlocks {
             )
             .tag(EGTags.GATEWAY_FRAME, BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE)
             .blockstate(VerticalGatewayBlock::blockstate)
-            .lang("Abandoned Gateway")
+            .lang("Abandoned Gateway Frame")
             .simpleItem()
             .register();
 

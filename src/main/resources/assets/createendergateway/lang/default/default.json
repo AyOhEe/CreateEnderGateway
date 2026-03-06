@@ -35,5 +35,19 @@
   "tooltip.createendergateway.portal_already_tuned": "This portal is already tuned",
   "tooltip.createendergateway.tuner_shift_click": "Tuner Unlinked",
 
+  "item.createendergateway.synthetic_eye.tooltip.summary": "A purpose-built Eye of Ender for finding and repairing abandoned stations",
+  "item.createendergateway.synthetic_eye.tooltip.condition1": "R-Click",
+  "item.createendergateway.synthetic_eye.tooltip.behaviour1": "Points towards abandoned stations in the current dimension",
+  "item.createendergateway.synthetic_eye.tooltip.condition2": "R-Click on empty Gateway Frame",
+  "item.createendergateway.synthetic_eye.tooltip.behaviour2": "Inserts Eye into frame",
+
+  "item.createendergateway.dimensional_tuner.tooltip.summary": "Used to link two portals in the End and Overworld together",
+  "item.createendergateway.dimensional_tuner.tooltip.condition1": "R-Click on portal",
+  "item.createendergateway.dimensional_tuner.tooltip.behaviour1": "Link tuner to portal",
+  "item.createendergateway.dimensional_tuner.tooltip.condition2": "R-Click on another portal",
+  "item.createendergateway.dimensional_tuner.tooltip.behaviour2": "Link both portals together",
+  "item.createendergateway.dimensional_tuner.tooltip.condition3": "R-Click while Sneaking",
+  "item.createendergateway.dimensional_tuner.tooltip.behaviour3": "Clear selection",
+
   "createendergateway.ponder.mod_name": "Create: Ender Gateway"
 }

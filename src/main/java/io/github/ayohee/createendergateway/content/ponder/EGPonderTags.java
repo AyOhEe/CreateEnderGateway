@@ -22,7 +22,6 @@ public class EGPonderTags {
                 .register();
 
         HELPER.addToTag(ENDER_GATEWAY)
-                .add(EGItems.SYNTHETIC_EYE)
                 .add(EGBlocks.ABANDONED_GATEWAY)
                 .add(EGBlocks.MECHANICAL_GATEWAY)
                 .add(EGItems.DIMENSIONAL_TUNER);
