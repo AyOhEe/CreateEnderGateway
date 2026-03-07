@@ -6,7 +6,7 @@ Blocks:
 - Mechanical Gateway Frame
 - Abandoned Gateway Frame
 - Gateway Corner (purely decorative)
-- 
+
 Items:
 - Synthetic Eye
 - Dimensional Tuner
@@ -15,7 +15,7 @@ Items:
 
 Fluids:
 - Dormant Ender Solution
-- Active Ender
+- Active Ender Solution
 
 Structures:
 - Abandoned Stations (Overworld and End variants)
