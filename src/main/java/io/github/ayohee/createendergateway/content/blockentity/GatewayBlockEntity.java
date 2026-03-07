@@ -17,21 +17,24 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.TheEndPortalBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class GatewayBlockEntity extends BlockEntity implements IHaveHoveringInformation {
+public class GatewayBlockEntity extends TheEndPortalBlockEntity implements IHaveHoveringInformation {
     private BlockPos linkedPos = null;
 
     public GatewayBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
+    @Override
     public boolean shouldRenderFace(Direction direction) {
-        return getBlockState().getValue(BlockStateProperties.HORIZONTAL_AXIS) != direction.getAxis();
+        Direction.Axis portalAxis = getBlockState().getValue(BlockStateProperties.HORIZONTAL_AXIS);
+        return direction.getAxis() != Direction.Axis.Y && direction.getAxis() != portalAxis;
     }
 
     public boolean isLinked() {

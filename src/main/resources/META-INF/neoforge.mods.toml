@@ -37,7 +37,13 @@ Generates dilapidated inter-dimensional train stations, allowing Create mod trai
     ordering="NONE"
     side="BOTH"
 
-[[mixin]]
+[[dependencies.${mod_id}]]
+    modId="iris"
+    type="optional"
+    ordering="AFTER"
+    side="CLIENT"
+
+[[mixins]]
     config="createendergateway.mixins.json"
 
 [[accessTransformers]]
