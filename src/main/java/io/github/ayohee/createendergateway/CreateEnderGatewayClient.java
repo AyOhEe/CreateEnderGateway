@@ -53,4 +53,9 @@ public class CreateEnderGatewayClient {
                 EGBlocks.GATEWAY_PORTAL.asItem()
         );
     }
+
+    @SubscribeEvent
+    static void onRegisterEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(EGEntityTypes.SYNTHETIC_EYE.get(), ctx -> new ThrownItemRenderer<>(ctx, 1.0f, true));
+    }
 }

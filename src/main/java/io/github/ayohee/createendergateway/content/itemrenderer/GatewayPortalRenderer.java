@@ -8,7 +8,10 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class GatewayPortalRenderer extends BlockEntityWithoutLevelRenderer {
     public GatewayPortalRenderer() {
         super(null, null);

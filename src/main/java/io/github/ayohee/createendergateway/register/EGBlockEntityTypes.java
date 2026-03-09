@@ -2,7 +2,6 @@ package io.github.ayohee.createendergateway.register;
 
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import io.github.ayohee.createendergateway.content.blockentity.GatewayBlockEntity;
-import io.github.ayohee.createendergateway.content.blockentityrenderer.GatewayBlockEntityRenderer;
 
 import static io.github.ayohee.createendergateway.CreateEnderGateway.REGISTRATE;
 

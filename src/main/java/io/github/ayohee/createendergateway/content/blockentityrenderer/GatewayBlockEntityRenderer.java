@@ -8,8 +8,11 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.TheEndPortalRenderer;
 import net.minecraft.core.Direction;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.joml.Matrix4f;
 
+@OnlyIn(Dist.CLIENT)
 public class GatewayBlockEntityRenderer extends TheEndPortalRenderer<GatewayBlockEntity> {
     public GatewayBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
         super(context);

@@ -6,6 +6,8 @@ import net.irisshaders.iris.shaderpack.IdMap;
 import net.irisshaders.iris.shaderpack.materialmap.BlockEntry;
 import net.irisshaders.iris.shaderpack.materialmap.NamespacedId;
 import net.irisshaders.iris.shaderpack.option.ShaderPackOptions;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Shadow;
@@ -24,6 +26,7 @@ import java.util.stream.Stream;
 import static io.github.ayohee.createendergateway.CreateEnderGateway.MODID;
 
 @Pseudo
+@OnlyIn(Dist.CLIENT)
 @Mixin(IdMap.class)
 public class IrisIdMapMixin {
     @Unique
