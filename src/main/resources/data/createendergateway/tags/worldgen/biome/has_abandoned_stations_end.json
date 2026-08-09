@@ -1,5 +1,6 @@
 {
   "values": [
-    "minecraft:small_end_islands"
+    "minecraft:small_end_islands",
+    "#minecraft:has_structure/end_city"
   ]
 }

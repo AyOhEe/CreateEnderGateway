@@ -25,22 +25,18 @@ public class EGSequencedAssemblyRecipeGen extends SequencedAssemblyRecipeGen {
             .addStep(DeployerApplicationRecipe::new, r -> r.require(EGItems.AMETHYST_DUST))
             .addStep(DeployerApplicationRecipe::new, r -> r.require(EGItems.SYNTHETIC_EYE_FRAGMENT))
             .addStep(DeployerApplicationRecipe::new, r -> r.require(EGItems.ECHO_DUST))
-            .loops(3)
     );
 
     public final GeneratedRecipe MECHANICAL_GATEWAY = create("mechanical_gateway", b -> b
-            .require(Blocks.END_STONE_BRICKS)
+            .require(Blocks.END_STONE)
             .transitionTo(EGItems.INCOMPLETE_MECHANICAL_GATEWAY)
-            .addOutput(EGBlocks.MECHANICAL_GATEWAY, 80)
-            .addOutput(Blocks.END_STONE, 10)
-            .addOutput(AllItems.PRECISION_MECHANISM, 10)
-            .addStep(FillingRecipe::new, r -> r.require(EGFluids.ACTIVE_ENDER_SOLUTION.get(), 250))
+            .addOutput(EGBlocks.MECHANICAL_GATEWAY, 100)
+            .addStep(FillingRecipe::new, r -> r.require(EGFluids.ACTIVE_ENDER_SOLUTION.get(), 100))
             .addStep(DeployerApplicationRecipe::new, r -> r.require(AllItems.PRECISION_MECHANISM))
             .addStep(DeployerApplicationRecipe::new, r -> r.require(AllBlocks.COGWHEEL))
             .addStep(DeployerApplicationRecipe::new, r -> r.require(Blocks.END_STONE))
             .addStep(PressingRecipe::new, r -> r)
             .addStep(PressingRecipe::new, r -> r)
-            .loops(3)
     );
 
     public EGSequencedAssemblyRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {

@@ -22,7 +22,6 @@ public class EGCompactingRecipeGen extends CompactingRecipeGen {
     public final GeneratedRecipe SYNTHETIC_EYE_FRAGMENT = create("synthetic_eye_fragment", b -> b
             .require(EGItems.SATURATED_EYE_FRAGMENT)
             .output(EGItems.SYNTHETIC_EYE_FRAGMENT)
-            .output(EGFluids.DORMANT_ENDER_SOLUTION.get(), 50)
     );
 
     public EGCompactingRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
