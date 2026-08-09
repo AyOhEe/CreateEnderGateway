@@ -25,6 +25,7 @@ public class EGSequencedAssemblyRecipeGen extends SequencedAssemblyRecipeGen {
             .addStep(DeployerApplicationRecipe::new, r -> r.require(EGItems.AMETHYST_DUST))
             .addStep(DeployerApplicationRecipe::new, r -> r.require(EGItems.SYNTHETIC_EYE_FRAGMENT))
             .addStep(DeployerApplicationRecipe::new, r -> r.require(EGItems.ECHO_DUST))
+            .loops(1)
     );
 
     public final GeneratedRecipe MECHANICAL_GATEWAY = create("mechanical_gateway", b -> b
@@ -37,6 +38,7 @@ public class EGSequencedAssemblyRecipeGen extends SequencedAssemblyRecipeGen {
             .addStep(DeployerApplicationRecipe::new, r -> r.require(Blocks.END_STONE))
             .addStep(PressingRecipe::new, r -> r)
             .addStep(PressingRecipe::new, r -> r)
+            .loops(1)
     );
 
     public EGSequencedAssemblyRecipeGen(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {

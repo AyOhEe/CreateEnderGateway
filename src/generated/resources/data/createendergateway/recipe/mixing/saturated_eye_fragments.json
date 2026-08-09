@@ -6,7 +6,7 @@
     },
     {
       "type": "neoforge:single",
-      "amount": 150,
+      "amount": 100,
       "fluid": "createendergateway:active_ender_solution"
     }
   ],
@@ -14,6 +14,10 @@
   "results": [
     {
       "id": "createendergateway:saturated_eye_fragment"
+    },
+    {
+      "chance": 0.5,
+      "id": "minecraft:blaze_powder"
     }
   ]
 }

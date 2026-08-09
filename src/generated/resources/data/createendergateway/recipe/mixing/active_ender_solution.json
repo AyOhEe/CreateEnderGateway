@@ -7,14 +7,18 @@
     },
     {
       "type": "neoforge:single",
-      "amount": 500,
+      "amount": 100,
       "fluid": "createendergateway:dormant_ender_solution"
     }
   ],
   "processing_time": 50,
   "results": [
     {
-      "amount": 500,
+      "chance": 0.9,
+      "id": "minecraft:nether_wart"
+    },
+    {
+      "amount": 100,
       "id": "createendergateway:active_ender_solution"
     }
   ]

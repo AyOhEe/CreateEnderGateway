@@ -1,21 +1,12 @@
 {
   "type": "create:sequenced_assembly",
   "ingredient": {
-    "item": "minecraft:end_stone_bricks"
+    "item": "minecraft:end_stone"
   },
-  "loops": 3,
   "results": [
     {
-      "chance": 80.0,
+      "chance": 100.0,
       "id": "createendergateway:mechanical_gateway"
-    },
-    {
-      "chance": 10.0,
-      "id": "minecraft:end_stone"
-    },
-    {
-      "chance": 10.0,
-      "id": "create:precision_mechanism"
     }
   ],
   "sequence": [
@@ -27,7 +18,7 @@
         },
         {
           "type": "neoforge:single",
-          "amount": 250,
+          "amount": 100,
           "fluid": "createendergateway:active_ender_solution"
         }
       ],

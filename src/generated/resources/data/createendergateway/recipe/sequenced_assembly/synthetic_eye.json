@@ -3,7 +3,6 @@
   "ingredient": {
     "item": "createendergateway:synthetic_eye_fragment"
   },
-  "loops": 3,
   "results": [
     {
       "chance": 100.0,
